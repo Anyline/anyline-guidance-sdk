@@ -1,11 +1,11 @@
 // TODOs
-// 1. Make video element parameterized
+// 1. DONE Make video element parameterized
 // 3. Add config to getImage function
 // 4. Introduce sonarcloud, eslint, ci pipeline, yarn
 // 5. Ship typescript module
-// 6. Remove vite
-// 7. Use ImageCapture polyfill from npm
-// 8. Check why importing the function doesn't work on browser
+// 6. DONE Remove vite
+// 7. DONE Use ImageCapture polyfill from npm
+// 8. DONE Check why importing the function doesn't work on browser
 
 // @ts-expect-error - No type definitions available for image-capture.
 import { ImageCapture } from 'image-capture';
@@ -99,8 +99,8 @@ async function getImageBlob(stream: MediaStream): Promise<Blob> {
 		imageHeight: maxImageHeight,
 		imageWidth: maxImageWidth,
 	});
+
 	return blob;
-	// onImageCapture(blob);
 }
 
 // Get the right media stream from highest resolution camera
@@ -116,7 +116,7 @@ async function getMedia(videoElementId: string): Promise<Blob> {
 	return await getImageBlob(stream);
 }
 
-export const getImage = async (videoElementId: string): Promise<void> => {
+export const getImage = async (videoElementId: string): Promise<Blob> => {
 	if (
 		navigator.mediaDevices === null ||
 		navigator.mediaDevices === undefined
@@ -124,7 +124,6 @@ export const getImage = async (videoElementId: string): Promise<void> => {
 		await Promise.reject(new Error('Unsupported device'));
 	}
 	const videoElement = document.getElementById(videoElementId);
-	console.log('v', videoElement);
 	if (videoElement === null || videoElement === undefined) {
 		await Promise.reject(
 			new Error(
@@ -132,14 +131,7 @@ export const getImage = async (videoElementId: string): Promise<void> => {
 			)
 		);
 	}
-	try {
-		await getMedia(videoElementId);
-	} catch (error) {
-		if (error instanceof Error) {
-			console.error(error.message);
-		}
-		await Promise.reject(error);
-	}
+	return await getMedia(videoElementId);
 };
 
 (window as any).Anyline = { getImage };
