@@ -2,5 +2,6 @@ node_modules
 .idea
 vscode
 dist
-public
+public/*
 .DS_Store
+!public/index.html

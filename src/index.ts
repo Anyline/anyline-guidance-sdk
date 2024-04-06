@@ -1,6 +1,10 @@
 const sum = async (): Promise<string> => {
-	const time = '!23';
+	const time = '1234';
 	return time;
+};
+
+export const another = (): string => {
+	return 'hellosasd';
 };
 
 export default sum;
