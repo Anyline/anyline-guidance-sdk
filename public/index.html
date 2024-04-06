@@ -1,18 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-	</head>
-	<body>
-		<script src="index.js"></script>
-		<script>
-			const sum = Anyline.default();
-			console.log('sum', sum);
 
-			const newa = Anyline.another();
-			console.log('new', newa);
-		</script>
-	</body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <video id="my-test-video" autoplay="" playsinline=""></video>
+    <script src="js/index-QQHWX7IG.js" type="application/javascript"></script>
+    <script>
+        Anyline.getImage('my-test-video')
+            .then(blob => console.log('Blob', blob))
+            .catch(err => {
+                console.log('Error', err);
+            });
+    </script>
+</body>
+
 </html>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<video id="my-test-video" autoplay playsinline></video>
+		<script src="index.js"></script>
+		<script>
+			Anyline.getImage('my-test-video')
+				.then(blob => console.log('Blob', blob))
+				.catch(err => {
+					console.log('Error', err);
+				});
+		</script>
+	</body>
+</html>
