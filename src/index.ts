@@ -1,8 +1,8 @@
-console.log("Hello");
+console.log('asd');
 
-const sum = async () => {
-  const time = '123';
-  return time;
-}
+const sum = async (): Promise<string> => {
+	const time = '!23';
+	return time;
+};
 
 export default sum;
