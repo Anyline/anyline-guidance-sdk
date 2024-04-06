@@ -20,6 +20,8 @@
     "lint": "eslint 'src/**/*.{js,ts}'"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^7.5.0",
     "esbuild": "^0.20.2",
@@ -31,7 +33,10 @@
     "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-promise": "^6.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "prettier": "^3.2.5",
+    "ts-jest": "^29.1.2",
     "typescript": "^4.5.4",
     "typescript-eslint": "^7.5.0"
   }
