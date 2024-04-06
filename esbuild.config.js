@@ -1,31 +1,35 @@
 import esbuild from 'esbuild';
 
-// Run TypeScript through esbuild
-async function build() {
-  // Build CommonJS
-  await esbuild.build({
-    entryPoints: ['src/index.ts'],
-    bundle: true,
-    platform: 'node',
-    target: ['node12'],
-    outdir: 'dist/cjs',
-    format: 'cjs',
-    loader: { '.ts': 'ts' },
-  });
+const baseConfig = {
+  entryPoints: ['src/index.ts'],
+  bundle: true,
+  platform: 'browser',
+  minify: true,
+  sourcemap: true,
+  target: ['es2015'],
+  loader: {
+    '.ts': 'ts',
+  },
+};
 
-  // Build ES Module
-  await esbuild.build({
-    entryPoints: ['src/index.ts'],
-    bundle: true,
-    platform: 'node',
-    target: ['node12'],
-    outdir: 'dist/esm',
-    format: 'esm',
-    loader: { '.ts': 'ts' },
-  });
-}
+// ESM
+esbuild.build({
+  ...baseConfig,
+  outfile: 'dist/esm/index.js',
+  format: 'esm',
+}).catch(() => process.exit(1));
 
-build().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// IIFE for <script> tag
+esbuild.build({
+  ...baseConfig,
+  outfile: 'dist/iife/index.js',
+  format: 'iife',
+  globalName: 'Anyline',
+}).catch(() => process.exit(1));
+
+// CJS
+esbuild.build({
+  ...baseConfig,
+  outfile: 'dist/cjs/index.js',
+  format: 'cjs',
+}).catch(() => process.exit(1));

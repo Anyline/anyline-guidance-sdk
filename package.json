@@ -3,19 +3,20 @@
   "version": "1.0.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/iife/index.js"
     }
   },
   "type": "module",
-  "repository": "git@gitlab.com:anylinecom/cloud-api/user-guidance-app.git",
-  "author": "Aditya Singh <aditya.singh@anyline.com>",
   "license": "MIT",
   "scripts": {
-    "check-types": "tsc --noEmit",
-    "build": "npm run check-types && node esbuild.config.js"
+    "build:types": "tsc",
+    "build:bundle": "node esbuild.config.js",
+    "build": "yarn build:types && yarn build:bundle"
   },
   "devDependencies": {
     "esbuild": "^0.20.2",
