@@ -1,9 +1,30 @@
-import sum from '../index';
+import getImage from '../index';
 
-describe('main function', () => {
-	it('returns !23', async () => {
-		const nice = await sum();
+describe('getImage', () => {
+	it('rejects for unsupported devices', async () => {
+		await expect(getImage({ videoElementId: 'video1' })).rejects.toThrow(
+			'Unsupported device'
+		);
+	});
 
-		expect(nice).toBe('!23');
+	it('rejects when no video element with given id was found', async () => {
+		document.getElementById = jest.fn().mockReturnValue(null);
+		Object.defineProperty(global.navigator, 'mediaDevices', {
+			writable: true,
+			value: {
+				getUserMedia: jest.fn(),
+				enumerateDevices: jest.fn().mockResolvedValue([
+					{
+						kind: 'audioInput',
+						label: 'Back Camera',
+						deviceId: 'backCamera1',
+						groupId: 'testGroup1',
+					},
+				]),
+			},
+		});
+		await expect(getImage({ videoElementId: 'video1' })).rejects.toThrow(
+			`No video element with id video1 was found in the DOM`
+		);
 	});
 });
