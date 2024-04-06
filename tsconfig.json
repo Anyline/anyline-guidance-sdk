@@ -11,10 +11,5 @@
 		"forceConsistentCasingInFileNames": true,
 		"strict": true
 	},
-	"include": [
-		"src/**/*",
-		"jest.config.js",
-		"esbuild.config.js",
-		"esbuild.dev.config.js"
-	]
+	"include": ["src/**/*", "jest.config.js", "esbuild.config.js"]
 }
