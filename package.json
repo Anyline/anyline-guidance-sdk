@@ -5,6 +5,9 @@
   "repository": "git@gitlab.com:anylinecom/cloud-api/user-guidance-app.git",
   "author": "Aditya Singh <aditya.singh@anyline.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
     "typescript": "^5.4.4"
   }
