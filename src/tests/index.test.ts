@@ -1,12 +1,11 @@
-import getImage from '../index';
+import init from '../index';
 
-describe('getImage', () => {
+describe('init', () => {
 	it('rejects for unsupported devices', async () => {
-		await expect(getImage('video1')).rejects.toThrow('Unsupported device');
+		await expect(init()).rejects.toThrow('Unsupported device');
 	});
 
-	it('rejects when no video element with given id was found', async () => {
-		document.getElementById = jest.fn().mockReturnValue(null);
+	it('throws an error when enumeratedevices rejects promise', async () => {
 		Object.defineProperty(global.navigator, 'mediaDevices', {
 			writable: true,
 			value: {
@@ -20,6 +19,22 @@ describe('getImage', () => {
 						},
 					]),
 				}),
+				enumerateDevices: jest
+					.fn()
+					.mockRejectedValue(new Error('Access denied')),
+			},
+		});
+
+		await expect(init()).rejects.toThrow('Access denied');
+
+		jest.restoreAllMocks();
+	});
+
+	it('throws an error when getting a high-resolution stream fails', async () => {
+		Object.defineProperty(global.navigator, 'mediaDevices', {
+			writable: true,
+			value: {
+				getUserMedia: jest.fn().mockRejectedValue(new Error()),
 				enumerateDevices: jest.fn().mockResolvedValue([
 					{
 						kind: 'videoinput',
@@ -30,9 +45,6 @@ describe('getImage', () => {
 				]),
 			},
 		});
-
-		await expect(getImage('video1')).rejects.toThrow(
-			`No video element with id video1 was found in the DOM`
-		);
+		await expect(init()).rejects.toThrow('No suitable constraints found');
 	});
 });

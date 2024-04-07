@@ -6,14 +6,11 @@
 		<title>Document</title>
 	</head>
 	<body>
-		<video id="my-test-video" autoplay playsinline></video>
 		<script src="index.js"></script>
 		<script>
-			Anyline.getImage('my-test-video')
+			Anyline.init()
 				.then(blob => console.log('Blob', blob))
-				.catch(err => {
-					console.log('Error', err);
-				});
+				.catch(err => console.log('Error', err));
 		</script>
 	</body>
 </html>

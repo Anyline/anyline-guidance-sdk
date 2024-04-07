@@ -15,6 +15,8 @@ import {
 	iosWideBackCameraLabels,
 } from './constants/cameraLabels';
 import cameraResolutions from './constants/cameraResolutions';
+import createModal from './modal/modal';
+import createVideoElementWithStream from './video/video';
 
 function isBackCameraLabel(label: string): boolean {
 	const lowercaseLabel = label.toLowerCase();
@@ -103,37 +105,20 @@ async function getImageBlob(stream: MediaStream): Promise<Blob> {
 	return blob;
 }
 
-// Get the right media stream from highest resolution camera
-async function getMedia(videoElementId: string): Promise<Blob> {
-	const device = await getHighResolutionNonWideAngleCamera();
-	const stream = await getHighestResolutionStream(device);
-	const video = document.getElementById(
-		videoElementId
-	) as HTMLVideoElement | null;
-	if (video !== null && video !== undefined) {
-		video.srcObject = stream;
-	}
-	return await getImageBlob(stream);
-}
-
-export const getImage = async (videoElementId: string): Promise<Blob> => {
+async function init(): Promise<Blob> {
 	if (
 		navigator.mediaDevices === null ||
 		navigator.mediaDevices === undefined
 	) {
 		await Promise.reject(new Error('Unsupported device'));
 	}
-	const videoElement = document.getElementById(videoElementId);
-	if (videoElement === null || videoElement === undefined) {
-		await Promise.reject(
-			new Error(
-				`No video element with id ${videoElementId} was found in the DOM`
-			)
-		);
-	}
-	return await getMedia(videoElementId);
-};
+	const device = await getHighResolutionNonWideAngleCamera();
+	const stream = await getHighestResolutionStream(device);
+	const modal = createModal();
+	createVideoElementWithStream(modal, stream);
+	return await getImageBlob(stream);
+}
 
-(window as any).Anyline = { getImage };
+(window as any).Anyline = { init };
 
-export default getImage;
+export default init;
