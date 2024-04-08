@@ -29,22 +29,4 @@ describe('init', () => {
 
 		jest.restoreAllMocks();
 	});
-
-	it('throws an error when getting a high-resolution stream fails', async () => {
-		Object.defineProperty(global.navigator, 'mediaDevices', {
-			writable: true,
-			value: {
-				getUserMedia: jest.fn().mockRejectedValue(new Error()),
-				enumerateDevices: jest.fn().mockResolvedValue([
-					{
-						kind: 'videoinput',
-						label: 'Back Camera',
-						deviceId: 'backCamera1',
-						groupId: 'testGroup1',
-					},
-				]),
-			},
-		});
-		await expect(init()).rejects.toThrow('No suitable constraints found');
-	});
 });

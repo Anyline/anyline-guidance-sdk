@@ -1,12 +1,3 @@
-// TODOs
-// 1. DONE Make video element parameterized
-// 3. Add config to getImage function
-// 4. Introduce sonarcloud, eslint, ci pipeline, yarn
-// 5. Ship typescript module
-// 6. DONE Remove vite
-// 7. DONE Use ImageCapture polyfill from npm
-// 8. DONE Check why importing the function doesn't work on browser
-
 // @ts-expect-error - No type definitions available for image-capture.
 import { ImageCapture } from 'image-capture';
 
@@ -32,6 +23,7 @@ function isNotIosWideAngleCamera(label: string): boolean {
 }
 
 async function getHighResolutionNonWideAngleCamera(): Promise<MediaDeviceInfo> {
+	await navigator.mediaDevices.getUserMedia({ video: true });
 	const allDevices = await navigator.mediaDevices.enumerateDevices();
 
 	const videoDevices = allDevices.filter(
@@ -69,7 +61,9 @@ async function getHighestResolutionStream(
 					: undefined,
 			width: { ideal: resolution.width },
 			height: { ideal: resolution.height },
-			facingMode: 'environment',
+			facingMode: {
+				ideal: 'environment',
+			},
 		},
 	}));
 
@@ -78,7 +72,9 @@ async function getHighestResolutionStream(
 			const stream = await navigator.mediaDevices.getUserMedia(
 				constraintsList[i]
 			);
-			if (stream !== null && stream !== undefined) return stream;
+			if (stream !== null && stream !== undefined) {
+				return stream;
+			}
 		} catch (error) {
 			console.log(
 				`Attempt for resolution ${constraintsList[i].video.width.ideal}x${constraintsList[i].video.height.ideal} failed:`,
@@ -115,7 +111,6 @@ async function init(): Promise<Blob> {
 	}
 	const device = await getHighResolutionNonWideAngleCamera();
 	const stream = await getHighestResolutionStream(device);
-	// createVideoElementWithStream(modal, stream);
 	const container = createContainerElemenet(stream);
 
 	createModal(container);

@@ -3,13 +3,14 @@
 	width: 100%;
 	height: 100%;
 	display: flex;
-	justify-content: center;
+	/* justify-content: center; */
 	align-items: center;
 	flex-direction: column;
 }
 
 .overlay {
 	/* position: absolute; */
+	margin-top: 100px;
 	width: 90%;
 	max-width: 500px;
 }
