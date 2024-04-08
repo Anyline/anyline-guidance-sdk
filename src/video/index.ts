@@ -10,7 +10,6 @@ export default function createVideoElementWithStream(
 	video.playsInline = true;
 	video.muted = true;
 	video.srcObject = stream;
-	video.style.objectFit = 'cover';
 
 	container.appendChild(video);
 }

@@ -1,6 +1,7 @@
 .video {
 	width: 100%;
 	height: 100%;
+	object-fit: cover;
 	/* TODO: Only do this when front camera is used */
 	/* transform: scaleX(-1); */
 }
