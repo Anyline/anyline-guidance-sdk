@@ -6,11 +6,25 @@
 		<title>Document</title>
 	</head>
 	<body>
+		<button id="start-sdk-btn">Start SDK</button><br /><br />
+		<img id="new-image" alt="Demo" width="400" height="400" />
 		<script src="index.js"></script>
-		<script>
-			Anyline.init()
-				.then(blob => console.log('Blob', blob))
-				.catch(err => console.log('Error', err));
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', event => {
+				document
+					.getElementById('start-sdk-btn')
+					.addEventListener('click', function () {
+						Anyline.init()
+							.then(blob => {
+								const blobUrl = URL.createObjectURL(blob);
+								const imgElement =
+									document.getElementById('new-image');
+								imgElement.src = blobUrl;
+								document.body.appendChild(imgElement);
+							})
+							.catch(err => console.log('Error', err));
+					});
+			});
 		</script>
 	</body>
 </html>

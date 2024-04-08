@@ -113,9 +113,9 @@ async function init(): Promise<Blob> {
 	const stream = await getHighestResolutionStream(device);
 	const container = createContainerElemenet(stream);
 
-	createModal(container);
+	const modal = createModal(container);
 
-	return await createButtonElement(container, stream);
+	return await createButtonElement(container, stream, modal);
 }
 
 (window as any).Anyline = { init };

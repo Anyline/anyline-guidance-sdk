@@ -3,19 +3,26 @@ import css from './index.module.css';
 
 export default async function createButtonElement(
 	container: HTMLElement,
-	stream: MediaStream
+	stream: MediaStream,
+	modal: HTMLElement
 ): Promise<Blob> {
 	// Create the button element
 	const button = document.createElement('button');
 	button.className = css.button;
-	button.innerText = 'Start Scanning';
+	button.innerHTML = `<div class=${css.buttonInner}><div>Capture</div></div>`;
 	container.appendChild(button);
 
-	// Return a promise that resolves when the button is clicked
 	return await new Promise((resolve, reject) => {
 		button.addEventListener('click', () => {
+			button.innerHTML = `<div class=${css.buttonInner}><div>Please wait...</div><div class=${css.spinner}></div></div>`;
+			button.disabled = true;
+			button.style.cursor = 'not-allowed';
 			getImageBlob(stream)
 				.then(blob => {
+					stream.getTracks().forEach(track => {
+						track.stop();
+					});
+					modal.remove();
 					resolve(blob);
 				})
 				.catch(error => {

@@ -13,17 +13,31 @@
                 l.href = url;
                 document.head.appendChild(l);
             }
-            loadStyle('css/index-Q5DJRO7K.css');
+            loadStyle('css/index-EG4KF3JW.css');
         }());
     </script>
 </head>
 
 <body>
-    <script src="js/index-6SOG2JSX.js" type="application/javascript"></script>
-    <script>
-        Anyline.init()
-            .then(blob => console.log('Blob', blob))
-            .catch(err => console.log('Error', err));
+    <button id="start-sdk-btn">Start SDK</button><br><br>
+    <img id="new-image" alt="Demo" width="400" height="400">
+    <script src="js/index-TXEI64WX.js" type="application/javascript"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', event => {
+            document
+                .getElementById('start-sdk-btn')
+                .addEventListener('click', function() {
+                    Anyline.init()
+                        .then(blob => {
+                            const blobUrl = URL.createObjectURL(blob);
+                            const imgElement =
+                                document.getElementById('new-image');
+                            imgElement.src = blobUrl;
+                            document.body.appendChild(imgElement);
+                        })
+                        .catch(err => console.log('Error', err));
+                });
+        });
     </script>
 </body>
 
