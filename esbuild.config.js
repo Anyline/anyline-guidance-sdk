@@ -9,6 +9,7 @@ const baseConfig = {
 	target: ['es2015'],
 	loader: {
 		'.ts': 'ts',
+		'.svg': 'dataurl',
 	},
 };
 
