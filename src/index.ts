@@ -15,8 +15,9 @@ import {
 	iosWideBackCameraLabels,
 } from './constants/cameraLabels';
 import cameraResolutions from './constants/cameraResolutions';
-import createModal from './modal/modal';
-import createVideoElementWithStream from './video/video';
+import createModal from './modal';
+import createContainerElemenet from './container';
+import createButtonElement from './button';
 
 function isBackCameraLabel(label: string): boolean {
 	const lowercaseLabel = label.toLowerCase();
@@ -89,7 +90,7 @@ async function getHighestResolutionStream(
 	return await Promise.reject(Error('No suitable constraints found'));
 }
 
-async function getImageBlob(stream: MediaStream): Promise<Blob> {
+export async function getImageBlob(stream: MediaStream): Promise<Blob> {
 	const track = stream.getVideoTracks()[0];
 	const imageCaptureInstance = new ImageCapture(track);
 	const photoCapabilities = await imageCaptureInstance.getPhotoCapabilities();
@@ -114,9 +115,12 @@ async function init(): Promise<Blob> {
 	}
 	const device = await getHighResolutionNonWideAngleCamera();
 	const stream = await getHighestResolutionStream(device);
-	const modal = createModal();
-	createVideoElementWithStream(modal, stream);
-	return await getImageBlob(stream);
+	// createVideoElementWithStream(modal, stream);
+	const container = createContainerElemenet(stream);
+
+	createModal(container);
+
+	return await createButtonElement(container, stream);
 }
 
 (window as any).Anyline = { init };
