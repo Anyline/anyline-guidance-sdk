@@ -4,13 +4,14 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>UGA Demo</title>
-    <script async src="../src/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <script async src="./index.js"></script>
     <script async type="text/javascript">
       document.addEventListener('DOMContentLoaded', event => {
         document
           .getElementById('start-sdk-btn')
           .addEventListener('click', async function () {
-            const blob = await Anyline.init();
+            const blob = await Anyline.default();
             const blobUrl = URL.createObjectURL(blob);
             const imgElement =
               document.getElementById('new-image');

@@ -17,6 +17,6 @@
 		"jest.config.js",
 		"esbuild.config.js",
 		"svgTransform.js",
-		"esbuild.dev.config.js"
+		"esbuild.demo.config.js"
 	]
 }
