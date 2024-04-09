@@ -9,12 +9,14 @@
 		"outDir": "dist/esm",
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"strict": true
+		"strict": true,
+		"skipLibCheck": true
 	},
 	"include": [
 		"src/**/*",
 		"jest.config.js",
 		"esbuild.config.js",
-		"svgTransform.js"
+		"svgTransform.js",
+		"esbuild.dev.config.js"
 	]
 }
