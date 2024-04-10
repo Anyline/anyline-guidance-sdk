@@ -14,7 +14,7 @@ const ctx = await esbuild.context({
 	globalName: 'Anyline',
 });
 
-const isDev = process.argv.includes('--a');
+const isDev = process.argv.includes('--dev');
 
 if (isDev) {
 	await ctx.watch();
