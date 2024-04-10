@@ -40,5 +40,3 @@ esbuild
 		format: 'cjs',
 	})
 	.catch(() => process.exit(1));
-
-esbuild.build()
