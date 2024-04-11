@@ -8,11 +8,15 @@ export default function createOverlayElement(
 	const overlayWrapper = document.createElement('div');
 	overlayWrapper.className = css.overlayWrapper;
 
+	const imageWrapper = document.createElement('div');
+	imageWrapper.className = css.imageWrapper;
+
 	const overlay = document.createElement('img');
 	overlay.src = overlaySrc;
 	overlay.className = css.overlay;
 
-	overlayWrapper.appendChild(overlay);
+	imageWrapper.appendChild(overlay);
+	overlayWrapper.appendChild(imageWrapper);
 	overlayWrapper.appendChild(instructionElement);
 
 	container.appendChild(overlayWrapper);

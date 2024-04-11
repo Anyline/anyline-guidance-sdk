@@ -1,7 +1,7 @@
 {
-  "author": "Anyline",
+	"author": "Anyline",
 	"name": "@anyline/anyline-guidance",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
 	"types": "dist/esm/index.d.ts",
@@ -11,17 +11,17 @@
 			"require": "./dist/cjs/index.js",
 			"default": "./dist/iife/index.js"
 		},
-    "./index.css": "./dist/esm/index.css"
+		"./index.css": "./dist/esm/index.css"
 	},
 	"type": "module",
 	"license": "MIT",
-  "publishConfig": {
-    "@anyline:registry":"https://npm.pkg.github.com/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Anyline/anyline-user-guidance.git"
-  },
+	"publishConfig": {
+		"@anyline:registry": "https://npm.pkg.github.com/"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Anyline/anyline-user-guidance.git"
+	},
 	"scripts": {
 		"build:types": "tsc --emitDeclarationOnly",
 		"build:bundle": "node esbuild.config.js",

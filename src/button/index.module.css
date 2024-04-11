@@ -61,3 +61,13 @@ SOFTWARE. */
 		transform: rotate(360deg);
 	}
 }
+
+@media (orientation: landscape) {
+	.button {
+		bottom: unset;
+		top: 10px;
+		right: 10px;
+		width: 200px;
+		max-width: 200px;
+	}
+}

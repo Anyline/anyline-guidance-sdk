@@ -3,14 +3,33 @@
 	width: 100%;
 	height: 100%;
 	display: flex;
-	/* justify-content: center; */
+	align-items: center;
+	flex-direction: column;
+}
+
+.imageWrapper {
+	margin-top: 100px;
+	width: 100%;
+	display: flex;
 	align-items: center;
 	flex-direction: column;
 }
 
 .overlay {
-	/* position: absolute; */
-	margin-top: 100px;
 	width: 90%;
 	max-width: 500px;
+}
+
+@media (orientation: landscape) {
+	.imageWrapper {
+		position: absolute;
+		height: 100%;
+		margin-top: unset;
+		justify-content: center;
+		flex-direction: row;
+	}
+	.overlay {
+		width: unset;
+		height: 90%;
+	}
 }
