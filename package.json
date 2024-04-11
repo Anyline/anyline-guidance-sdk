@@ -1,5 +1,6 @@
 {
-	"name": "user-guidance-app",
+  "author": "Anyline",
+	"name": "@anyline/anyline-user-guidance",
 	"version": "1.0.0",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -13,6 +14,13 @@
 	},
 	"type": "module",
 	"license": "MIT",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anyline/anyline-user-guidance.git"
+  },
 	"scripts": {
 		"build:types": "tsc --emitDeclarationOnly",
 		"build:bundle": "node esbuild.config.js",
