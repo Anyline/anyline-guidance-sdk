@@ -1,7 +1,7 @@
 {
   "author": "Anyline",
-	"name": "@anyline/anyline-user-guidance",
-	"version": "1.0.7",
+	"name": "@anyline/anyline-guidance",
+	"version": "1.0.9",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
 	"types": "dist/esm/index.d.ts",
