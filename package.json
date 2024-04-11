@@ -14,7 +14,7 @@
 	"type": "module",
 	"license": "MIT",
 	"scripts": {
-		"build:types": "tsc",
+		"build:types": "tsc --emitDeclarationOnly",
 		"build:bundle": "node esbuild.config.js",
 		"build:demo": "node esbuild.demo.config.js",
 		"build": "yarn build:types && yarn build:bundle",

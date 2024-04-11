@@ -13,10 +13,6 @@
 		"skipLibCheck": true
 	},
 	"include": [
-		"src/**/*",
-		"jest.config.js",
-		"esbuild.config.js",
-		"svgTransform.js",
-		"esbuild.demo.config.js"
+		"src/**/*"
 	]
 }
