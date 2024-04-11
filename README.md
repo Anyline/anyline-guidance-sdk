@@ -1,32 +1,35 @@
 # Anyline User Guidance App
 
-**TODO** explain what this package does and how one can benefit from using it.  
+Anyline guidance sdk to retrieve high resolution image from a video stream with tire overlay that helps to point accurately to the tire.
 
 ## Usage
 
 ```js
-const blob = await Anyline.init();
+const blob = await init();
 ```
 
 ## Installation
 
-**TODO**
 
 ```shell
-yarn add @anyline/TODO
+yarn add @anyline/anyline-guidance
 ```
 
 
 ## Usage
 
 1. For ESM:
-   You can import the SDK using `import init from 'user-guidance-app'` and call `init()` function from within your code whenever you want to start the SDK
+   - Import the sdk using `import init from '@anyline/anyline-guidance'` 
+   - Import required css `import '@anyline/anyline-guidance/index.css'`
+   - Call the `init()` function whenever you'd want the sdk to start.
 
 2. For CJS:
-   Import the SDK using `const init = require('user-guidance-app')` and call `init()` function from within your code whenever you want to start the SDK
+   Same as ESM
 
 3. For direction script tag inclusions:
-   Include the SDK using `<script src="dist/iife/index.js"></script>` and call `Anyline.init()` function from within your code whenever you want to start the SDK
+   - Include the SDK using `<script src="TODO: path to js from CDN"></script>` 
+   - Include the css in style tag using `<link rel="stylesheet" href="TODO: path to css from CDN">`
+   - Call `Anyline.init()` function from within your code whenever you'd want the sdk to start.
 
 ### SDK return types
 
