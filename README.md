@@ -26,10 +26,11 @@ yarn add @anyline/anyline-guidance
 2. For CJS:
    Same as ESM
 
+WIP: Provide CDN for IIFE
 3. For direction script tag inclusions:
-   - Include the SDK using `<script src="TODO: path to js from CDN"></script>` 
-   - Include the css in style tag using `<link rel="stylesheet" href="TODO: path to css from CDN">`
-   - Call `Anyline.init()` function from within your code whenever you'd want the sdk to start.
+   - Include the SDK using `<script src="node_modules/@anyline/anyline-guidance/dist/iife/index.js"></script>` 
+   - Include the css in style tag using `<link rel="stylesheet" href="node_modules/@anyline/anyline-guidance/dist/iife/index.css">`
+   - Call `Anyline.default()` function from within your code whenever you'd want the sdk to start.
 
 ### SDK return types
 
