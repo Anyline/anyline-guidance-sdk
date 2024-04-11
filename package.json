@@ -1,7 +1,7 @@
 {
   "author": "Anyline",
 	"name": "@anyline/anyline-user-guidance",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
 	"types": "dist/esm/index.d.ts",
@@ -10,7 +10,8 @@
 			"import": "./dist/esm/index.js",
 			"require": "./dist/cjs/index.js",
 			"default": "./dist/iife/index.js"
-		}
+		},
+    "./index.css": "./dist/esm/index.css"
 	},
 	"type": "module",
 	"license": "MIT",
