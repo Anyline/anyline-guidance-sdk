@@ -1,10 +1,10 @@
 {
-  "extends": "./tsconfig.json",
-  "include": [
-    "src/**/*",
-    "jest.config.js",
-    "esbuild.config.js",
-    "tests/**/*.js",
-    "esbuild.demo.config.js"
-  ]
+	"extends": "./tsconfig.json",
+	"include": [
+		"src/**/*",
+		"jest.config.js",
+		"esbuild.config.js",
+		"tests/**/*.js",
+		"esbuild.demo.config.js"
+	]
 }
