@@ -1,4 +1,4 @@
-import { getImageBlob } from '..';
+import { getImageBlob } from '../camera';
 import css from './index.module.css';
 
 export default async function createButtonElement(
