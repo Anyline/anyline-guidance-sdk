@@ -3,7 +3,7 @@ import { ImageCapture } from 'image-capture';
 
 import {
 	backCameraKeywords,
-	iosWideBackCameraLabels,
+	iosNonWideBackCameraLabels,
 } from './constants/cameraLabels';
 import cameraResolutions from './constants/cameraResolutions';
 import createModal from './modal';
@@ -17,7 +17,7 @@ function isBackCameraLabel(label: string): boolean {
 
 function isNotIosWideAngleCamera(label: string): boolean {
 	const lowercaseLabel = label.toLowerCase();
-	return !iosWideBackCameraLabels.some(iosLabel =>
+	return iosNonWideBackCameraLabels.some(iosLabel =>
 		lowercaseLabel.includes(iosLabel.toLowerCase())
 	);
 }
@@ -34,10 +34,13 @@ async function getHighResolutionNonWideAngleCamera(): Promise<MediaDeviceInfo> {
 		return await Promise.reject(new Error('No video device found'));
 	}
 
+	const ua = navigator.userAgent.toLowerCase();
+	const isAndroid = ua.includes('android');
+
 	let backCameras = videoDevices.filter(
 		device =>
 			isBackCameraLabel(device.label) &&
-			isNotIosWideAngleCamera(device.label)
+			(isAndroid || isNotIosWideAngleCamera(device.label))
 	);
 
 	backCameras = backCameras.reverse();

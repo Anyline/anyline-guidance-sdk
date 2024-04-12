@@ -39,7 +39,7 @@ export const backCameraKeywords = [
 	'बैक',
 ];
 
-export const iosWideBackCameraLabels = [
+export const iosNonWideBackCameraLabels = [
 	'Back Camera',
 	'Rückkamera',
 	'Caméra arrière',
