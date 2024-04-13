@@ -5,6 +5,7 @@
 		"jest.config.js",
 		"esbuild.config.js",
 		"tests/**/*.js",
-		"esbuild.demo.config.js"
+		"esbuild.demo.config.js",
+		"wdio.conf.cjs"
 	]
 }

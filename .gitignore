@@ -5,3 +5,11 @@ public/build
 #IDE
 .idea
 .vscode
+
+# browserstack
+usage.log
+local.log
+browserstack.err
+
+# wdio
+logs
