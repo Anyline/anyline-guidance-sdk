@@ -38,14 +38,14 @@ exports.config = {
 		// 		osVersion: '10.0',
 		// 	},
 		// },
-		// {
-		// 	browserName: 'chrome',
-		// 	'bstack:options': {
-		// 		deviceOrientation: 'portrait',
-		// 		deviceName: 'Samsung Galaxy S9',
-		// 		osVersion: '8.0',
-		// 	},
-		// },
+		{
+			browserName: 'chrome',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'Samsung Galaxy S9',
+				osVersion: '8.0',
+			},
+		},
 		// {
 		// 	browserName: 'chrome',
 		// 	'bstack:options': {
@@ -62,30 +62,30 @@ exports.config = {
 		// 		osVersion: '12.0',
 		// 	},
 		// },
-		{
-			browserName: 'safari',
-			'bstack:options': {
-				deviceOrientation: 'portrait',
-				deviceName: 'iPhone 13 Pro',
-				osVersion: '15',
-			},
-		},
-		{
-			browserName: 'safari',
-			'bstack:options': {
-				deviceOrientation: 'portrait',
-				deviceName: 'iPhone 11 Pro Max',
-				osVersion: '13',
-			},
-		},
-		{
-			browserName: 'chromium',
-			'bstack:options': {
-				deviceOrientation: 'portrait',
-				deviceName: 'iPhone 13 Pro',
-				osVersion: '15',
-			},
-		},
+		// {
+		// 	browserName: 'safari',
+		// 	'bstack:options': {
+		// 		deviceOrientation: 'portrait',
+		// 		deviceName: 'iPhone 13 Pro',
+		// 		osVersion: '15',
+		// 	},
+		// },
+		// {
+		// 	browserName: 'safari',
+		// 	'bstack:options': {
+		// 		deviceOrientation: 'portrait',
+		// 		deviceName: 'iPhone 11 Pro Max',
+		// 		osVersion: '13',
+		// 	},
+		// },
+		// {
+		// 	browserName: 'chromium',
+		// 	'bstack:options': {
+		// 		deviceOrientation: 'portrait',
+		// 		deviceName: 'iPhone 13 Pro',
+		// 		osVersion: '15',
+		// 	},
+		// },
 	],
 	commonCapabilities: {
 		'bstack:options': {

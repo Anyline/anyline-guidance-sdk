@@ -23,7 +23,10 @@ function isNotIosWideAngleCamera(label: string): boolean {
 }
 
 async function getHighResolutionNonWideAngleCamera(): Promise<MediaDeviceInfo> {
-	await navigator.mediaDevices.getUserMedia({ video: true });
+	const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+	stream.getTracks().forEach(track => {
+		track.stop();
+	});
 	const allDevices = await navigator.mediaDevices.enumerateDevices();
 
 	const videoDevices = allDevices.filter(
@@ -58,10 +61,7 @@ async function getHighestResolutionStream(
 ): Promise<MediaStream> {
 	const constraintsList = cameraResolutions.map(resolution => ({
 		video: {
-			deviceId:
-				device !== undefined && device !== null
-					? { exact: device.deviceId }
-					: undefined,
+			deviceId: { exact: device.deviceId },
 			width: { ideal: resolution.width },
 			height: { ideal: resolution.height },
 			facingMode: {
@@ -86,7 +86,20 @@ async function getHighestResolutionStream(
 		}
 	}
 
-	return await Promise.reject(Error('No suitable constraints found'));
+	const fallbackConstraints = {
+		video: {
+			deviceId: { exact: device.deviceId },
+		},
+	};
+
+	try {
+		const stream =
+			await navigator.mediaDevices.getUserMedia(fallbackConstraints);
+		return stream;
+	} catch (error: any) {
+		console.error('Final attempt failed:', error.name, error.message);
+		return await Promise.reject(Error('No suitable constraints found'));
+	}
 }
 
 export async function getImageBlob(stream: MediaStream): Promise<Blob> {

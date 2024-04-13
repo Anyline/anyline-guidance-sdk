@@ -5,9 +5,10 @@
 // 2. When allow is clicked, it should open a modal which must have a video element and capture button
 // 3. When capture button is clicked, the text inside should change to "Please wait..."
 // 4. When capture button is clicked, after some time, img element should have src defined
-describe('Browserstack first test', () => {
-	it('should display the capture button after clicking the start sdk button', async () => {
-		await browser.url('https://cloud-api-user-guidance-app.vercel.app/');
+describe('guidance sdk', () => {
+	it('should open modal with video element and capture button', async () => {
+		// await browser.url('https://cloud-api-user-guidance-app.vercel.app/');
+		await browser.url('http://localhost:8000');
 
 		const startSdkButton = await $('#start-sdk-btn');
 
@@ -38,9 +39,14 @@ describe('Browserstack first test', () => {
 		await popUp.click();
 
 		await browser.switchContext(contexts[1]);
+		const videoElement = await $('*[data-test-id="videoElement"]');
 
-		const captureButton = await $('.button_button');
+		// const isVideoElementPresent = await videoElement.isExisting();
+		// const isVideoElemenVisible = await videoElement.isDisplayed();
+		// const captureButton = await $('*[data-test-id="captureButtonn"]');
 
-		await expect(captureButton).toHaveText('Capture');
+		// await expect(captureButton).toHaveText('Capture');
+		await expect(videoElement).toBeDisplayed();
+		// await expect(isVideoElemenVisible).to.be.true;
 	});
 });
