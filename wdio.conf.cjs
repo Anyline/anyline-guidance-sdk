@@ -2,6 +2,13 @@ const currentDate = new Date().toISOString();
 const buildName = `Build-${currentDate}`;
 
 exports.config = {
+	async before(capabilities, specs) {
+		setOptions({ wait: 5000 });
+		global.wdioExpect = global.expect;
+		await import('expect-webdriverio').then(mod => {
+			global.expect = mod.default;
+		});
+	},
 	runner: 'local',
 	autoCompileOpts: {
 		autoCompile: true,
@@ -47,12 +54,28 @@ exports.config = {
 		// 		osVersion: '10.0',
 		// 	},
 		// },
+		// {
+		// 	browserName: 'chrome',
+		// 	'bstack:options': {
+		// 		deviceOrientation: 'portrait',
+		// 		deviceName: 'Samsung Galaxy S22 Ultra',
+		// 		osVersion: '12.0',
+		// 	},
+		// },
 		{
 			browserName: 'safari',
 			'bstack:options': {
 				deviceOrientation: 'portrait',
 				deviceName: 'iPhone 13 Pro',
 				osVersion: '15',
+			},
+		},
+		{
+			browserName: 'safari',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'iPhone 11 Pro Max',
+				osVersion: '13',
 			},
 		},
 		{
@@ -63,22 +86,6 @@ exports.config = {
 				osVersion: '15',
 			},
 		},
-		// {
-		// 	browserName: 'safari',
-		// 	'bstack:options': {
-		// 		deviceOrientation: 'portrait',
-		// 		deviceName: 'iPhone 11 Pro Max',
-		// 		osVersion: '13',
-		// 	},
-		// },
-		// {
-		// 	browserName: 'chrome',
-		// 	'bstack:options': {
-		// 		deviceOrientation: 'portrait',
-		// 		deviceName: 'Samsung Galaxy S22 Ultra',
-		// 		osVersion: '12.0',
-		// 	},
-		// },
 	],
 	commonCapabilities: {
 		'bstack:options': {
