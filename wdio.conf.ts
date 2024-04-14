@@ -29,8 +29,120 @@ const preConfig: Options.Testrunner = {
 			browserName: 'chrome',
 			'bstack:options': {
 				deviceOrientation: 'portrait',
+				deviceName: 'Samsung Galaxy A11',
+				osVersion: '10.0',
+			},
+		},
+		{
+			browserName: 'chrome',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
 				deviceName: 'Samsung Galaxy S9',
 				osVersion: '8.0',
+			},
+		},
+		{
+			browserName: 'chrome',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'Samsung Galaxy S20',
+				osVersion: '10.0',
+			},
+		},
+		{
+			browserName: 'chrome',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'Google Pixel 3',
+				osVersion: '9.0',
+			},
+		},
+		{
+			browserName: 'chrome',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'Google Pixel 6',
+				osVersion: '12.0',
+			},
+		},
+		{
+			browserName: 'chrome',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'Google Pixel 8 Pro',
+				osVersion: '14.0',
+			},
+		},
+		{
+			browserName: 'chrome',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'Vivo Y50',
+				osVersion: '10.0',
+			},
+		},
+		{
+			browserName: 'chrome',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'Oppo Reno 3 Pro',
+				osVersion: '10.0',
+			},
+		},
+		{
+			browserName: 'chrome',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'Huawei P30',
+				osVersion: '9.0',
+			},
+		},
+		{
+			browserName: 'safari',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'iPhone 7',
+				osVersion: '10',
+			},
+		},
+		{
+			browserName: 'safari',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'iPhone X',
+				osVersion: '11',
+			},
+		},
+		{
+			browserName: 'safari',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'iPhone 11',
+				osVersion: '13',
+			},
+		},
+		{
+			browserName: 'chromium',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'iPhone 13 Pro',
+				osVersion: '15',
+			},
+		},
+		{
+			browserName: 'safari',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'iPhone 13 Pro',
+				osVersion: '15',
+			},
+		},
+		{
+			browserName: 'safari',
+			'bstack:options': {
+				deviceOrientation: 'portrait',
+				deviceName: 'iPhone SE 2020',
+				osVersion: '16',
 			},
 		},
 	] as WebdriverIO.Capabilities[],

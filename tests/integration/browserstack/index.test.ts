@@ -9,8 +9,8 @@ import { expect } from 'expect-webdriverio';
 // 4. When capture button is clicked, after some time, img element should have src defined
 
 async function visitDemo(): Promise<void> {
-	// await browser.url('https://cloud-api-user-guidance-app.vercel.app/');
-	await browser.url('http://localhost:8000');
+	await browser.url('https://cloud-api-user-guidance-app.vercel.app/');
+	// await browser.url('http://localhost:8000');
 }
 
 async function startSDK(): Promise<void> {
