@@ -1,6 +1,6 @@
 .button {
-	position: absolute;
-	bottom: 100px;
+	position: fixed;
+	bottom: 20px;
 	background-color: rgba(0, 153, 255, 1);
 	border: 0;
 	outline: 0;
