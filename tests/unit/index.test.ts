@@ -1,4 +1,4 @@
-import init from '../src/index';
+import init from '../../src/index';
 
 describe('init', () => {
 	it('rejects for unsupported devices', async () => {
