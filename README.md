@@ -52,9 +52,10 @@ The SDK will resolve or reject a promise as its return type. If everything goes 
 
 ### To Try
   - run `yarn dev` (uses [esbuild.demo.config.js](./esbuild.demo.config.js))
-  ```
-    This will build [demo/index.html](public/index.html) and serve [public/index.html](public/index.html)
-    in a local server running on http://localhost:8000.  
-    Hot-reload is not supported on `index.html` at the moment, so you will have to manually refresh the page after every change.
+
+  This will build [public/index.html](public/index.html) and serve [public/index.html](public/index.html)
+  in a local server running on http://localhost:8000.
+  ```text
+    Hot-reload is not supported on "index.html" at the moment, so you will have to manually refresh the page after every change.
   ```
   
