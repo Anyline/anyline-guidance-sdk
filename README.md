@@ -1,4 +1,4 @@
-# Anyline User Guidance App
+# Anyline Guidance SDK
 
 Anyline guidance sdk to retrieve high resolution image from a video stream with tire overlay that helps to point accurately to the tire.
 
@@ -12,15 +12,15 @@ const blob = await init();
 
 
 ```shell
-yarn add @anyline/anyline-guidance
+yarn add @anyline/anyline-guidance-sdk
 ```
 
 
 ## Usage
 
 1. For ESM:
-   - Import the sdk using `import init from '@anyline/anyline-guidance'` 
-   - Import required css `import '@anyline/anyline-guidance/index.css'`
+   - Import the sdk using `import init from '@anyline/anyline-guidance-sdk'` 
+   - Import required css `import '@anyline/anyline-guidance-sdk/index.css'`
    - Call the `init()` function whenever you'd want the sdk to start.
 
 2. For CJS:
@@ -28,8 +28,8 @@ yarn add @anyline/anyline-guidance
 
 WIP: Provide CDN for IIFE
 3. For direction script tag inclusions:
-   - Include the SDK using `<script src="node_modules/@anyline/anyline-guidance/dist/iife/index.js"></script>` 
-   - Include the css in style tag using `<link rel="stylesheet" href="node_modules/@anyline/anyline-guidance/dist/iife/index.css">`
+   - Include the SDK using `<script src="node_modules/@anyline/anyline-guidance-sdk/dist/iife/index.js"></script>` 
+   - Include the css in style tag using `<link rel="stylesheet" href="node_modules/@anyline/anyline-guidance-sdk/dist/iife/index.css">`
    - Call `Anyline.default()` function from within your code whenever you'd want the sdk to start.
 
 ### SDK return types

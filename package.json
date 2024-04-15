@@ -1,7 +1,7 @@
 {
 	"author": "Anyline",
-	"name": "@anyline/anyline-guidance",
-	"version": "1.0.14",
+	"name": "@anyline/anyline-guidance-sdk",
+	"version": "1.0.15",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
 	"types": "dist/esm/index.d.ts",
@@ -19,7 +19,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/Anyline/anyline-user-guidance.git"
+		"url": "git+https://github.com/Anyline/anyline-guidance-sdk.git"
 	},
 	"scripts": {
 		"build:types": "tsc --build tsconfig.prod.json",
