@@ -21,6 +21,7 @@ if (isDev) {
 	await ctx.serve({
 		servedir: 'public',
 	});
+	console.log(`Application is running at: http://localhost:8000`);
 } else {
 	await ctx.watch();
 	await ctx.dispose();
