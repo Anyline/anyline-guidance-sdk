@@ -12,7 +12,7 @@ const blob = await init();
 
 
 ```shell
-yarn add @anyline/anyline-guidance-sdk
+npm install @anyline/anyline-guidance-sdk
 ```
 
 
@@ -26,10 +26,10 @@ yarn add @anyline/anyline-guidance-sdk
 2. For CJS:
    Same as ESM
 
-WIP: Provide CDN for IIFE
 3. For direction script tag inclusions:
-   - Include the SDK using `<script src="node_modules/@anyline/anyline-guidance-sdk/dist/iife/index.js"></script>` 
-   - Include the css in style tag using `<link rel="stylesheet" href="node_modules/@anyline/anyline-guidance-sdk/dist/iife/index.css">`
+   - Refer [index.html](./public/index.html) for demo implementation.
+   - Include the css in style tag using `<link rel="stylesheet" href="node_modules/@anyline/anyline-guidance-sdk/dist/iife/index.css">` in your html file.
+   - Include the SDK using `<script src="node_modules/@anyline/anyline-guidance-sdk/dist/iife/index.js"></script>` in your html file.
    - Call `Anyline.default()` function from within your code whenever you'd want the sdk to start.
 
 ### SDK return types
