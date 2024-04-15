@@ -13,13 +13,16 @@
 				document
 					.getElementById('start-sdk-btn')
 					.addEventListener('click', async function () {
+            const errorElement = document.getElementById("error");
+            errorElement.innerText = '';
 						try {
               const blob = await Anyline.default();
               const blobUrl = URL.createObjectURL(blob);
               const imgElement = document.getElementById('new-image');
               imgElement.src = blobUrl;
-            }catch (err) {
+            } catch (err) {
               console.log("Error", err);
+              errorElement.innerText = err;
             }
 					});
 			});
@@ -27,6 +30,7 @@
 	</head>
 	<body>
 		<button id="start-sdk-btn">Start SDK</button><br /><br />
-		<img id="new-image" alt="Demo" width="100%" style="max-width: 500px" />
+		<img id="new-image" alt="Demo" width="100%" style="max-width: 500px" /><br />
+    <div id="error"></div>
 	</body>
 </html>
