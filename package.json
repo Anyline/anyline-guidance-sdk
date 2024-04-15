@@ -22,14 +22,14 @@
 		"url": "git+https://github.com/Anyline/anyline-guidance-sdk.git"
 	},
 	"scripts": {
-		"build:types": "tsc --build tsconfig.prod.json",
+		"build:types": "tsc --build tsconfig.json",
 		"build:bundle": "node esbuild.config.js",
 		"build:demo": "node esbuild.demo.config.js",
 		"build": "yarn build:types && yarn build:bundle",
 		"lint": "eslint 'src/**/*.{js,ts}'",
 		"dev": "node esbuild.demo.config.js --dev",
 		"test": "jest",
-		"wdio": "wdio run ./wdio.conf.ts"
+		"wdio": "TS_NODE_PROJECT=tsconfig.wdio.json wdio run ./wdio.conf.ts"
 	},
 	"type": "module",
 	"devDependencies": {

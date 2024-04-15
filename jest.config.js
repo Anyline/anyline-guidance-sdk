@@ -2,7 +2,7 @@ export default {
 	preset: 'ts-jest',
 	testEnvironment: 'jest-environment-jsdom',
 	transform: {
-		'^.+\\.ts$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.prod.json' }],
+		'^.+\\.ts$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.json' }],
 		'^.+\\.svg$': '<rootDir>/tests/svgTransform.js',
 	},
 	testMatch: ['<rootDir>/tests/unit/**/*.test.ts'],

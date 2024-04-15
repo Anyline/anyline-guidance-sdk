@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import type { Options } from '@wdio/types';
 
 const currentDate = new Date().toISOString();
@@ -11,7 +8,6 @@ const preConfig: Options.Testrunner = {
 	autoCompileOpts: {
 		autoCompile: true,
 		tsNodeOpts: {
-			project: 'tsconfig.json',
 			transpileOnly: true,
 		},
 	},

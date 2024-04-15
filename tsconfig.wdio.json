@@ -1,0 +1,24 @@
+// wdio tsconfig
+{
+	"compilerOptions": {
+		"moduleResolution": "node",
+		"module": "ESNext",
+		"target": "es2022",
+		"lib": ["es2022", "dom"],
+		"types": [
+			"@wdio/mocha-framework",
+			"@wdio/globals/types",
+			"expect-webdriverio",
+			"node"
+		],
+		"skipLibCheck": true,
+		"noEmit": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true
+	},
+	"include": ["tests/integration/browserstack/**/*.test.ts", "wdio.conf.ts"]
+}
