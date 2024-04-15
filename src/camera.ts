@@ -23,10 +23,22 @@ function isNotIosWideAngleCamera(label: string): boolean {
 }
 
 async function getHighResolutionNonWideAngleCamera(): Promise<MediaDeviceInfo> {
-	const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-	stream.getTracks().forEach(track => {
-		track.stop();
-	});
+	try {
+		const stream = await navigator.mediaDevices.getUserMedia({
+			video: true,
+		});
+		stream.getTracks().forEach(track => {
+			track.stop();
+		});
+	} catch (err) {
+		let errorMessage = 'An error occurred';
+		if (typeof err === 'string') {
+			errorMessage = err;
+		} else if (err instanceof Error) {
+			errorMessage = err.message;
+		}
+		return await Promise.reject(new Error(errorMessage));
+	}
 	const allDevices = await navigator.mediaDevices.enumerateDevices();
 
 	const videoDevices = allDevices.filter(

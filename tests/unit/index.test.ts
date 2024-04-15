@@ -10,6 +10,14 @@ describe('init', () => {
 			writable: true,
 			value: {
 				getUserMedia: jest.fn().mockResolvedValue({
+					getTracks: jest.fn().mockReturnValue([
+						{
+							getSettings: jest
+								.fn()
+								.mockReturnValue({ width: 7680, height: 4320 }),
+							stop: jest.fn(),
+						},
+					]),
 					getVideoTracks: jest.fn().mockReturnValue([
 						{
 							getSettings: jest

@@ -1,33 +1,34 @@
 name: Anyline Guidance SDK
 
 on:
-    release:
-        types: [created]
+  release:
+    types: [created]
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
-              with:
-                  node-version: 'lts/iron'
-            - run: yarn install --frozen-lockfile
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/iron'
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
 
-    publish:
-        needs: build
-        runs-on: ubuntu-latest
-        permissions:
-            packages: write
-            contents: read
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
-              with:
-                  node-version: 'lts/iron'
-                  registry-url: https://npm.pkg.github.com/
-            - run: yarn install --frozen-lockfile
-            - run: yarn build
-            - run: yarn publish --non-interactive
-              env:
-                  NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/iron'
+          registry-url: https://npm.pkg.github.com/
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - run: yarn publish --non-interactive
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
