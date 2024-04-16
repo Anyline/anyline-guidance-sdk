@@ -1,6 +1,10 @@
 import init from '../../src/index';
 
 describe('init', () => {
+	afterEach(() => {
+		jest.restoreAllMocks();
+	});
+
 	it('rejects for unsupported devices', async () => {
 		await expect(init()).rejects.toThrow('Unsupported device');
 	});
@@ -26,7 +30,5 @@ describe('init', () => {
 		});
 
 		await expect(init()).rejects.toThrow('Access denied');
-
-		jest.restoreAllMocks();
 	});
 });
