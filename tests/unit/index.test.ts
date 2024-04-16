@@ -18,14 +18,6 @@ describe('init', () => {
 							stop: jest.fn(),
 						},
 					]),
-					getVideoTracks: jest.fn().mockReturnValue([
-						{
-							getSettings: jest
-								.fn()
-								.mockReturnValue({ width: 7680, height: 4320 }),
-							stop: jest.fn(),
-						},
-					]),
 				}),
 				enumerateDevices: jest
 					.fn()
