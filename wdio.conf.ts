@@ -13,7 +13,7 @@ const preConfig: Options.Testrunner = {
 	},
 	user: process.env.BROWSERSTACK_USERNAME,
 	key: process.env.BROWSERSTACK_ACCESS_KEY,
-	specs: ['tests/integration/browserstack/*.ts'],
+	specs: ['tests/integration/browserstack/**'],
 	services: [
 		[
 			'browserstack',

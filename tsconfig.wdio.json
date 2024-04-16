@@ -1,4 +1,3 @@
-// wdio tsconfig
 {
 	"compilerOptions": {
 		"moduleResolution": "node",
@@ -20,5 +19,4 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true
 	},
-	"include": ["tests/integration/browserstack/**/*.test.ts", "wdio.conf.ts"]
 }

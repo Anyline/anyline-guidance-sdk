@@ -1,12 +1,5 @@
 import { expect } from 'expect-webdriverio';
-
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-
-// test cases
-// 1. Check when start sdk button is clicked, it should ask for permission
-// 2. When allow is clicked, it should open a modal which must have a video element and capture button
-// 3. When capture button is clicked, the text inside should change to "Please wait..."
-// 4. When capture button is clicked, after some time, img element should have src defined
+import { browser, $ } from '@wdio/globals';
 
 async function visitDemo(): Promise<void> {
 	await browser.url('https://cloud-api-user-guidance-app.vercel.app/');
@@ -26,7 +19,7 @@ async function acceptCameraPermission(): Promise<void> {
 		popUp = await $('.//android.widget.Button[@text="Allow"]');
 	}
 	if (browser.isIOS) {
-		const capabilities = await browser.capabilities;
+		const capabilities = browser.capabilities;
 		const { browserName } = capabilities;
 		if (browserName === '') {
 			// hack for chromium on ios, browsername is empty for chromium on ios
