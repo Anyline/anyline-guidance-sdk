@@ -1,4 +1,4 @@
-import init from './camera';
+import init from './camera/camera';
 
 export default init;
 
