@@ -16,37 +16,28 @@ function isNotIosWideAngleCamera(label: string): boolean {
 }
 
 async function requestCameraAccess(): Promise<void> {
-	const isCameraPermissionAllowed = localStorage.getItem(
-		'isCameraPermissionAllowed'
-	);
-	if (
-		isCameraPermissionAllowed === undefined ||
-		isCameraPermissionAllowed === null
-	) {
-		try {
-			const stream = await navigator.mediaDevices.getUserMedia({
-				video: true,
-			});
-			stream.getTracks().forEach(track => {
-				track.stop();
-			});
-			localStorage.setItem('isCameraPermissionAllowed', 'true');
-		} catch (err) {
-			let errorMessage = 'An error occurred';
-			if (typeof err === 'string') {
-				errorMessage = err;
-			} else if (err instanceof Error) {
-				errorMessage = err.message;
-			}
-			await Promise.reject(new Error(errorMessage));
+	try {
+		const stream = await navigator.mediaDevices.getUserMedia({
+			video: true,
+		});
+		stream.getTracks().forEach(track => {
+			track.stop();
+		});
+	} catch (err) {
+		let errorMessage = 'An error occurred';
+		if (typeof err === 'string') {
+			errorMessage = err;
+		} else if (err instanceof Error) {
+			errorMessage = err.message;
 		}
+		await Promise.reject(new Error(errorMessage));
 	}
 }
 
 export async function getNonWideAngleCamera(): Promise<MediaDeviceInfo> {
 	await requestCameraAccess();
-
 	const allDevices = await navigator.mediaDevices.enumerateDevices();
+
 	const videoDevices = allDevices.filter(
 		device => device.kind === 'videoinput'
 	);
