@@ -1,5 +1,5 @@
 import createModal from '../components/modal';
-import createContainerElemenet from '../components/container';
+import createContainerElement from '../components/container';
 import createButtonElement from '../components/button';
 import { getNonWideAngleCamera } from './getNonWideAngleCamera';
 import { getHighestResolutionStream } from './getHighestResolutionStream';
@@ -13,7 +13,7 @@ async function init(): Promise<Blob> {
 	}
 	const device = await getNonWideAngleCamera();
 	const stream = await getHighestResolutionStream(device);
-	const container = createContainerElemenet(stream);
+	const container = createContainerElement(stream);
 
 	const modal = createModal(container);
 

@@ -3,7 +3,7 @@ import createOverlayElement from '../overlay';
 import createVideoElementWithStream from '../video';
 import css from './index.module.css';
 
-export default function createContainerElemenet(
+export default function createContainerElement(
 	stream: MediaStream
 ): HTMLElement {
 	// container for video, overlay, instruction and button
