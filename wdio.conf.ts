@@ -98,14 +98,6 @@ const preConfig: Options.Testrunner = {
 			browserName: 'safari',
 			'bstack:options': {
 				deviceOrientation: 'portrait',
-				deviceName: 'iPhone 7',
-				osVersion: '10',
-			},
-		},
-		{
-			browserName: 'safari',
-			'bstack:options': {
-				deviceOrientation: 'portrait',
 				deviceName: 'iPhone X',
 				osVersion: '11',
 			},
