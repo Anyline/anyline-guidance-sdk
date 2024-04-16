@@ -20,6 +20,7 @@ const preConfig: Options.Testrunner = {
 			{ browserstackLocal: true, opts: { forcelocal: false } },
 		],
 	],
+	maxInstances: 6,
 	capabilities: [
 		{
 			browserName: 'chrome',
