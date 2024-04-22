@@ -6,11 +6,8 @@ export async function getHighestResolutionStream(
 	const constraintsList = cameraResolutions.map(resolution => ({
 		video: {
 			deviceId: { exact: device.deviceId },
-			width: { ideal: resolution.width },
-			height: { ideal: resolution.height },
-			facingMode: {
-				ideal: 'environment',
-			},
+			width: { exact: resolution.width },
+			height: { exact: resolution.height },
 		},
 	}));
 
@@ -24,7 +21,7 @@ export async function getHighestResolutionStream(
 			}
 		} catch (error) {
 			console.log(
-				`Attempt for resolution ${constraintsList[i].video.width.ideal}x${constraintsList[i].video.height.ideal} failed:`,
+				`Attempt for resolution ${constraintsList[i].video.width.exact}x${constraintsList[i].video.height.exact} failed:`,
 				error
 			);
 		}
