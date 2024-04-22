@@ -10,7 +10,7 @@
 			body {
 				font-family: Arial, Helvetica, sans-serif;
 			}
-			.start-sdk-btn {
+			button {
 				min-width: 100px;
 				height: 54px;
 			}
@@ -19,6 +19,7 @@
 		<script async src="./build/index.js"></script>
 		<script async type="text/javascript">
 			document.addEventListener('DOMContentLoaded', event => {
+				let blobUrl = '';
 				const startSdk = async config => {
 					const errorElement = document.getElementById('error');
 					errorElement.innerText = '';
@@ -27,13 +28,9 @@
 							blob,
 							metadata: { width, height, fileSize },
 						} = await Anyline.default(config);
-						const blobUrl = URL.createObjectURL(blob);
+						blobUrl = URL.createObjectURL(blob);
 						const imgElement = document.getElementById('new-image');
 
-						// image specs
-						imgElement.onload = function () {
-							URL.revokeObjectURL(blobUrl);
-						};
 						imgElement.src = blobUrl;
 
 						const specsElement =
@@ -47,6 +44,18 @@
 				document
 					.getElementById('start-sdk-btn')
 					.addEventListener('click', () => startSdk('default'));
+
+				document
+					.getElementById('download-button')
+					.addEventListener('click', () => {
+						if (blobUrl) {
+							console.log('Blob', blobUrl);
+							const link = document.createElement('a');
+							link.href = blobUrl;
+							link.download = `guidance-${new Date()}`;
+							link.click();
+						}
+					});
 			});
 		</script>
 	</head>
@@ -60,6 +69,8 @@
 			style="max-width: 500px"
 		/><br />
 		<div id="image-specs"></div>
+		<br />
+		<button id="download-button">Download Image</button>
 		<br />
 		<div id="error"></div>
 	</body>
