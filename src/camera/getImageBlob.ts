@@ -1,20 +1,21 @@
-// @ts-expect-error - No type definitions available for image-capture.
-import { ImageCapture } from 'image-capture';
+export async function getImageBlob(): Promise<Blob> {
+	return await new Promise((resolve, reject) => {
+		const inputElement = document.createElement('input');
+		inputElement.type = 'file';
+		inputElement.accept = 'image/*';
+		inputElement.capture = 'camera';
+		inputElement.click();
 
-export async function getImageBlob(stream: MediaStream): Promise<Blob> {
-	const track = stream.getVideoTracks()[0];
-
-	const imageCaptureInstance = new ImageCapture(track);
-
-	const photoCapabilities = await imageCaptureInstance.getPhotoCapabilities();
-
-	const maxImageWidth = photoCapabilities.imageWidth.max;
-	const maxImageHeight = photoCapabilities.imageHeight.max;
-
-	const blob = await imageCaptureInstance.takePhoto({
-		imageWidth: maxImageWidth,
-		imageHeight: maxImageHeight,
+		inputElement.onchange = function (event) {
+			const fileInput = event.target as HTMLInputElement;
+			if (fileInput.files != null && fileInput.files.length > 0) {
+				const file = fileInput.files[0];
+				if (file !== undefined && file !== null) {
+					resolve(file);
+				} else {
+					reject(new Error('No file selected'));
+				}
+			}
+		};
 	});
-
-	return blob;
 }

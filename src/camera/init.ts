@@ -31,13 +31,22 @@ async function init(): Promise<SDKReturnType> {
 
 	const modal = createModal(container);
 
-	await createButtonElement(container);
+	const button = createButtonElement(container);
 
-	const blob = await getImageBlob(stream);
-	const metadata = await getImageSpecification(blob);
-	await closeSDK(stream, modal);
-
-	return { blob, metadata };
+	return await new Promise((resolve, reject) => {
+		button.addEventListener('click', () => {
+			void (async () => {
+				try {
+					const blob = await getImageBlob();
+					const metadata = await getImageSpecification(blob);
+					resolve({ blob, metadata });
+					closeSDK(stream, modal);
+				} catch (err) {
+					reject(err);
+				}
+			})();
+		});
+	});
 }
 
 export default init;
