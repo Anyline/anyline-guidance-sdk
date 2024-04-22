@@ -5,6 +5,7 @@
 		"esbuild.demo.config.js",
 		"jest.config.js",
 		"tests",
-		"wdio.conf.ts"
+		"wdio.conf.ts",
+		"src"
 	]
 }

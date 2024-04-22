@@ -5,6 +5,7 @@ import { getNonWideAngleCamera } from './getNonWideAngleCamera';
 import { getHighestResolutionStream } from './getHighestResolutionStream';
 import { getImageBlob } from './getImageBlob';
 import { getImageSpecification } from './getImageSpecification';
+import { closeSDK } from './closeSDK';
 
 export interface ImageMetadata {
 	width: number;
@@ -34,7 +35,7 @@ async function init(): Promise<SDKReturnType> {
 
 	const blob = await getImageBlob(stream);
 	const metadata = await getImageSpecification(blob);
-	modal.remove();
+	await closeSDK(stream, modal);
 
 	return { blob, metadata };
 }

@@ -16,9 +16,5 @@ export async function getImageBlob(stream: MediaStream): Promise<Blob> {
 		imageHeight: maxImageHeight,
 	});
 
-	stream.getTracks().forEach(track => {
-		track.stop();
-	});
-
 	return blob;
 }
