@@ -1,7 +1,4 @@
 const cameraResolutions = [
-	{ name: 'Highest Resolution', width: 99999, height: 99999 },
-	{ name: '8K Ultra HD', width: 7680, height: 4320 },
-	{ name: '5K', width: 5120, height: 2880 },
 	{ name: '4K Ultra HD', width: 3840, height: 2160 },
 	{ name: '1440p QHD', width: 2560, height: 1440 },
 	{ name: '2K', width: 2048, height: 1080 },
