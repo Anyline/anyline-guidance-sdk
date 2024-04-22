@@ -3,34 +3,64 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>UGA Demo</title>
-    <!-- Anyline Guidance SDK css -->
+		<title>UGS Demo</title>
+		<!-- Anyline Guidance SDK css -->
 		<link rel="stylesheet" type="text/css" href="./build/index.css" />
-    <!-- Anyline Guidance SDK js -->
+		<style>
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			.start-sdk-btn {
+				min-width: 100px;
+				height: 54px;
+			}
+		</style>
+		<!-- Anyline Guidance SDK js -->
 		<script async src="./build/index.js"></script>
 		<script async type="text/javascript">
 			document.addEventListener('DOMContentLoaded', event => {
+				const startSdk = async config => {
+					const errorElement = document.getElementById('error');
+					errorElement.innerText = '';
+					try {
+						const {
+							blob,
+							metadata: { width, height, fileSize },
+						} = await Anyline.default(config);
+						const blobUrl = URL.createObjectURL(blob);
+						const imgElement = document.getElementById('new-image');
+
+						// image specs
+						imgElement.onload = function () {
+							URL.revokeObjectURL(blobUrl);
+						};
+						imgElement.src = blobUrl;
+
+						const specsElement =
+							document.getElementById('image-specs');
+						specsElement.innerText = `Image specs: ${width}px X ${height}px, ${fileSize}kb`;
+					} catch (err) {
+						console.log('Error', err);
+						errorElement.innerText = err;
+					}
+				};
 				document
 					.getElementById('start-sdk-btn')
-					.addEventListener('click', async function () {
-            const errorElement = document.getElementById("error");
-            errorElement.innerText = '';
-						try {
-              const blob = await Anyline.default();
-              const blobUrl = URL.createObjectURL(blob);
-              const imgElement = document.getElementById('new-image');
-              imgElement.src = blobUrl;
-            } catch (err) {
-              console.log("Error", err);
-              errorElement.innerText = err;
-            }
-					});
+					.addEventListener('click', () => startSdk('default'));
 			});
 		</script>
 	</head>
 	<body>
-		<button id="start-sdk-btn">Start SDK</button><br /><br />
-		<img id="new-image" alt="Demo" width="100%" style="max-width: 500px" /><br />
-    <div id="error"></div>
+		<button id="start-sdk-btn" class="start-sdk-btn">Start SDK</button>
+		<br /><br />
+		<img
+			id="new-image"
+			alt="Demo"
+			width="100%"
+			style="max-width: 500px"
+		/><br />
+		<div id="image-specs"></div>
+		<br />
+		<div id="error"></div>
 	</body>
 </html>

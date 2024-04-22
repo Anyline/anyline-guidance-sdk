@@ -3,8 +3,21 @@ import createContainerElement from '../components/container';
 import createButtonElement from '../components/button';
 import { getNonWideAngleCamera } from './getNonWideAngleCamera';
 import { getHighestResolutionStream } from './getHighestResolutionStream';
+import { getImageBlob } from './getImageBlob';
+import { getImageSpecification } from './getImageSpecification';
 
-async function init(): Promise<Blob> {
+export interface ImageMetadata {
+	width: number;
+	height: number;
+	fileSize: number;
+}
+
+export interface SDKReturnType {
+	blob: Blob;
+	metadata: ImageMetadata;
+}
+
+async function init(): Promise<SDKReturnType> {
 	if (
 		navigator.mediaDevices === null ||
 		navigator.mediaDevices === undefined
@@ -17,7 +30,13 @@ async function init(): Promise<Blob> {
 
 	const modal = createModal(container);
 
-	return await createButtonElement(container, stream, modal);
+	await createButtonElement(container);
+
+	const blob = await getImageBlob(stream);
+	const metadata = await getImageSpecification(blob);
+	modal.remove();
+
+	return { blob, metadata };
 }
 
 export default init;
