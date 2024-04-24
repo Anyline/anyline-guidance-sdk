@@ -4,6 +4,7 @@ export async function getImageBlob(): Promise<Blob> {
 	inputElement.accept = 'image/*';
 	inputElement.capture = 'camera';
 	inputElement.click();
+	inputElement.style.display = 'none';
 
 	document.body.appendChild(inputElement);
 
