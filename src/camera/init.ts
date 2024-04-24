@@ -6,6 +6,7 @@ import { getHighestResolutionStream } from './getHighestResolutionStream';
 import { getImageBlob } from './getImageBlob';
 import { getImageSpecification } from './getImageSpecification';
 import { closeSDK } from './closeSDK';
+import createCloseElement from '../components/close';
 
 export interface ImageMetadata {
 	width: number;
@@ -31,6 +32,8 @@ async function init(): Promise<SDKReturnType> {
 
 	const modal = createModal(container);
 
+	createCloseElement(stream, modal, container);
+
 	const button = createButtonElement(container);
 
 	return await new Promise((resolve, reject) => {
@@ -39,8 +42,8 @@ async function init(): Promise<SDKReturnType> {
 				try {
 					const blob = await getImageBlob();
 					const metadata = await getImageSpecification(blob);
-					resolve({ blob, metadata });
 					closeSDK(stream, modal);
+					resolve({ blob, metadata });
 				} catch (err) {
 					reject(err);
 				}
