@@ -3,7 +3,6 @@ import css from './index.module.css';
 
 export default function createCloseElement(
 	stream: MediaStream,
-	modal: HTMLElement,
 	container: HTMLElement
 ): void {
 	const button = document.createElement('button');
@@ -14,6 +13,6 @@ export default function createCloseElement(
 	container.appendChild(button);
 
 	button.addEventListener('click', () => {
-		closeSDK(stream, modal);
+		closeSDK(stream);
 	});
 }

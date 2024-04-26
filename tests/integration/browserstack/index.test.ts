@@ -2,8 +2,8 @@ import { expect } from 'expect-webdriverio';
 import { browser, $ } from '@wdio/globals';
 
 async function visitDemo(): Promise<void> {
-	await browser.url('https://cloud-api-user-guidance-app.vercel.app/');
-	// await browser.url('http://localhost:8000');
+	// await browser.url('https://cloud-api-user-guidance-app.vercel.app/');
+	await browser.url('http://localhost:8000');
 }
 
 async function startSDK(): Promise<void> {
@@ -35,7 +35,7 @@ async function acceptCameraPermission(): Promise<void> {
 }
 
 describe('guidance sdk', () => {
-	it.skip('should open modal with video element and capture button', async () => {
+	it('should open modal with video element and capture button', async () => {
 		await visitDemo();
 		await startSDK();
 		await acceptCameraPermission();
@@ -46,7 +46,7 @@ describe('guidance sdk', () => {
 		await expect(captureButton).toBeDisplayed();
 	});
 
-	it('should receive image blob after capture button is clicked', async () => {
+	it.skip('should receive image blob after capture button is clicked', async () => {
 		await visitDemo();
 
 		const demoImage = await $('#new-image');

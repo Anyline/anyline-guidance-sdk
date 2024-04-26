@@ -12,13 +12,8 @@ The next step varies based on which environment you are working on.
 
 ### ESM
 
-   <!-- - Import the sdk using `import init from '@anyline/anyline-guidance-sdk'` 
-   - Import required css `import '@anyline/anyline-guidance-sdk/index.css'`
-   - Call the `init()` function whenever you'd want the sdk to start. -->
-
 ```js
 import init from '@anyline/anyline-guidance-sdk';
-import '@anyline/anyline-guidance-sdk/index.css';
 ```
 
 Call the `init()` (refer [Code Example](#code-example)) function whenever you'd want the sdk to start.
@@ -28,17 +23,16 @@ Call the `init()` (refer [Code Example](#code-example)) function whenever you'd 
 Refer [index.html](./public/index.html) for demo implementation.
 
 ```js
-<link rel="stylesheet" href="anyline-guidance-sdk.css" />
 <script src="anyline-guidance-sdk.js"></script>
 ```
 
-You can get `anyline-guidance-sdk.css` and `anyline-guidance-sdk.js` files in the following ways:
+You can get `anyline-guidance-sdk.js` files in the following ways:
 
-By [installing the package](https://github.com/Anyline/anyline-guidance-sdk) and copying `index.css` and `index.js` from `dist/iife/` folder into your project.
+By [installing the package](https://github.com/Anyline/anyline-guidance-sdk) and copying `index.js` from `dist/iife/` folder into your project.
 
 (OR)
 
-You can also build the sdk by yourself and copy `index.css` and `index.js` from `dist/iife` folder (refer [To Build](#to-build) section).
+You can also build the sdk by yourself and copy `index.js` from `dist/iife` folder (refer [To Build](#to-build) section).
 
 [//]: # "Call `Anyline.default()` function from within your code whenever you'd want the sdk to start."
 

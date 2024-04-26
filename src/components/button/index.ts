@@ -2,7 +2,7 @@ import css from './index.module.css';
 
 export default function createButtonElement(
 	container: HTMLElement
-): HTMLElement {
+): HTMLButtonElement {
 	const button = document.createElement('button');
 	button.className = css.button;
 	button.id = 'captureButton';
