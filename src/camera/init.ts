@@ -1,12 +1,11 @@
 import createModal from '../components/modal';
 import createContainerElement from '../components/container';
-import createButtonElement from '../components/button';
 import { getNonWideAngleCamera } from './getNonWideAngleCamera';
 import { getHighestResolutionStream } from './getHighestResolutionStream';
 import { getImageBlob } from './getImageBlob';
 import { getImageSpecification } from './getImageSpecification';
 import { closeSDK } from './closeSDK';
-import createCloseElement from '../components/close';
+import injectCSS from '../lib/injectCSS';
 
 export interface ImageMetadata {
 	width: number;
@@ -26,23 +25,23 @@ async function init(): Promise<SDKReturnType> {
 	) {
 		await Promise.reject(new Error('Unsupported device'));
 	}
+
+	injectCSS();
+
 	const device = await getNonWideAngleCamera();
 	const stream = await getHighestResolutionStream(device);
-	const container = createContainerElement(stream);
+	const { container, captureButton, fileInputElement } =
+		createContainerElement(stream);
 
-	const modal = createModal(container);
-
-	createCloseElement(stream, modal, container);
-
-	const button = createButtonElement(container);
+	createModal(container);
 
 	return await new Promise((resolve, reject) => {
-		button.addEventListener('click', () => {
+		captureButton.addEventListener('click', () => {
 			void (async () => {
 				try {
-					const blob = await getImageBlob();
+					const blob = await getImageBlob(fileInputElement);
 					const metadata = await getImageSpecification(blob);
-					closeSDK(stream, modal);
+					closeSDK(stream);
 					resolve({ blob, metadata });
 				} catch (err) {
 					reject(err);

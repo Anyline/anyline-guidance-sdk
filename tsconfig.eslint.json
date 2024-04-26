@@ -1,11 +1,13 @@
 {
 	"extends": "./tsconfig.json",
 	"include": [
+		"esbuild",
 		"esbuild.config.js",
 		"esbuild.demo.config.js",
 		"jest.config.js",
+		"jest.setup.js",
+		"src",
 		"tests",
-		"wdio.conf.ts",
-		"src"
+		"wdio.conf.ts"
 	]
 }

@@ -1,10 +1,11 @@
 import esbuild from 'esbuild';
+import { injectCSSPlugin } from './esbuild/injectCSSPlugin.js';
 
 const baseConfig = {
 	entryPoints: ['src/index.ts'],
 	bundle: true,
-	platform: 'browser',
 	minify: true,
+	platform: 'browser',
 	sourcemap: true,
 	target: ['es2015'],
 	loader: {
@@ -17,6 +18,7 @@ const baseConfig = {
 esbuild
 	.build({
 		...baseConfig,
+		plugins: [injectCSSPlugin('../dist/esm/')],
 		outfile: 'dist/esm/index.js',
 		format: 'esm',
 	})
@@ -26,6 +28,7 @@ esbuild
 esbuild
 	.build({
 		...baseConfig,
+		plugins: [injectCSSPlugin('../dist/iife/')],
 		outfile: 'dist/iife/index.js',
 		format: 'iife',
 		globalName: 'Anyline',
@@ -36,6 +39,7 @@ esbuild
 esbuild
 	.build({
 		...baseConfig,
+		plugins: [injectCSSPlugin('../dist/cjs/')],
 		outfile: 'dist/cjs/index.js',
 		format: 'cjs',
 	})
