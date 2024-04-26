@@ -1,8 +1,10 @@
 import init from '../../src/index';
+import injectCSS from '../../src/lib/injectCSS';
 
 describe('init', () => {
 	afterEach(() => {
 		jest.restoreAllMocks();
+		jest.clearAllMocks();
 	});
 
 	it('rejects for unsupported devices', async () => {
@@ -30,5 +32,12 @@ describe('init', () => {
 		});
 
 		await expect(init()).rejects.toThrow('Access denied');
+	});
+
+	it('calls injectCSS upon init', async () => {
+		try {
+			await init();
+		} catch (err) {}
+		await expect(injectCSS).toHaveBeenCalledTimes(1);
 	});
 });

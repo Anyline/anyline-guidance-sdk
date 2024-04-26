@@ -1,4 +1,5 @@
 import * as esbuild from 'esbuild';
+import { injectCSSPlugin } from './esbuild/injectCSSPlugin.js';
 
 const ctx = await esbuild.context({
 	outfile: 'public/build/index.js',
@@ -12,6 +13,7 @@ const ctx = await esbuild.context({
 	},
 	format: 'iife',
 	globalName: 'Anyline',
+	plugins: [injectCSSPlugin()],
 });
 
 const isDev = process.argv.includes('--dev');
