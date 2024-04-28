@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.2] - 28-04-2024
+
+-   (feat): remove need to additionally import css when importing sdk
+
 ## [1.0.23] - 22-04-2024
 
 -   (feat): sdk switches to native camera upon "Capture" button click on non desktop environments
