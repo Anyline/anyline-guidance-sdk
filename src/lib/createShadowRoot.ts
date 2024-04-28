@@ -1,12 +1,16 @@
 import createHost from './createHost';
 
-export default function createShadowRoot(): ShadowRoot {
+export default function createShadowRoot(): ShadowRoot | HTMLDivElement {
 	const host = createHost();
 
-	if (host.shadowRoot !== undefined && host.shadowRoot !== null)
-		return host.shadowRoot;
+	if (process.env.MODE === 'production') {
+		if (host.shadowRoot !== undefined && host.shadowRoot !== null)
+			return host.shadowRoot;
 
-	const shadowRoot = host.attachShadow({ mode: 'open' });
+		const shadowRoot = host.attachShadow({ mode: 'open' });
 
-	return shadowRoot;
+		return shadowRoot;
+	}
+
+	return host;
 }
