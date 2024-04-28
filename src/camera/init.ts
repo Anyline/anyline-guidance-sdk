@@ -26,7 +26,9 @@ async function init(): Promise<SDKReturnType> {
 		await Promise.reject(new Error('Unsupported device'));
 	}
 
-	injectCSS();
+	if (process.env.MODE === 'production') {
+		injectCSS();
+	}
 
 	const device = await getNonWideAngleCamera();
 	const stream = await getHighestResolutionStream(device);
