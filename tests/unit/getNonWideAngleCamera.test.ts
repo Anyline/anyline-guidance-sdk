@@ -5,6 +5,29 @@ describe('getNonWideAngleCamera', () => {
 		jest.restoreAllMocks();
 	});
 
+	it('throws an error when enumeratedevices rejects promise', async () => {
+		Object.defineProperty(global.navigator, 'mediaDevices', {
+			writable: true,
+			value: {
+				getUserMedia: jest.fn().mockResolvedValue({
+					getTracks: jest.fn().mockReturnValue([
+						{
+							getSettings: jest
+								.fn()
+								.mockReturnValue({ width: 7680, height: 4320 }),
+							stop: jest.fn(),
+						},
+					]),
+				}),
+				enumerateDevices: jest
+					.fn()
+					.mockRejectedValue(new Error('Access denied')),
+			},
+		});
+
+		await expect(getNonWideAngleCamera()).rejects.toThrow('Access denied');
+	});
+
 	it('throws an error when getUserMedia promise is rejected', async () => {
 		Object.defineProperty(global.navigator, 'mediaDevices', {
 			writable: true,

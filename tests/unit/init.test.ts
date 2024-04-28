@@ -11,33 +11,23 @@ describe('init', () => {
 		await expect(init()).rejects.toThrow('Unsupported device');
 	});
 
-	it('throws an error when enumeratedevices rejects promise', async () => {
+	it('calls injectCSS when init is called in production build', async () => {
+		process.env.MODE = 'production';
 		Object.defineProperty(global.navigator, 'mediaDevices', {
 			writable: true,
-			value: {
-				getUserMedia: jest.fn().mockResolvedValue({
-					getTracks: jest.fn().mockReturnValue([
-						{
-							getSettings: jest
-								.fn()
-								.mockReturnValue({ width: 7680, height: 4320 }),
-							stop: jest.fn(),
-						},
-					]),
-				}),
-				enumerateDevices: jest
-					.fn()
-					.mockRejectedValue(new Error('Access denied')),
-			},
+			value: {},
 		});
-
-		await expect(init()).rejects.toThrow('Access denied');
-	});
-
-	it('calls injectCSS upon init', async () => {
 		try {
 			await init();
 		} catch (err) {}
 		await expect(injectCSS).toHaveBeenCalledTimes(1);
+	});
+
+	it('does not call injectCSS when init is called in development build', async () => {
+		process.env.MODE = 'development';
+		try {
+			await init();
+		} catch (err) {}
+		await expect(injectCSS).toHaveBeenCalledTimes(0);
 	});
 });
