@@ -3,6 +3,7 @@ import path from 'path';
 import postcss from 'postcss';
 import postcssModules from 'postcss-modules';
 import { fileURLToPath } from 'url';
+import cssnano from 'cssnano';
 
 const pluginName = 'css-modules-plugin';
 
@@ -28,6 +29,7 @@ export const injectCSSPlugin = baseDir => {
 							cssModulesJSON = json;
 						},
 					}),
+					cssnano(),
 				]).process(css, { from: args.path });
 
 				allCSS += result.css;
