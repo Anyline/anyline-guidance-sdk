@@ -47,6 +47,7 @@
 		"@wdio/spec-reporter": "^8.36.0",
 		"browserstack-local": "^1.5.5",
 		"browserstack-node-sdk": "^1.32.7",
+		"cssnano": "^7.0.1",
 		"esbuild": "^0.20.2",
 		"eslint": "^8.0.1",
 		"eslint-config-prettier": "^9.1.0",
@@ -71,7 +72,6 @@
 		"wdio-wait-for": "^3.0.11"
 	},
 	"dependencies": {
-		"dotenv": "^16.4.5",
 		"image-capture": "^0.4.0"
 	},
 	"resolutions": {
