@@ -14,12 +14,6 @@ export default function createContainerElement(stream: MediaStream): {
 	const container = document.createElement('div');
 	container.className = css.container;
 
-	const borderOverlay = document.createElement('div');
-	borderOverlay.className = css.borderOverlay;
-
-	// attach top and bottom fading overlay
-	container.appendChild(borderOverlay);
-
 	// attach video
 	createVideoElementWithStream(container, stream);
 

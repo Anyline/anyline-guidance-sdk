@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.31] - 30-04-2024
+
+-   (feat): add background overlay outside the tire section
+-   (chore): remove top and bottom border shadow around the video stream
+
 ## [1.2.3] - 28-04-2024
 
 -   (feat): remove need to additionally import css when importing sdk

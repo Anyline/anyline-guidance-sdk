@@ -4,8 +4,13 @@
 	height: 100%;
 	display: flex;
 	align-items: center;
-  justify-content: center;
+	justify-content: center;
 	flex-direction: column;
+	background: radial-gradient(
+		circle at center,
+		transparent min(248px, 44vw),
+		rgba(0, 0, 0, 0.7) min(248px, 44vw)
+	);
 }
 
 .imageWrapper {
@@ -16,11 +21,18 @@
 }
 
 .overlay {
-	width: 90%;
+	width: 90vw;
 	max-width: 500px;
 }
 
 @media (orientation: landscape) {
+	.overlayWrapper {
+		background: radial-gradient(
+			circle at center,
+			transparent min(248px, 41vh),
+			rgba(0, 0, 0, 0.7) min(248px, 41vh)
+		);
+	}
 	.imageWrapper {
 		position: absolute;
 		height: 100%;
@@ -30,6 +42,6 @@
 	}
 	.overlay {
 		width: unset;
-		height: 90%;
+		height: 84vh;
 	}
 }
