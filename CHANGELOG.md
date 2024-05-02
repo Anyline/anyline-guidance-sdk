@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.3.0] - 02-05-2024
+
+-   (feat): first public release
+
 ## [1.2.31] - 30-04-2024
 
 -   (feat): add background overlay outside the tire section
