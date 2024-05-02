@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.3.0] - 02-05-2024
+## [1.3.01] - 02-05-2024
 
 -   (feat): first public release
 
