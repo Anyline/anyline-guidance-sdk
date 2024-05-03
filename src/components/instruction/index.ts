@@ -1,3 +1,6 @@
+import getBrowserLanguage, {
+	BrowserLanguage,
+} from '../../lib/getBrowserLanguage';
 import css from './index.module.css';
 
 export default function createInstructionElement(
@@ -9,7 +12,12 @@ export default function createInstructionElement(
 	const instruction = document.createElement('div');
 	instruction.className = css.instruction;
 
-	instruction.innerText = `Ready? Tap "OPEN PHONE CAMERA" and then take a picture`;
+	const browserLanguage = getBrowserLanguage();
+
+	instruction.innerText =
+		browserLanguage === BrowserLanguage.ENGLISH
+			? 'Ready? Tap "OPEN PHONE CAMERA" and then take a picture'
+			: 'Sind Sie bereit? Tippen Sie auf „HANDY-KAMERA ÖFFNEN“ und machen Sie ein Foto.';
 
 	instructionWrapper.appendChild(instruction);
 
