@@ -9,8 +9,7 @@ export default function createInstructionElement(
 	const instruction = document.createElement('div');
 	instruction.className = css.instruction;
 
-	instruction.innerText =
-		'Position the entire sidewall to match the blue overlay';
+	instruction.innerText = `Ready? Tap "OPEN PHONE CAMERA" and then take a picture`;
 
 	instructionWrapper.appendChild(instruction);
 

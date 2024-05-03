@@ -17,11 +17,11 @@ export default function createContainerElement(stream: MediaStream): {
 	// attach video
 	createVideoElementWithStream(container, stream);
 
-	// attach instructions
-	const instructionElement = createInstructionElement(container);
-
 	// attach tire overlay
-	createOverlayElement(container, instructionElement);
+	createOverlayElement(container);
+
+	// attach instructions
+	createInstructionElement(container);
 
 	// attach close sdk button
 	createCloseElement(stream, container);
