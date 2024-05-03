@@ -1,3 +1,6 @@
+import getBrowserLanguage, {
+	BrowserLanguage,
+} from '../../lib/getBrowserLanguage';
 import css from './index.module.css';
 
 export default function createButtonElement(
@@ -7,7 +10,13 @@ export default function createButtonElement(
 	button.className = css.button;
 	button.id = 'captureButton';
 	button.setAttribute('data-test-id', 'captureButton');
-	button.innerText = `OPEN PHONE CAMERA`;
+
+	const browserLanguage = getBrowserLanguage();
+
+	button.innerText =
+		browserLanguage === BrowserLanguage.ENGLISH
+			? 'OPEN PHONE CAMERA'
+			: 'HANDY-KAMERA ÖFFNEN';
 	container.appendChild(button);
 
 	return button;
