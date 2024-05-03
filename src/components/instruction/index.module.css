@@ -1,40 +1,12 @@
 .instructionWrapper {
-	margin-top: 24px;
+	position: fixed;
+	bottom: 90px;
 	padding: 0 24px;
 	text-align: center;
-  display: none;
 }
 .instruction {
 	position: relative;
-	background: white;
-	border: 1px solid rgba(0, 153, 255, 1);
-	color: rgba(0, 153, 255, 1);
-	border-radius: 4px;
-	padding: 12px;
-}
-.instruction:after,
-.instruction:before {
-	bottom: 100%;
-	left: 50%;
-	border: solid transparent;
-	content: '';
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-}
-
-.instruction:after {
-	border-color: rgba(136, 183, 213, 0);
-	border-bottom-color: white;
-	border-width: 8px;
-	margin-left: -8px;
-}
-.instruction:before {
-	border-color: rgba(194, 225, 245, 0);
-	border-bottom-color: rgba(0, 153, 255, 1);
-	border-width: 9px;
-	margin-left: -9px;
+	color: #eee;
 }
 
 @media (orientation: landscape) {

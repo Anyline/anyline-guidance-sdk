@@ -1,10 +1,7 @@
 import overlaySrc from './overlay.svg';
 import css from './index.module.css';
 
-export default function createOverlayElement(
-	container: HTMLElement,
-	instructionElement: HTMLElement
-): void {
+export default function createOverlayElement(container: HTMLElement): void {
 	const overlayWrapper = document.createElement('div');
 	overlayWrapper.className = css.overlayWrapper;
 
@@ -17,7 +14,6 @@ export default function createOverlayElement(
 
 	imageWrapper.appendChild(overlay);
 	overlayWrapper.appendChild(imageWrapper);
-	overlayWrapper.appendChild(instructionElement);
 
 	container.appendChild(overlayWrapper);
 }

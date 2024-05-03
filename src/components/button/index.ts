@@ -7,7 +7,7 @@ export default function createButtonElement(
 	button.className = css.button;
 	button.id = 'captureButton';
 	button.setAttribute('data-test-id', 'captureButton');
-	button.innerHTML = `<div class=${css.buttonInner}><div>Capture</div></div>`;
+	button.innerText = `OPEN PHONE CAMERA`;
 	container.appendChild(button);
 
 	return button;

@@ -9,7 +9,7 @@
 	background: radial-gradient(
 		circle at center,
 		transparent min(248px, 44vw),
-		rgba(0, 0, 0, 0.7) min(248px, 44vw)
+		rgba(0, 0, 0, 0.9) min(248px, 44vw)
 	);
 }
 
@@ -30,7 +30,7 @@
 		background: radial-gradient(
 			circle at center,
 			transparent min(248px, 41vh),
-			rgba(0, 0, 0, 0.7) min(248px, 41vh)
+			rgba(0, 0, 0, 0.9) min(248px, 41vh)
 		);
 	}
 	.imageWrapper {
