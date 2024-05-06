@@ -1,19 +1,20 @@
 .button {
 	position: fixed;
 	top: 0px;
-  left: 0px;
+	left: 0px;
 	background-color: inherit;
 	border: 0;
 	outline: 0;
 	color: #fff;
-  width: 75px;
+	width: 75px;
 	height: 75px;
 	cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
-  vertical-align: middle;
-  padding: 0;
-  box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 30px;
+	vertical-align: middle;
+	padding: 0;
+	box-sizing: border-box;
+	z-index: 1;
 }

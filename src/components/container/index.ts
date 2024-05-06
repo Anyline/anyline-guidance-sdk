@@ -1,3 +1,4 @@
+import createBottomSection from '../bottomSection';
 import createButtonElement from '../button';
 import createCloseElement from '../close';
 import { createFileInputElement } from '../fileInput';
@@ -6,31 +7,35 @@ import createOverlayElement from '../overlay';
 import createVideoElementWithStream from '../video';
 import css from './index.module.css';
 
-export default function createContainerElement(stream: MediaStream): {
+export default async function createContainerElement(
+	stream: MediaStream
+): Promise<{
 	container: HTMLElement;
-	captureButton: HTMLButtonElement;
+	captureButton: HTMLDivElement;
 	fileInputElement: HTMLInputElement;
-} {
+}> {
 	const container = document.createElement('div');
 	container.className = css.container;
 
 	// attach video
-	createVideoElementWithStream(container, stream);
+	const videoElement = await createVideoElementWithStream(container, stream);
 
 	// attach tire overlay
-	createOverlayElement(container);
-
-	// attach instructions
-	createInstructionElement(container);
+	createOverlayElement(container, videoElement);
 
 	// attach close sdk button
 	createCloseElement(stream, container);
 
-	// attach capture button
-	const captureButton = createButtonElement(container);
+	// create instructions
+	const instructionsElement = createInstructionElement();
+
+	// create capture button
+	const captureButton = createButtonElement();
+
+	// attach bottom section
+	createBottomSection(instructionsElement, captureButton, container);
 
 	// attach fileInput
-
 	const fileInputElement = createFileInputElement(container);
 
 	return { container, captureButton, fileInputElement };

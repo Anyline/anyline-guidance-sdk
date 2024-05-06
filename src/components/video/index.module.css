@@ -1,5 +1,13 @@
 .video {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
+@media (orientation: landscape) {
+	.video {
+		position: relative;
+		height: 100%;
+		width: unset;
+	}
 }

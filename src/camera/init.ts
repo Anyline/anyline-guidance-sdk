@@ -33,7 +33,7 @@ async function init(): Promise<SDKReturnType> {
 	const device = await getNonWideAngleCamera();
 	const stream = await getHighestResolutionStream(device);
 	const { container, captureButton, fileInputElement } =
-		createContainerElement(stream);
+		await createContainerElement(stream);
 
 	createModal(container);
 
