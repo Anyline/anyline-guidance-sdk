@@ -1,12 +1,24 @@
 .instructionWrapper {
-	position: fixed;
-	bottom: 90px;
+	z-index: 1;
 	padding: 0 24px;
-	text-align: center;
+	box-sizing: border-box;
+	-webkit-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
 }
 .instruction {
-	position: relative;
-	color: #eee;
+	position: fixed;
+	bottom: 80px;
+	z-index: 1;
+	color: white;
+}
+.instructionsList {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+.instructionsList > div {
+	padding-bottom: 8px;
 }
 
 @media (orientation: landscape) {

@@ -1,7 +1,10 @@
 import overlaySrc from './overlay.svg';
 import css from './index.module.css';
 
-export default function createOverlayElement(container: HTMLElement): void {
+export default function createOverlayElement(
+	container: HTMLElement,
+	videoElement: HTMLVideoElement
+): void {
 	const overlayWrapper = document.createElement('div');
 	overlayWrapper.className = css.overlayWrapper;
 
@@ -15,5 +18,14 @@ export default function createOverlayElement(container: HTMLElement): void {
 	imageWrapper.appendChild(overlay);
 	overlayWrapper.appendChild(imageWrapper);
 
-	container.appendChild(overlayWrapper);
+	function updateHeightAndAppend(): void {
+		const videoElementHeight = videoElement.getBoundingClientRect().height;
+		overlayWrapper.style.height = `${videoElementHeight}px`;
+		imageWrapper.style.height = `${videoElementHeight}px`;
+		container.appendChild(overlayWrapper);
+	}
+
+	setTimeout(updateHeightAndAppend, 0);
+
+	window.addEventListener('resize', updateHeightAndAppend);
 }
