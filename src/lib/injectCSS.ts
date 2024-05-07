@@ -1,9 +1,8 @@
-import createShadowRoot from './createShadowRoot';
-
-export default function injectCSS(): void {
+export default function injectCSS(
+	shadowRoot: HTMLDivElement | ShadowRoot
+): void {
 	const style = document.createElement('style');
 	style.id = `anyline-guidance-sdk-style`;
 	style.textContent = '';
-	const shadowRoot = createShadowRoot();
 	shadowRoot.appendChild(style);
 }

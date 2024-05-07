@@ -1,7 +1,7 @@
-import createShadowRoot from '../../lib/createShadowRoot';
 import css from './index.module.css';
 
 export default function createModal(
+	shadowRoot: HTMLDivElement | ShadowRoot,
 	containerElement: HTMLElement
 ): HTMLElement {
 	const modal = document.createElement('div');
@@ -9,7 +9,6 @@ export default function createModal(
 
 	modal.appendChild(containerElement);
 
-	const shadowRoot = createShadowRoot();
 	shadowRoot.appendChild(modal);
 
 	return modal;
