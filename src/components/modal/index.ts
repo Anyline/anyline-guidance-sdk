@@ -1,13 +1,11 @@
 import css from './index.module.css';
 
 export default function createModal(
-	shadowRoot: HTMLDivElement | ShadowRoot,
-	containerElement: HTMLElement
+	shadowRoot: HTMLDivElement | ShadowRoot
 ): HTMLElement {
 	const modal = document.createElement('div');
 	modal.className = css.modal;
-
-	modal.appendChild(containerElement);
+	modal.setAttribute('data-testid', 'components-modal');
 
 	shadowRoot.appendChild(modal);
 
