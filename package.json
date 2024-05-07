@@ -35,6 +35,8 @@
 	"devDependencies": {
 		"@chialab/esbuild-plugin-html": "^0.18.2",
 		"@jest/globals": "^29.7.0",
+		"@testing-library/dom": "^10.1.0",
+		"@testing-library/jest-dom": "^6.4.5",
 		"@types/jest": "^29.5.12",
 		"@types/w3c-image-capture": "^1.0.10",
 		"@typescript-eslint/eslint-plugin": "^6.4.0",
