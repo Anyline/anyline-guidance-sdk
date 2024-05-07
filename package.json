@@ -28,7 +28,7 @@
 		"build": "yarn build:types && yarn build:bundle",
 		"lint": "eslint 'src/**/*.{js,ts}'",
 		"dev": "node esbuild.demo.config.js --dev",
-		"test": "jest",
+		"test": "NODE_OPTIONS=--experimental-vm-modules jest",
 		"wdio": "TS_NODE_PROJECT=tsconfig.wdio.json wdio run ./wdio.conf.ts"
 	},
 	"type": "module",
@@ -61,7 +61,6 @@
 		"jest": "^29.7.0",
 		"jest-css-modules": "^2.1.0",
 		"jest-environment-jsdom": "^29.7.0",
-		"jsdom": "^24.0.0",
 		"postcss": "^8.4.38",
 		"postcss-modules": "^6.0.0",
 		"prettier": "^3.2.5",

@@ -1,6 +1,6 @@
 export default {
 	preset: 'ts-jest',
-	testEnvironment: 'jest-environment-jsdom',
+	testEnvironment: 'jsdom',
 	transform: {
 		'^.+\\.ts$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.json' }],
 		'^.+\\.svg$': '<rootDir>/tests/svgTransform.js',
