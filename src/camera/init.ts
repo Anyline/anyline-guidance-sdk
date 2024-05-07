@@ -6,6 +6,8 @@ import { getImageBlob } from './getImageBlob';
 import { getImageSpecification } from './getImageSpecification';
 import { closeSDK } from './closeSDK';
 import injectCSS from '../lib/injectCSS';
+import createHost from '../lib/createHost';
+import createShadowRoot from '../lib/createShadowRoot';
 
 export interface ImageMetadata {
 	width: number;
@@ -26,8 +28,12 @@ async function init(): Promise<SDKReturnType> {
 		await Promise.reject(new Error('Unsupported device'));
 	}
 
+	const host = createHost();
+
+	const shadowRoot = createShadowRoot(host);
+
 	if (process.env.MODE === 'production') {
-		injectCSS();
+		injectCSS(shadowRoot);
 	}
 
 	const device = await getNonWideAngleCamera();
@@ -35,7 +41,7 @@ async function init(): Promise<SDKReturnType> {
 	const { container, captureButton, fileInputElement } =
 		await createContainerElement(stream);
 
-	createModal(container);
+	createModal(shadowRoot, container);
 
 	return await new Promise((resolve, reject) => {
 		captureButton.addEventListener('click', () => {

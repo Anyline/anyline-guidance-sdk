@@ -8,6 +8,7 @@ export default function createHost(): HTMLDivElement {
 	if (host === undefined || host === null) {
 		host = document.createElement('div');
 		host.id = hostId;
+		host.setAttribute('data-testid', 'lib-create-host');
 		document.body.appendChild(host);
 		return host;
 	}
