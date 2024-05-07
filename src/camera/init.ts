@@ -36,12 +36,18 @@ async function init(): Promise<SDKReturnType> {
 		injectCSS(shadowRoot);
 	}
 
+	const modal = createModal(shadowRoot);
+
+	// step 1
+	// show onboarding screen
+
+	// step 2
 	const device = await getNonWideAngleCamera();
 	const stream = await getHighestResolutionStream(device);
 	const { container, captureButton, fileInputElement } =
 		await createContainerElement(stream);
 
-	createModal(shadowRoot, container);
+	modal.appendChild(container);
 
 	return await new Promise((resolve, reject) => {
 		captureButton.addEventListener('click', () => {
