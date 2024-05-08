@@ -9,6 +9,7 @@ const ctx = await esbuild.context({
 	loader: {
 		'.ts': 'ts',
 		'.svg': 'dataurl',
+		'.png': 'dataurl',
 	},
 	format: 'iife',
 	globalName: 'Anyline',
