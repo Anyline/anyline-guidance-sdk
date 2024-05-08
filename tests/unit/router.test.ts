@@ -1,60 +1,50 @@
 import '@testing-library/jest-dom';
-import router from '../../src/router';
+import Router from '../../src/modules/Router';
 import { screen } from '@testing-library/dom';
-import createHost from '../../src/lib/createHost';
-import createShadowRoot from '../../src/lib/createShadowRoot';
-import createModal from '../../src/components/modal';
 
-describe('router', () => {
-	it('attaches all screens to an HTMLDivElement with display as none, except first one', () => {
-		const host = createHost();
-		const shadowRoot = createShadowRoot(host);
+describe('Router', () => {
+	let router: Router;
 
-		const modal = createModal(shadowRoot);
-
-		const home = document.createElement('div');
-		home.setAttribute('data-testid', 'test-home');
-		const about = document.createElement('div');
-		about.setAttribute('data-testid', 'test-about');
-		router(modal, [home, about]);
-
-		const homeElement = screen.getByTestId('test-home');
-		const aboutElement = screen.getByTestId('test-about');
-
-		void expect(homeElement).toBeInTheDocument();
-		void expect(homeElement).toBeVisible();
-
-		void expect(aboutElement).toBeInTheDocument();
-		void expect(aboutElement).not.toBeVisible();
+	beforeEach(() => {
+		router = Router.getInstance();
+		const mount = document.createElement('div');
+		document.body.appendChild(mount);
+		router.init(mount);
 	});
 
-	it('shows 3rd element in the HTMLDivElement and hides rest', () => {
-		const host = createHost();
-		const shadowRoot = createShadowRoot(host);
+	it('should have push and pop public methods', () => {
+		const testHome = document.createElement('div');
+		void expect(() => {
+			router.push(testHome);
+		}).not.toThrow();
+		void expect(() => {
+			router.pop();
+		}).not.toThrow();
+	});
 
-		const modal = createModal(shadowRoot);
+	it('should set css display value to none on the first screen when there are two screens pushed', () => {
+		const testHome = document.createElement('div');
+		testHome.setAttribute('data-testid', 'test-home');
+		router.push(testHome);
+		const homeScreen = screen.getByTestId('test-home');
 
-		const home = document.createElement('div');
-		home.setAttribute('data-testid', 'test-home');
-		const about = document.createElement('div');
-		about.setAttribute('data-testid', 'test-about');
-		const demo = document.createElement('div');
-		demo.setAttribute('data-testid', 'test-demo');
-		const { navigate } = router(modal, [home, about, demo]);
+		const aboutUs = document.createElement('div');
+		aboutUs.setAttribute('data-testid', 'test-aboutus');
+		router.push(aboutUs);
+		void expect(homeScreen).toHaveStyle({ display: 'none' });
+	});
 
-		navigate(2);
+	it('should set css display value to flex on previous screen when pop is called', () => {
+		const testHome = document.createElement('div');
+		testHome.setAttribute('data-testid', 'test-home');
+		router.push(testHome);
+		const homeScreen = screen.getByTestId('test-home');
 
-		const homeElement = screen.getByTestId('test-home');
-		const aboutElement = screen.getByTestId('test-about');
-		const demoElement = screen.getByTestId('test-demo');
+		const aboutUs = document.createElement('div');
+		aboutUs.setAttribute('data-testid', 'test-aboutus');
+		router.push(aboutUs);
 
-		void expect(homeElement).toBeInTheDocument();
-		void expect(homeElement).not.toBeVisible();
-
-		void expect(aboutElement).toBeInTheDocument();
-		void expect(aboutElement).not.toBeVisible();
-
-		void expect(demoElement).toBeInTheDocument();
-		void expect(demoElement).toBeVisible();
+		router.pop();
+		void expect(homeScreen).toHaveStyle({ display: 'flex' });
 	});
 });
