@@ -1,0 +1,28 @@
+.headlineWrapper {
+	margin: 24px 0;
+	text-align: center;
+}
+
+.headlineWrapper > span {
+	font-size: 32px;
+	font-weight: 700;
+}
+
+.instructionsWrapper {
+	margin-bottom: 12px;
+	padding: 0 24px;
+}
+
+.demoImageWrapper {
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 150px;
+	overflow: hidden;
+}
+
+.demoImageWrapper > img {
+	/* hide extended overlay in the actual image */
+	width: 101%;
+}

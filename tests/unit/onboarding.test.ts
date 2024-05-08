@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import createModal from '../../src/components/modal/index';
 import createHost from '../../src/lib/createHost';
 import createShadowRoot from '../../src/lib/createShadowRoot';
-import createOnboardingInstructions from '../../src/components/onboardingInstructions';
+import createOnboardingInstructions from '../../src/screens/onboardingInstructions';
 import { fireEvent, screen, waitFor } from '@testing-library/dom';
 
 describe('onboarding', () => {
@@ -11,7 +11,9 @@ describe('onboarding', () => {
 		const shadowRoot = createShadowRoot(host);
 
 		const modal = createModal(shadowRoot);
-		createOnboardingInstructions(modal);
+		const onboardingInstructionsWrapper = createOnboardingInstructions();
+
+		modal.appendChild(onboardingInstructionsWrapper);
 
 		const closeModalButton = screen.getByTestId(
 			'components-onboarding-instructions-close-sdk-button'

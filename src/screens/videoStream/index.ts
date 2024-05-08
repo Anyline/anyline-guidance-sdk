@@ -1,14 +1,14 @@
-import createBottomSection from '../bottomSection';
-import createButtonElement from '../button';
-import createCloseElement from '../close';
-import { createFileInputElement } from '../fileInput';
-import createInstructionElement from '../instruction';
-import createOverlayElement from '../overlay';
-import createVideoElementWithStream from '../video';
+import createBottomSection from './bottomSection';
+import createButtonElement from './button';
+import createCloseElement from './close';
+import { createFileInputElement } from './fileInput';
+import createInstructionElement from './instruction';
+import createOverlayElement from './overlay';
+import createVideoElementWithStream from './video';
 import css from './index.module.css';
 
 export default async function createContainerElement(): Promise<{
-	container: HTMLElement;
+	container: HTMLDivElement;
 	captureButton: HTMLDivElement;
 	fileInputElement: HTMLInputElement;
 }> {
