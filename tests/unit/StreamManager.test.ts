@@ -3,13 +3,7 @@
 import StreamManager from '../../src/modules/StreamManager';
 
 describe('StreamManager', () => {
-	it('should always return the same instance', () => {
-		const instance1 = StreamManager.getInstance();
-		const instance2 = StreamManager.getInstance();
-		void expect(instance1).toBe(instance2);
-	});
-
-	it('should initialize a stream with the given device', async () => {
+	beforeEach(() => {
 		Object.defineProperty(global.navigator, 'mediaDevices', {
 			writable: true,
 			value: {
@@ -30,6 +24,15 @@ describe('StreamManager', () => {
 					]),
 			},
 		});
+	});
+
+	it('should always return the same instance', () => {
+		const instance1 = StreamManager.getInstance();
+		const instance2 = StreamManager.getInstance();
+		void expect(instance1).toBe(instance2);
+	});
+
+	it('should initialize a stream with the given device', async () => {
 		const streamManager = StreamManager.getInstance();
 
 		const testDevice = {
@@ -67,5 +70,29 @@ describe('StreamManager', () => {
 		void expect(mockTrack.stop).toHaveBeenCalled();
 		void expect(mockStream.getTracks).toHaveBeenCalled();
 		void expect(StreamManager.getInstance()).not.toBe(streamManager);
+	});
+
+	it('should call onStreamSet callback only when stream is set', async () => {
+		const streamManager = StreamManager.getInstance();
+		const mockCallback = jest.fn();
+
+		streamManager.onStreamSet(mockCallback);
+
+		const testDevice = {
+			deviceId: 'test-device-id',
+			groupId: 'test',
+			kind: 'videoinput' as MediaDeviceKind,
+			label: 'test',
+		};
+		const device: MediaDeviceInfo = {
+			...testDevice,
+			toJSON: () => ({ ...testDevice }),
+		};
+
+		void expect(mockCallback).not.toHaveBeenCalled();
+
+		await streamManager.getStream(device);
+
+		void expect(mockCallback).toHaveBeenCalled();
 	});
 });
