@@ -3,6 +3,8 @@ import css from '../screens/videoStream/video/index.module.css';
 export default class VideoManager {
 	public videoElement: HTMLVideoElement;
 	private static instance: VideoManager | null = null;
+	private observer: MutationObserver | null = null;
+	private resizeObserver: ResizeObserver | null = null;
 
 	private constructor() {
 		this.videoElement = document.createElement('video');
@@ -20,7 +22,7 @@ export default class VideoManager {
 	}
 
 	public onMount(callback: () => Promise<void>): void {
-		const observer = new MutationObserver((mutationsList, observer) => {
+		this.observer = new MutationObserver((mutationsList, observer) => {
 			for (const mutation of mutationsList) {
 				if (mutation.type === 'childList') {
 					const addedNodes = Array.from(mutation.addedNodes);
@@ -33,13 +35,16 @@ export default class VideoManager {
 			}
 		});
 
-		observer.observe(document.body, { childList: true, subtree: true });
+		this.observer.observe(document.body, {
+			childList: true,
+			subtree: true,
+		});
 	}
 
 	public onChangeDimension(
 		callback: (width: number, height: number) => void
 	): void {
-		const resizeObserver = new ResizeObserver(entries => {
+		this.resizeObserver = new ResizeObserver(entries => {
 			for (const entry of entries) {
 				if (entry.target === this.videoElement) {
 					callback(entry.contentRect.width, entry.contentRect.height);
@@ -47,10 +52,28 @@ export default class VideoManager {
 			}
 		});
 
-		resizeObserver.observe(this.videoElement);
+		this.resizeObserver.observe(this.videoElement);
 	}
 
 	public getVideoElement(): HTMLVideoElement {
 		return this.videoElement;
+	}
+
+	public destroy(): void {
+		// Stop any observers
+		if (this.observer != null) {
+			this.observer.disconnect();
+		}
+		if (this.resizeObserver != null) {
+			this.resizeObserver.disconnect();
+		}
+
+		// Remove the video element from the DOM
+		if (this.videoElement.parentNode != null) {
+			this.videoElement.parentNode.removeChild(this.videoElement);
+		}
+
+		// Nullify the instance
+		VideoManager.instance = null;
 	}
 }
