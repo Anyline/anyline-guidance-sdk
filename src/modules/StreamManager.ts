@@ -1,6 +1,7 @@
 export default class StreamManager {
 	private static instance: StreamManager | null = null;
 	private stream: MediaStream | null = null;
+	private streamSetCallback: (() => void) | null = null;
 
 	private constructor() {}
 
@@ -11,6 +12,10 @@ export default class StreamManager {
 		return StreamManager.instance;
 	}
 
+	public onStreamSet(callback: () => void): void {
+		this.streamSetCallback = callback;
+	}
+
 	public async getStream(device?: MediaDeviceInfo): Promise<MediaStream> {
 		if (this.stream === null) {
 			const constraints = {
@@ -19,6 +24,9 @@ export default class StreamManager {
 			try {
 				this.stream =
 					await navigator.mediaDevices.getUserMedia(constraints);
+				if (this.streamSetCallback != null) {
+					this.streamSetCallback();
+				}
 			} catch (error) {
 				console.error('Failed to initialize the media stream:', error);
 				throw error;
