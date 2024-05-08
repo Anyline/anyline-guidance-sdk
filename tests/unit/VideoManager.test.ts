@@ -30,4 +30,11 @@ describe('VideoManager', () => {
 
 		void expect(mockCallback).toHaveBeenCalled();
 	});
+
+	it('should destory the video and clear the instance', () => {
+		const videoManager = VideoManager.getInstance();
+		void expect(VideoManager.getInstance()).toBe(videoManager);
+		videoManager.destroy();
+		void expect(VideoManager.getInstance()).not.toBe(videoManager);
+	});
 });
