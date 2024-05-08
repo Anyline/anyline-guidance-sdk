@@ -2,3 +2,9 @@
 	flex: 1;
 	background-color: black;
 }
+
+@media (orientation: landscape) {
+	.bottomSection {
+		background-color: inherit;
+	}
+}

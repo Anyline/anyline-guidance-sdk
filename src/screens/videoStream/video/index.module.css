@@ -1,4 +1,7 @@
 .video {
+	position: fixed;
+	top: 0;
+	left: 0;
 	width: 100%;
 	height: auto;
 	object-fit: contain;
@@ -6,8 +9,10 @@
 
 @media (orientation: landscape) {
 	.video {
-		position: relative;
 		height: 100%;
 		width: unset;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 	}
 }

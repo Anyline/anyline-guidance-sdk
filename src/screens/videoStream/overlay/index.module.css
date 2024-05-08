@@ -13,6 +13,8 @@
 		transparent min(248px, 44vw),
 		rgba(0, 0, 0, 0.9) min(248px, 44vw)
 	);
+	z-index: 1;
+	transition: height 0.1s ease-in;
 }
 
 .imageWrapper {

@@ -1,10 +1,8 @@
 import overlaySrc from './overlay.svg';
 import css from './index.module.css';
+import VideoManager from '../../../modules/VideoManager';
 
-export default function createOverlayElement(
-	container: HTMLElement,
-	videoElement: HTMLVideoElement
-): void {
+export default function createOverlayElement(): HTMLDivElement {
 	const overlayWrapper = document.createElement('div');
 	overlayWrapper.className = css.overlayWrapper;
 
@@ -18,14 +16,12 @@ export default function createOverlayElement(
 	imageWrapper.appendChild(overlay);
 	overlayWrapper.appendChild(imageWrapper);
 
-	function updateHeightAndAppend(): void {
-		const videoElementHeight = videoElement.getBoundingClientRect().height;
-		overlayWrapper.style.height = `${videoElementHeight}px`;
-		imageWrapper.style.height = `${videoElementHeight}px`;
-		container.appendChild(overlayWrapper);
-	}
+	const videoManager = VideoManager.getInstance();
 
-	setTimeout(updateHeightAndAppend, 0);
+	videoManager.onChangeDimension((_, height) => {
+		overlayWrapper.style.height = `${height}px`;
+		imageWrapper.style.height = `${height}px`;
+	});
 
-	window.addEventListener('resize', updateHeightAndAppend);
+	return overlayWrapper;
 }
