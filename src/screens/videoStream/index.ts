@@ -4,37 +4,48 @@ import createCloseElement from './close';
 import { createFileInputElement } from './fileInput';
 import createInstructionElement from './instruction';
 import createOverlayElement from './overlay';
-import createVideoElementWithStream from './video';
 import css from './index.module.css';
+import StreamManager from '../../modules/StreamManager';
+import createSpinner from './spinner';
 
-export default async function createContainerElement(): Promise<{
-	container: HTMLDivElement;
-	captureButton: HTMLDivElement;
-	fileInputElement: HTMLInputElement;
-}> {
+export default function createContainerElement(): HTMLDivElement {
 	const container = document.createElement('div');
 	container.className = css.container;
 
-	// attach video
-	const videoElement = await createVideoElementWithStream(container);
+	const spinner = createSpinner();
+	container.appendChild(spinner);
 
-	// attach tire overlay
-	createOverlayElement(container, videoElement);
+	const streamManager = StreamManager.getInstance();
 
-	// attach close sdk button
-	createCloseElement(container);
+	streamManager.onStreamSet(() => {
+		container.removeChild(spinner);
 
-	// create instructions
-	const instructionsElement = createInstructionElement();
+		// attach tire overlay
+		const overlayElement = createOverlayElement();
 
-	// create capture button
-	const captureButton = createButtonElement();
+		// attach close sdk button
+		const closeElement = createCloseElement();
 
-	// attach bottom section
-	createBottomSection(instructionsElement, captureButton, container);
+		// create instructions
+		const instructionsElement = createInstructionElement();
 
-	// attach fileInput
-	const fileInputElement = createFileInputElement(container);
+		// create capture button
+		const captureButton = createButtonElement();
 
-	return { container, captureButton, fileInputElement };
+		// attach bottom section
+		const bottomSection = createBottomSection(
+			instructionsElement,
+			captureButton
+		);
+
+		// attach fileInput
+		const fileInputElement = createFileInputElement();
+
+		container.appendChild(overlayElement);
+		container.appendChild(closeElement);
+		container.appendChild(bottomSection);
+		container.appendChild(fileInputElement);
+	});
+
+	return container;
 }
