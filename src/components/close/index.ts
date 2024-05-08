@@ -1,10 +1,7 @@
-import { closeSDK } from '../../camera/closeSDK';
+import closeSDK from '../../camera/closeSDK';
 import css from './index.module.css';
 
-export default function createCloseElement(
-	stream: MediaStream,
-	container: HTMLElement
-): void {
+export default function createCloseElement(container: HTMLElement): void {
 	const button = document.createElement('button');
 	button.className = css.button;
 	button.id = 'closeButton';
@@ -13,6 +10,6 @@ export default function createCloseElement(
 	container.appendChild(button);
 
 	button.addEventListener('click', () => {
-		closeSDK(stream);
+		closeSDK();
 	});
 }

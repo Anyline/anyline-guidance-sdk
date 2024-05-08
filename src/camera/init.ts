@@ -1,10 +1,8 @@
 import createModal from '../components/modal';
 import createContainerElement from '../components/container';
-import { getNonWideAngleCamera } from './getNonWideAngleCamera';
-import { getHighestResolutionStream } from './getHighestResolutionStream';
 import { getImageBlob } from './getImageBlob';
 import { getImageSpecification } from './getImageSpecification';
-import { closeSDK } from './closeSDK';
+import closeSDK from './closeSDK';
 import injectCSS from '../lib/injectCSS';
 import createHost from '../lib/createHost';
 import createShadowRoot from '../lib/createShadowRoot';
@@ -42,10 +40,9 @@ async function init(): Promise<SDKReturnType> {
 	// show onboarding screen
 
 	// step 2
-	const device = await getNonWideAngleCamera();
-	const stream = await getHighestResolutionStream(device);
+	// show video stream screen
 	const { container, captureButton, fileInputElement } =
-		await createContainerElement(stream);
+		await createContainerElement();
 
 	modal.appendChild(container);
 
@@ -55,7 +52,7 @@ async function init(): Promise<SDKReturnType> {
 				try {
 					const blob = await getImageBlob(fileInputElement);
 					const metadata = await getImageSpecification(blob);
-					closeSDK(stream);
+					closeSDK();
 					resolve({ blob, metadata });
 				} catch (err) {
 					reject(err);

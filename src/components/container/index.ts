@@ -7,9 +7,7 @@ import createOverlayElement from '../overlay';
 import createVideoElementWithStream from '../video';
 import css from './index.module.css';
 
-export default async function createContainerElement(
-	stream: MediaStream
-): Promise<{
+export default async function createContainerElement(): Promise<{
 	container: HTMLElement;
 	captureButton: HTMLDivElement;
 	fileInputElement: HTMLInputElement;
@@ -18,13 +16,13 @@ export default async function createContainerElement(
 	container.className = css.container;
 
 	// attach video
-	const videoElement = await createVideoElementWithStream(container, stream);
+	const videoElement = await createVideoElementWithStream(container);
 
 	// attach tire overlay
 	createOverlayElement(container, videoElement);
 
 	// attach close sdk button
-	createCloseElement(stream, container);
+	createCloseElement(container);
 
 	// create instructions
 	const instructionsElement = createInstructionElement();

@@ -1,11 +1,11 @@
 import createShadowRoot from '../lib/createShadowRoot';
 import createHost from '../lib/createHost';
+import StreamManager from '../modules/StreamManager';
 
-export function closeSDK(stream: MediaStream): void {
+export default function closeSDK(): void {
 	const host = createHost();
 	const shadowRoot = createShadowRoot(host);
 	shadowRoot.innerHTML = '';
-	stream.getTracks().forEach(track => {
-		track.stop();
-	});
+	const streamManager = StreamManager.getInstance();
+	streamManager.destroy();
 }
