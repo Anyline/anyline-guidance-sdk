@@ -11,6 +11,7 @@ const baseConfig = {
 	loader: {
 		'.ts': 'ts',
 		'.svg': 'dataurl',
+		'.png': 'dataurl',
 	},
 	define: { 'process.env.MODE': '"production"' },
 };
