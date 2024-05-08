@@ -1,6 +1,6 @@
 import css from './index.module.css';
-import StreamManager from '../../modules/StreamManager';
-import { getNonWideAngleCamera } from '../../camera/getNonWideAngleCamera';
+import StreamManager from '../../../modules/StreamManager';
+import { getNonWideAngleCamera } from '../../../camera/getNonWideAngleCamera';
 
 export default async function createVideoElementWithStream(
 	container: HTMLElement
