@@ -39,4 +39,10 @@ export default class Router {
 			screenToShow.style.display = 'flex';
 		}
 	}
+
+	public destroy(): void {
+		Router.instance = null;
+		this.mount = null;
+		this.screens = [];
+	}
 }

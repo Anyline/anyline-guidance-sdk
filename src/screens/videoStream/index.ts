@@ -1,7 +1,6 @@
 import createBottomSection from './bottomSection';
 import createButtonElement from './button';
 import createCloseElement from './close';
-import { createFileInputElement } from './fileInput';
 import createInstructionElement from './instruction';
 import createOverlayElement from './overlay';
 import css from './index.module.css';
@@ -38,13 +37,9 @@ export default function createContainerElement(): HTMLDivElement {
 			captureButton
 		);
 
-		// attach fileInput
-		const fileInputElement = createFileInputElement();
-
 		container.appendChild(overlayElement);
 		container.appendChild(closeElement);
 		container.appendChild(bottomSection);
-		container.appendChild(fileInputElement);
 	});
 
 	return container;
