@@ -11,7 +11,7 @@ export default function createCloseSDKButton(): HTMLButtonElement {
 	button.innerHTML = `<div class=${css.buttonInner}><div>&#x2715;</div></div>`;
 	button.type = 'button';
 
-	button.onclick = async () => {
+	button.onclick = () => {
 		closeSDK();
 	};
 
