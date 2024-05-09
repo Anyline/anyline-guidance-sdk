@@ -3,8 +3,6 @@ export default class StreamManager {
 	private stream: MediaStream | null = null;
 	private streamSetCallback: (() => void) | null = null;
 
-	private constructor() {}
-
 	public static getInstance(): StreamManager {
 		if (StreamManager.instance === null) {
 			StreamManager.instance = new StreamManager();

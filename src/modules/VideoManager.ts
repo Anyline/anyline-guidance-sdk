@@ -60,7 +60,6 @@ export default class VideoManager {
 	}
 
 	public destroy(): void {
-		// Stop any observers
 		if (this.observer != null) {
 			this.observer.disconnect();
 		}
@@ -68,12 +67,10 @@ export default class VideoManager {
 			this.resizeObserver.disconnect();
 		}
 
-		// Remove the video element from the DOM
 		if (this.videoElement.parentNode != null) {
 			this.videoElement.parentNode.removeChild(this.videoElement);
 		}
 
-		// Nullify the instance
 		VideoManager.instance = null;
 	}
 }

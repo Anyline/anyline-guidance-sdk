@@ -20,7 +20,7 @@ describe('init', () => {
 		try {
 			await init();
 		} catch (err) {}
-		await expect(injectCSS).toHaveBeenCalledTimes(1);
+		void expect(injectCSS).toHaveBeenCalledTimes(1);
 	});
 
 	it('does not call injectCSS when init is called in development build', async () => {
@@ -28,6 +28,6 @@ describe('init', () => {
 		try {
 			await init();
 		} catch (err) {}
-		await expect(injectCSS).toHaveBeenCalledTimes(0);
+		void expect(injectCSS).toHaveBeenCalledTimes(0);
 	});
 });
