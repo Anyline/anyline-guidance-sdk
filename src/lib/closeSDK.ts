@@ -8,22 +8,23 @@ import OnboardingScreen from '../screens/onboardingInstructions';
 import VideoStreamScreen from '../screens/videoStream';
 
 export default function closeSDK(): void {
-	const streamManager = StreamManager.getInstance();
-	const videoManager = VideoManager.getInstance();
-	const fileInputManager = FileInputManager.getInstance();
-	const imageManager = ImageManager.getInstance();
-	const routerManager = Router.getInstance();
 	const onboardingScreenManager = OnboardingScreen.getInstance();
 	const videoStreamScreenManager = VideoStreamScreen.getInstance();
-	const hostManager = HostManager.getInstance();
 
-	streamManager.destroy();
-	videoManager.destroy();
+	const fileInputManager = FileInputManager.getInstance();
+	const hostManager = HostManager.getInstance();
+	const imageManager = ImageManager.getInstance();
+	const routerManager = Router.getInstance();
+	const streamManager = StreamManager.getInstance();
+	const videoManager = VideoManager.getInstance();
+
+	onboardingScreenManager.destroy();
+	videoStreamScreenManager.destroy();
 	fileInputManager.destroy();
 	imageManager.destroy();
 	routerManager.destroy();
-	videoStreamScreenManager.destroy();
-	onboardingScreenManager.destroy();
+	streamManager.destroy();
+	videoManager.destroy();
 
 	hostManager.destroy();
 }
