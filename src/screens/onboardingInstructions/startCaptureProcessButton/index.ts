@@ -1,8 +1,5 @@
-import { getNonWideAngleCamera } from '../../../camera/getNonWideAngleCamera';
 import Router from '../../../modules/Router';
-import StreamManager from '../../../modules/StreamManager';
-import VideoManager from '../../../modules/VideoManager';
-import createContainerElement from '../../videoStream';
+import VideoStreamScreen from '../../videoStream';
 import css from '../../videoStream/button/index.module.css';
 
 export default function createStartCaptureProcessButton(): HTMLDivElement {
@@ -15,20 +12,9 @@ export default function createStartCaptureProcessButton(): HTMLDivElement {
 
 	button.onclick = async () => {
 		const router = Router.getInstance();
-		const container = createContainerElement();
+		const videoStreamScreenManager = VideoStreamScreen.getInstance();
+		const container = videoStreamScreenManager.getElement();
 		router.push(container);
-
-		const videoManager = VideoManager.getInstance();
-		const videoElement = videoManager.getVideoElement();
-
-		videoManager.onMount(async () => {
-			const device = await getNonWideAngleCamera();
-			const streamManager = StreamManager.getInstance();
-			const stream = await streamManager.getStream(device);
-			videoElement.srcObject = stream;
-		});
-
-		container.appendChild(videoElement);
 	};
 
 	buttonWrapper.appendChild(button);
