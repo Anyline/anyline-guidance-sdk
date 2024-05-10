@@ -1,4 +1,4 @@
-import closeSDK from '../../../camera/closeSDK';
+import closeSDK from '../../../lib/closeSDK';
 import css from './index.module.css';
 
 export default function createCloseSDKButton(): HTMLButtonElement {
