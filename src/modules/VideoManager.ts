@@ -67,10 +67,6 @@ export default class VideoManager {
 			this.resizeObserver.disconnect();
 		}
 
-		if (this.videoElement.parentNode != null) {
-			this.videoElement.parentNode.removeChild(this.videoElement);
-		}
-
 		VideoManager.instance = null;
 	}
 }
