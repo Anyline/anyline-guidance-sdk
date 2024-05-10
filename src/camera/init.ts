@@ -1,11 +1,10 @@
 import createModal from '../components/modal';
 import { getImageSpecification } from './getImageSpecification';
 import injectCSS from '../lib/injectCSS';
-import createHost from '../lib/createHost';
-import createShadowRoot from '../lib/createShadowRoot';
 import Router from '../modules/Router';
 import ImageManager from '../modules/ImageManager';
 import OnboardingScreen from '../screens/onboardingInstructions';
+import HostManager from '../modules/HostManager';
 
 export interface ImageMetadata {
 	width: number;
@@ -26,10 +25,9 @@ async function init(): Promise<SDKReturnType> {
 		await Promise.reject(new Error('Unsupported device'));
 	}
 
-	const host = createHost();
+	const hostManager = HostManager.getInstance();
 
-	const shadowRoot = createShadowRoot(host);
-
+	const shadowRoot = hostManager.getShadowRoot();
 	if (process.env.MODE === 'production') {
 		injectCSS(shadowRoot);
 	}
