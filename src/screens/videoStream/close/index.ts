@@ -1,6 +1,5 @@
 import VideoStreamScreen from '..';
 import FileInputManager from '../../../modules/FileInputManager';
-import ImageManager from '../../../modules/ImageManager';
 import Router from '../../../modules/Router';
 import StreamManager from '../../../modules/StreamManager';
 import VideoManager from '../../../modules/VideoManager';
@@ -14,18 +13,16 @@ export default function createCloseElement(): HTMLButtonElement {
 	button.innerHTML = `<div class=${css.buttonInner}><div>&#x2715;</div></div>`;
 
 	button.onclick = () => {
+		const videoStreamScreenManager = VideoStreamScreen.getInstance();
+		const fileInputManager = FileInputManager.getInstance();
 		const router = Router.getInstance();
 		const streamManager = StreamManager.getInstance();
 		const videoManager = VideoManager.getInstance();
-		const fileInputManager = FileInputManager.getInstance();
-		const imageManager = ImageManager.getInstance();
-		const videoStreamScreenManager = VideoStreamScreen.getInstance();
 
+		videoStreamScreenManager.destroy();
+		fileInputManager.destroy();
 		streamManager.destroy();
 		videoManager.destroy();
-		fileInputManager.destroy();
-		imageManager.destroy();
-		videoStreamScreenManager.destroy();
 		router.pop();
 	};
 
