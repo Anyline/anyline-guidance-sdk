@@ -4,8 +4,8 @@ import injectCSS from '../lib/injectCSS';
 import createHost from '../lib/createHost';
 import createShadowRoot from '../lib/createShadowRoot';
 import Router from '../modules/Router';
-import createOnboardingInstructions from '../screens/onboardingInstructions';
 import ImageManager from '../modules/ImageManager';
+import OnboardingScreen from '../screens/onboardingInstructions';
 
 export interface ImageMetadata {
 	width: number;
@@ -39,7 +39,9 @@ async function init(): Promise<SDKReturnType> {
 	const router = Router.getInstance();
 	router.init(modal);
 
-	const onboardingScreen = createOnboardingInstructions();
+	const onboardingScreenManager = OnboardingScreen.getInstance();
+	const onboardingScreen = onboardingScreenManager.getElement();
+
 	router.push(onboardingScreen);
 
 	const imageManager = ImageManager.getInstance();
