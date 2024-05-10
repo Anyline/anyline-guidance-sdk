@@ -62,4 +62,16 @@ describe('HostManager', () => {
 		void expect(host.id).toEqual('anyline-guidance-sdk');
 		hostManager.destroy();
 	});
+
+	it('should remove host from dom along with shadowRoot when destory is called', () => {
+		const hostManager = HostManager.getInstance();
+
+		const host = hostManager.getHost();
+		void expect(host).toBeInTheDocument();
+
+		hostManager.destroy();
+
+		void expect(host.innerHTML).toBe('');
+		void expect(document.body).not.toContainElement(host);
+	});
 });

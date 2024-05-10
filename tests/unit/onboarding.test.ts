@@ -1,15 +1,16 @@
 import '@testing-library/jest-dom';
 import createModal from '../../src/components/modal/index';
-import createHost from '../../src/lib/createHost';
-import createShadowRoot from '../../src/lib/createShadowRoot';
 import { fireEvent, screen, waitFor } from '@testing-library/dom';
 import OnboardingScreen from '../../src/screens/onboardingInstructions';
+import HostManager from '../../src/modules/HostManager';
 
 describe('onboarding', () => {
 	it('should close the sdk when close button is pressed from onboarding screen', async () => {
 		process.env.MODE = 'development';
-		const host = createHost();
-		const shadowRoot = createShadowRoot(host);
+
+		const hostManager = HostManager.getInstance();
+		const host = hostManager.getHost();
+		const shadowRoot = hostManager.getShadowRoot();
 
 		const modal = createModal(shadowRoot);
 		const onboardingScreenManager = OnboardingScreen.getInstance();

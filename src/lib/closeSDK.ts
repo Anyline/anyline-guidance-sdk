@@ -1,4 +1,5 @@
 import FileInputManager from '../modules/FileInputManager';
+import HostManager from '../modules/HostManager';
 import ImageManager from '../modules/ImageManager';
 import Router from '../modules/Router';
 import StreamManager from '../modules/StreamManager';
@@ -14,6 +15,7 @@ export default function closeSDK(): void {
 	const routerManager = Router.getInstance();
 	const onboardingScreenManager = OnboardingScreen.getInstance();
 	const videoStreamScreenManager = VideoStreamScreen.getInstance();
+	const hostManager = HostManager.getInstance();
 
 	streamManager.destroy();
 	videoManager.destroy();
@@ -23,8 +25,5 @@ export default function closeSDK(): void {
 	videoStreamScreenManager.destroy();
 	onboardingScreenManager.destroy();
 
-	const host = document.getElementById('anyline-guidance-sdk');
-	if (host !== null) {
-		document.body.removeChild(host);
-	}
+	hostManager.destroy();
 }

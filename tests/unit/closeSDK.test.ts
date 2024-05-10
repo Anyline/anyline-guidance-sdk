@@ -7,18 +7,16 @@ import VideoManager from '../../src/modules/VideoManager';
 import FileInputManager from '../../src/modules/FileInputManager';
 import ImageManager from '../../src/modules/ImageManager';
 import VideoStreamScreen from '../../src/screens/videoStream';
+import HostManager from '../../src/modules/HostManager';
 
 describe('closeSDK', () => {
 	it('removes host from DOM', async () => {
-		const host = document.createElement('div');
-		host.id = 'anyline-guidance-sdk';
-
-		document.body.appendChild(host);
+		const hostManager = HostManager.getInstance();
+		const host = hostManager.getHost();
 
 		void expect(host).toBeInTheDocument();
 
 		closeSDK();
-
 		await waitFor(() => {
 			void expect(host).not.toBeInTheDocument();
 		});
