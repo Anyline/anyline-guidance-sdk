@@ -34,6 +34,8 @@ export default class HostManager {
 	}
 
 	public destroy(): void {
+		this.host.innerHTML = '';
+		document.body.removeChild(this.host);
 		HostManager.instance = null;
 	}
 }
