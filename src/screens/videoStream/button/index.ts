@@ -1,4 +1,4 @@
-import closeSDK from '../../../camera/closeSDK';
+import closeSDK from '../../../lib/closeSDK';
 import FileInputManager from '../../../modules/FileInputManager';
 import ImageManager from '../../../modules/ImageManager';
 import css from './index.module.css';
