@@ -54,4 +54,12 @@ describe('HostManager', () => {
 		void expect(shadowRoot).toBeInstanceOf(HTMLDivElement);
 		hostManager.destroy();
 	});
+
+	it('should return the host with id anyline-guidance-sdk', () => {
+		const hostManager = HostManager.getInstance();
+		const host = hostManager.getHost();
+
+		void expect(host.id).toEqual('anyline-guidance-sdk');
+		hostManager.destroy();
+	});
 });
