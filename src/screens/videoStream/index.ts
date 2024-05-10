@@ -21,7 +21,7 @@ export default class VideoStreamScreen extends ComponentManager {
 		const spinner = createSpinner();
 		container.appendChild(spinner);
 
-		super.onMount(async () => {
+		this.onMount(async () => {
 			const device = await getNonWideAngleCamera();
 			const streamManager = StreamManager.getInstance();
 			const stream = await streamManager.getStream(device);
