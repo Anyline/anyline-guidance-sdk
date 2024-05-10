@@ -1,10 +1,6 @@
 import getBrowserLanguage from '../../src/lib/getBrowserLanguage';
 
 describe('getBrowserLanguage', () => {
-	afterEach(() => {
-		jest.restoreAllMocks();
-	});
-
 	it('returns english as default language when navigator.language is undefined', async () => {
 		Object.defineProperty(global.navigator, 'language', {
 			writable: true,

@@ -1,10 +1,6 @@
 import { getNonWideAngleCamera } from '../../src/camera/getNonWideAngleCamera';
 
 describe('getNonWideAngleCamera', () => {
-	afterEach(() => {
-		jest.restoreAllMocks();
-	});
-
 	it('throws an error when enumeratedevices rejects promise', async () => {
 		Object.defineProperty(global.navigator, 'mediaDevices', {
 			writable: true,
