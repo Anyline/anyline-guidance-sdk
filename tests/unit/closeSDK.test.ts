@@ -8,6 +8,7 @@ import FileInputManager from '../../src/modules/FileInputManager';
 import ImageManager from '../../src/modules/ImageManager';
 import VideoStreamScreen from '../../src/screens/videoStream';
 import HostManager from '../../src/modules/HostManager';
+import OnboardingScreen from '../../src/screens/onboardingInstructions';
 
 describe('closeSDK', () => {
 	it('removes host from DOM', async () => {
@@ -17,8 +18,8 @@ describe('closeSDK', () => {
 		void expect(host).toBeInTheDocument();
 
 		closeSDK();
-		await waitFor(() => {
-			void expect(host).not.toBeInTheDocument();
+		await waitFor(async () => {
+			await expect(host).not.toBeInTheDocument();
 		});
 	});
 
@@ -29,6 +30,8 @@ describe('closeSDK', () => {
 		const fileInputManager = FileInputManager.getInstance();
 		const imageManager = ImageManager.getInstance();
 		const videoStreamScreenManager = VideoStreamScreen.getInstance();
+		const onboardingScreenManager = OnboardingScreen.getInstance();
+		const hostManager = HostManager.getInstance();
 
 		const routerSpy = jest
 			.spyOn(router, 'destroy')
@@ -60,12 +63,25 @@ describe('closeSDK', () => {
 			.mockImplementation(() => {});
 		void expect(videoStreamScreenManagerSpy).not.toHaveBeenCalled();
 
+		const onboardingScreenManagerSpy = jest
+			.spyOn(onboardingScreenManager, 'destroy')
+			.mockImplementation(() => {});
+		void expect(onboardingScreenManagerSpy).not.toHaveBeenCalled();
+
+		const hostManagerSpy = jest
+			.spyOn(hostManager, 'destroy')
+			.mockImplementation(() => {});
+		void expect(hostManagerSpy).not.toHaveBeenCalled();
+
 		closeSDK();
 
 		void expect(routerSpy).toHaveBeenCalledTimes(1);
 		void expect(streamManagerSpy).toHaveBeenCalledTimes(1);
 		void expect(videoManagerSpy).toHaveBeenCalledTimes(1);
 		void expect(fileInputManagerSpy).toHaveBeenCalledTimes(1);
+		void expect(imageManagerSpy).toHaveBeenCalledTimes(1);
 		void expect(videoStreamScreenManagerSpy).toHaveBeenCalledTimes(1);
+		void expect(onboardingScreenManagerSpy).toHaveBeenCalledTimes(1);
+		void expect(hostManagerSpy).toHaveBeenCalledTimes(1);
 	});
 });

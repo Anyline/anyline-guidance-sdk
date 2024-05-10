@@ -12,6 +12,10 @@ describe('Router', () => {
 		router.init(mount);
 	});
 
+	afterEach(() => {
+		router.destroy();
+	});
+
 	it('should have push and pop public methods', () => {
 		const testHome = document.createElement('div');
 		void expect(() => {

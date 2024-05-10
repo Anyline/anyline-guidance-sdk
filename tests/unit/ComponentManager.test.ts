@@ -1,18 +1,26 @@
 import ComponentManager from '../../src/modules/ComponentManager';
 
 describe('ComponentManager', () => {
+	let componentManager: ComponentManager;
+
+	beforeEach(() => {
+		componentManager = ComponentManager.getInstance();
+	});
+
+	afterEach(() => {
+		componentManager.destroy();
+	});
+
 	it('should always return same instance', () => {
-		const instance1 = ComponentManager.getInstance();
-		const instance2 = ComponentManager.getInstance();
-		void expect(instance1).toBe(instance2);
+		const componentManager2 = ComponentManager.getInstance();
+		void expect(componentManager).toBe(componentManager2);
+		componentManager2.destroy();
 	});
 
 	it('should call onMount when a component is added to the dom', async () => {
-		const component = ComponentManager.getInstance();
-		const element = component.element;
-
+		const element = componentManager.element;
 		const mockCallback = jest.fn();
-		component.onMount(mockCallback);
+		componentManager.onMount(mockCallback);
 
 		document.body.appendChild(element);
 
@@ -34,10 +42,11 @@ describe('ComponentManager', () => {
 		const secondInstance = Second.getInstance();
 
 		void expect(firstInstance).not.toBe(secondInstance);
+		firstInstance.destroy();
+		secondInstance.destroy();
 	});
 
 	it('should returns a div element when getElement is called', () => {
-		const componentManager = ComponentManager.getInstance();
 		const element = componentManager.getElement();
 
 		void expect(element).toBeInstanceOf(HTMLDivElement);

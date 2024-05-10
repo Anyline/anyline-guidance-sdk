@@ -23,6 +23,8 @@ describe('ImageManager', () => {
 		await promise;
 
 		void expect(blob).toBe(file);
+
+		imageManager.destroy();
 	});
 
 	it('should destroy image manager instance', () => {
