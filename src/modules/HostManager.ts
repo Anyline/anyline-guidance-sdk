@@ -29,6 +29,10 @@ export default class HostManager {
 		return this.shadowRoot ?? this.host;
 	}
 
+	public getHost(): HTMLDivElement {
+		return this.host;
+	}
+
 	public destroy(): void {
 		HostManager.instance = null;
 	}
