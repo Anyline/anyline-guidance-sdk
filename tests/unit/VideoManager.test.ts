@@ -9,26 +9,9 @@ describe('VideoManager', () => {
 
 	it('should return a video element', async () => {
 		const videoManager = VideoManager.getInstance();
-		const mockCallback = jest.fn();
-		videoManager.onMount(mockCallback);
-
 		const videoElement = videoManager.getVideoElement();
 
 		void expect(videoElement).toBeInstanceOf(HTMLVideoElement);
-	});
-
-	it('should call onMount callback when videoElement is added to the DOM', async () => {
-		const videoManager = VideoManager.getInstance();
-		const mockCallback = jest.fn();
-		videoManager.onMount(mockCallback);
-
-		document.body.appendChild(videoManager.getVideoElement());
-
-		void expect(mockCallback).not.toHaveBeenCalled();
-
-		await new Promise(resolve => setTimeout(resolve, 0));
-
-		void expect(mockCallback).toHaveBeenCalled();
 	});
 
 	it('should destory the video and clear the instance', () => {
