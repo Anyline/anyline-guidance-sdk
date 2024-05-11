@@ -3,7 +3,7 @@ import css from '../screens/videoStream/video/index.module.css';
 export default class VideoManager {
 	public videoElement: HTMLVideoElement;
 	private static instance: VideoManager | null = null;
-	private observer: MutationObserver | null = null;
+	private readonly observer: MutationObserver | null = null;
 	private resizeObserver: ResizeObserver | null = null;
 
 	private constructor() {
@@ -19,26 +19,6 @@ export default class VideoManager {
 			VideoManager.instance = new VideoManager();
 		}
 		return VideoManager.instance;
-	}
-
-	public onMount(callback: () => Promise<void>): void {
-		this.observer = new MutationObserver((mutationsList, observer) => {
-			for (const mutation of mutationsList) {
-				if (mutation.type === 'childList') {
-					const addedNodes = Array.from(mutation.addedNodes);
-					if (addedNodes.includes(this.videoElement)) {
-						void callback();
-						observer.disconnect();
-						break;
-					}
-				}
-			}
-		});
-
-		this.observer.observe(document.body, {
-			childList: true,
-			subtree: true,
-		});
 	}
 
 	public onChangeDimension(
