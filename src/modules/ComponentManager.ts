@@ -1,3 +1,5 @@
+import HostManager from './HostManager';
+
 export default class ComponentManager {
 	private static readonly instances = new Map<
 		new () => ComponentManager,
@@ -34,7 +36,10 @@ export default class ComponentManager {
 			}
 		});
 
-		this.observer.observe(document.body, {
+		const hostmanager = HostManager.getInstance();
+		const child = hostmanager.getShadowRoot();
+
+		this.observer.observe(child, {
 			childList: true,
 			subtree: true,
 		});
