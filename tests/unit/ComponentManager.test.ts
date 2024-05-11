@@ -1,4 +1,5 @@
 import ComponentManager from '../../src/modules/ComponentManager';
+import HostManager from '../../src/modules/HostManager';
 
 describe('ComponentManager', () => {
 	let componentManager: ComponentManager;
@@ -18,11 +19,13 @@ describe('ComponentManager', () => {
 	});
 
 	it('should call onMount when a component is added to the dom', async () => {
+		const hostmanager = HostManager.getInstance();
+		const host = hostmanager.getHost();
 		const element = componentManager.element;
 		const mockCallback = jest.fn();
 		componentManager.onMount(mockCallback);
 
-		document.body.appendChild(element);
+		host.appendChild(element);
 
 		void expect(mockCallback).not.toHaveBeenCalled();
 
