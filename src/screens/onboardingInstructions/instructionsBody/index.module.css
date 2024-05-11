@@ -1,5 +1,8 @@
 .headlineWrapper {
-	margin: 24px 0;
+	display: flex;
+	height: 75px;
+	align-items: center;
+	justify-content: center;
 	text-align: center;
 }
 
@@ -10,7 +13,7 @@
 
 .instructionsWrapper {
 	margin-bottom: 12px;
-	padding: 0 24px;
+	padding: 0 16px;
 }
 
 .demoImageWrapper {
