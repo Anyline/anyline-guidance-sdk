@@ -45,6 +45,29 @@ export default class ComponentManager {
 		});
 	}
 
+	public onUnmount(callback: () => Promise<void>): void {
+		this.observer = new MutationObserver((mutationsList, observer) => {
+			for (const mutation of mutationsList) {
+				if (mutation.type === 'childList') {
+					const removedNodes = Array.from(mutation.removedNodes);
+					if (removedNodes.includes(this.element)) {
+						void callback();
+						observer.disconnect();
+						break;
+					}
+				}
+			}
+		});
+
+		const hostmanager = HostManager.getInstance();
+		const child = hostmanager.getShadowRoot();
+
+		this.observer.observe(child, {
+			childList: true,
+			subtree: true,
+		});
+	}
+
 	public getElement(): HTMLDivElement {
 		return this.element;
 	}

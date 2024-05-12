@@ -7,7 +7,7 @@ import createStartCaptureProcessButton from './startCaptureProcessButton';
 export default class OnboardingScreen extends ComponentManager {
 	constructor() {
 		super();
-		const onboardingInstructionsWrapper = super.getElement();
+		const onboardingInstructionsWrapper = this.getElement();
 		onboardingInstructionsWrapper.className =
 			css.onboardingInstructionsWrapper;
 		onboardingInstructionsWrapper.setAttribute(
