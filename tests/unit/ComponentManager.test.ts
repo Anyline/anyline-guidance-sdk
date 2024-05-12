@@ -34,6 +34,27 @@ describe('ComponentManager', () => {
 		void expect(mockCallback).toHaveBeenCalled();
 	});
 
+	it('should call onUnmount when a component is removed from the dom', async () => {
+		const hostmanager = HostManager.getInstance();
+		const host = hostmanager.getHost();
+		const element = componentManager.element;
+		const mockCallback = jest.fn();
+		componentManager.onMount(async () => {
+			await Promise.resolve();
+		});
+		componentManager.onUnmount(mockCallback);
+
+		host.appendChild(element);
+		await new Promise(resolve => setTimeout(resolve, 0));
+		host.removeChild(element);
+
+		void expect(mockCallback).not.toHaveBeenCalled();
+
+		await new Promise(resolve => setTimeout(resolve, 0));
+
+		void expect(mockCallback).toHaveBeenCalled();
+	});
+
 	it('should have separate instance when ComponentManager is extended to different instances', () => {
 		class First extends ComponentManager {
 			//
