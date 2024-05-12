@@ -1,6 +1,8 @@
+import VideoStreamScreen from '..';
 import closeSDK from '../../../lib/closeSDK';
 import FileInputManager from '../../../modules/FileInputManager';
 import ImageManager from '../../../modules/ImageManager';
+import Router from '../../../modules/Router';
 import css from './index.module.css';
 
 export default function createButtonElement(): HTMLDivElement {
@@ -26,7 +28,16 @@ export default function createButtonElement(): HTMLDivElement {
 				closeSDK();
 			})
 			.catch(e => {
-				console.log('e', e);
+				const routerManager = Router.getInstance();
+				routerManager.pop();
+
+				setTimeout(() => {
+					const videoStreamScreenManager =
+						VideoStreamScreen.getInstance();
+					const videoStreamScreen =
+						videoStreamScreenManager.getElement();
+					routerManager.push(videoStreamScreen);
+				}, 0);
 			});
 	};
 
