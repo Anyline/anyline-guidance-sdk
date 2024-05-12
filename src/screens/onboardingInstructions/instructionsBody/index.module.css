@@ -11,9 +11,19 @@
 	font-weight: 700;
 }
 
+.instructionsBody {
+	padding: 0 16px;
+	box-sizing: border-box;
+}
+
 .instructionsWrapper {
 	margin-bottom: 12px;
-	padding: 0 16px;
+}
+
+.instructionsWrapper > p {
+	-webkit-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
 }
 
 .demoImageWrapper {
@@ -28,4 +38,15 @@
 .demoImageWrapper > img {
 	/* hide extended overlay in the actual image */
 	width: 101%;
+}
+
+@media (orientation: landscape) {
+	.instructionsBody {
+		display: flex;
+		margin-top: 16px;
+	}
+
+	.instructionsWrapper > p {
+		margin: 0;
+	}
 }
