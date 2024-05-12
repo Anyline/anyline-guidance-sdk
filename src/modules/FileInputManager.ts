@@ -7,6 +7,10 @@ export default class FileInputManager {
 		| ((this: GlobalEventHandlers, event: Event) => any)
 		| null = null;
 
+	private fileCancelListener:
+		| ((this: GlobalEventHandlers, event: Event) => any)
+		| null = null;
+
 	constructor() {
 		this.fileInput.type = 'file';
 		this.fileInput.accept = 'image/*';
@@ -26,7 +30,7 @@ export default class FileInputManager {
 	}
 
 	public async onFileSet(): Promise<File> {
-		return await new Promise(resolve => {
+		return await new Promise((resolve, reject) => {
 			this.fileChangeListener = () => {
 				if (
 					this.fileInput.files != null &&
@@ -35,7 +39,11 @@ export default class FileInputManager {
 					resolve(this.fileInput.files[0]);
 				}
 			};
+			this.fileCancelListener = () => {
+				reject(new Error('File selection was cancelled'));
+			};
 			this.fileInput.addEventListener('change', this.fileChangeListener);
+			this.fileInput.addEventListener('cancel', this.fileCancelListener);
 		});
 	}
 
@@ -44,6 +52,12 @@ export default class FileInputManager {
 			this.fileInput.removeEventListener(
 				'change',
 				this.fileChangeListener
+			);
+		}
+		if (this.fileCancelListener != null) {
+			this.fileInput.removeEventListener(
+				'cancel',
+				this.fileCancelListener
 			);
 		}
 		FileInputManager.instance = null;
