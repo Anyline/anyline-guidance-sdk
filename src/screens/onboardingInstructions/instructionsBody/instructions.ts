@@ -7,7 +7,7 @@ export default function createInstructions(): HTMLDivElement {
 	const instructions = document.createElement('p');
 
 	instructions.innerHTML =
-		'As the first step, an overlay will guide you in placing the tire. <br /> Once positioned correctly, keep still and tap to open the camera for capture.';
+		'<p>As the first step, an overlay will guide you in placing the tire.</p> <p>Once positioned correctly, keep still and tap to open the camera for capture.</p>';
 
 	instructionsWrapper.appendChild(instructions);
 

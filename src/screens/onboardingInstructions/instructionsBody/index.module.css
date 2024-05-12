@@ -1,9 +1,9 @@
 .headlineWrapper {
 	display: flex;
-	height: 75px;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
+	height: 45px;
 }
 
 .headlineWrapper > span {
@@ -24,6 +24,8 @@
 	-webkit-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
+	word-spacing: 0.3px;
+	letter-spacing: 0.3px;
 }
 
 .demoImageWrapper {
@@ -41,11 +43,19 @@
 }
 
 @media (orientation: landscape) {
+	.headlineWrapper {
+		height: 75px;
+		justify-content: unset;
+		margin-left: 50px;
+	}
 	.instructionsBody {
 		display: flex;
 		margin-top: 16px;
 	}
-
+	.instructionsWrapper {
+		flex: 1;
+		margin-right: 16px;
+	}
 	.instructionsWrapper > p {
 		margin: 0;
 	}

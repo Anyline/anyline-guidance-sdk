@@ -25,6 +25,8 @@ async function init(): Promise<SDKReturnType> {
 		await Promise.reject(new Error('Unsupported device'));
 	}
 
+	document.body.style.overflow = 'hidden';
+
 	const hostManager = HostManager.getInstance();
 
 	const shadowRoot = hostManager.getShadowRoot();
@@ -45,6 +47,8 @@ async function init(): Promise<SDKReturnType> {
 	const imageManager = ImageManager.getInstance();
 	const blob = await imageManager.getImageBlob();
 	const metadata = await getImageSpecification(blob);
+
+	document.body.style.overflow = 'unset';
 
 	return { blob, metadata };
 }
