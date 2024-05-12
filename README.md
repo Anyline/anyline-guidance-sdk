@@ -40,11 +40,15 @@ You can also build the sdk by yourself and copy `index.js` from `dist/iife` fold
 
 ```js
 const { blob, metadata } = await init();
+// blob represents the image captured by SDK in Blob format
+blob: Blob
+// other metadata related to image viz. width, height and fileSize
+metadata: {
+  width: number,
+  height: number,
+  fileSize: number,
+}
 ```
-
-### SDK return types
-
-The SDK will resolve or reject a promise as its return type. If everything goes well, it will resolve to a Blob containing the image that was captured. If there was en error, it will reject an error specifying the type of error.
 
 ## Developers / Contributors
 

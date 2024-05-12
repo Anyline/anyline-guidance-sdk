@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.0] - 12-05-2024
+
+-   (feat): add onboarding instructions to describe how to take better tire picture
+-   (chore): add routing mechanism
+-   (fix): stream is zoomed in after user cancels taking picture from native camera
+
 ## [1.3.01] - 02-05-2024
 
 -   (feat): first public release

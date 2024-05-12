@@ -18,6 +18,8 @@ export default function closeSDK(): void {
 	const streamManager = StreamManager.getInstance();
 	const videoManager = VideoManager.getInstance();
 
+	document.body.style.overflow = 'unset';
+
 	onboardingScreenManager.destroy();
 	videoStreamScreenManager.destroy();
 	fileInputManager.destroy();

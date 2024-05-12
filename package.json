@@ -1,7 +1,7 @@
 {
 	"author": "Anyline",
 	"name": "@anyline/anyline-guidance-sdk",
-	"version": "1.3.01",
+	"version": "1.4.0",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
 	"types": "dist/esm/index.d.ts",
@@ -72,7 +72,9 @@
 		"typescript-eslint": "^7.5.0",
 		"wdio-wait-for": "^3.0.11"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"bowser": "^2.11.0"
+	},
 	"resolutions": {
 		"@typescript-eslint/parser": "6.21.0",
 		"@typescript-eslint/eslint-plugin": "6.21.0"

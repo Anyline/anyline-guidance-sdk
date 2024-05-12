@@ -1,0 +1,17 @@
+.buttonWrapper {
+	padding: 16px;
+	text-align: center;
+}
+.button {
+	width: auto;
+	padding: 0 16px;
+	max-width: unset;
+}
+
+@media (orientation: landscape) {
+	.buttonWrapper {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+}

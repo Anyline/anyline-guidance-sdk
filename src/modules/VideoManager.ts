@@ -35,6 +35,14 @@ export default class VideoManager {
 		this.resizeObserver.observe(this.videoElement);
 	}
 
+	public onPlay(callback: () => void): void {
+		if (this.videoElement.readyState >= 3) {
+			callback();
+		} else {
+			this.videoElement.onplay = callback;
+		}
+	}
+
 	public getVideoElement(): HTMLVideoElement {
 		return this.videoElement;
 	}

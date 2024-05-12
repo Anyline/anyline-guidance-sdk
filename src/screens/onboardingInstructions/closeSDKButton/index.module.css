@@ -1,8 +1,8 @@
 .button {
-	position: fixed;
+	position: absolute;
 	top: 0px;
 	left: 0px;
-	background-color: inherit;
+	background-color: transparent;
 	border: 0;
 	outline: 0;
 	width: 75px;
@@ -19,4 +19,33 @@
 }
 .buttonInner {
 	padding-left: 16px;
+}
+
+/* Custom for close sdk button on onboarding instructions screen */
+.buttonPosition {
+	position: relative;
+	height: 45px;
+	right: 0;
+	left: unset;
+	justify-content: flex-end;
+	font-size: 24px;
+	margin-left: auto;
+}
+.buttonInnerPosition {
+	padding-left: unset;
+	padding-right: 16px;
+	color: #bbb;
+}
+
+@media (orientation: landscape) {
+	.buttonPosition {
+		height: 75px;
+		position: absolute;
+		right: unset;
+		justify-content: unset;
+	}
+	.buttonInnerPosition {
+		padding-left: 16px;
+		padding-right: unset;
+	}
 }

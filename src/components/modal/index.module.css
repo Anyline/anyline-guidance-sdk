@@ -14,7 +14,13 @@
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background-color: #fff;
 	z-index: 2147483647;
 	animation: slideUp 0.2s ease-out;
+}
+
+.modalBackground {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
 }

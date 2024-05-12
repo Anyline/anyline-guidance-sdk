@@ -7,6 +7,12 @@ export default function createModal(
 	modal.className = css.modal;
 	modal.setAttribute('data-testid', 'components-modal');
 
+	const modalBackground = document.createElement('div');
+
+	modalBackground.className = css.modalBackground;
+
+	modal.appendChild(modalBackground);
+
 	shadowRoot.appendChild(modal);
 
 	return modal;
