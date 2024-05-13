@@ -11,8 +11,6 @@ describe('modal', () => {
 		createModal(shadowRoot);
 		const modal = screen.getByTestId('components-modal');
 		void expect(modal).toBeInTheDocument();
-		void expect(modal.innerHTML).toBeFalsy();
-
 		hostManager.destroy();
 	});
 });

@@ -1,23 +1,18 @@
 .video {
-  visibility: hidden;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: auto;
+	height: calc(100vw * 4 / 3);
 	object-fit: contain;
-}
-
-.video::-webkit-media-controls {
-  display: none !important;
 }
 
 @media (orientation: landscape) {
 	.video {
+		position: relative;
+		top: unset;
+		left: unset;
 		height: 100%;
-		width: unset;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+		width: calc(100vh * 4 / 3);
 	}
 }

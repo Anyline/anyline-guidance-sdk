@@ -17,7 +17,10 @@ export default class StreamManager {
 	public async getStream(device?: MediaDeviceInfo): Promise<MediaStream> {
 		if (this.stream === null) {
 			const constraints = {
-				video: { deviceId: { exact: device?.deviceId } },
+				video: {
+					deviceId: { exact: device?.deviceId },
+					aspectRatio: { exact: 4 / 3 },
+				},
 			};
 			try {
 				this.stream =
