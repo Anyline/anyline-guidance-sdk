@@ -53,7 +53,12 @@ export default class VideoStreamScreen extends ComponentManager {
 				// hide loader
 				container.removeChild(spinner);
 
-				container.appendChild(videoElement);
+				const videoWrapper = document.createElement('div');
+				videoWrapper.className = css.videoWrapper;
+
+				videoWrapper.appendChild(videoElement);
+
+				container.appendChild(videoWrapper);
 				container.appendChild(overlayElement);
 				container.appendChild(closeElement);
 				container.appendChild(bottomSection);
