@@ -63,7 +63,7 @@ describe('HostManager', () => {
 		hostManager.destroy();
 	});
 
-	it('should remove host from dom along with shadowRoot when destory is called', () => {
+	it('should remove host from dom along with shadowRoot when destroy is called', () => {
 		const hostManager = HostManager.getInstance();
 
 		const host = hostManager.getHost();

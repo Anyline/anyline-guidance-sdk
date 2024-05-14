@@ -53,6 +53,9 @@ describe('StreamManager', () => {
 				deviceId: {
 					exact: testDevice.deviceId,
 				},
+				aspectRatio: {
+					exact: 4 / 3,
+				},
 			},
 		});
 	});
