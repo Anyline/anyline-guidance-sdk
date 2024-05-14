@@ -41,7 +41,7 @@ export default class ConfigManager {
 		return this.config;
 	}
 
-	public destory(): void {
+	public destroy(): void {
 		ConfigManager.instance = null;
 	}
 }

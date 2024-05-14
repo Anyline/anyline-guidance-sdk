@@ -4,12 +4,12 @@ describe('ConfigManager', () => {
 	it('can be initiated with config and without config', () => {
 		const configManager = ConfigManager.getInstance();
 		void expect(configManager.getConfig()).toEqual(null);
-		configManager.destory();
+		configManager.destroy();
 
 		const config = { onboardingInstructions: { timesShown: 2 } };
 		const configManager2 = ConfigManager.getInstance(config);
 		void expect(configManager2.getConfig()).toEqual(config);
-		configManager2.destory();
+		configManager2.destroy();
 	});
 
 	it('throws error when config does not match expected type', () => {
@@ -28,7 +28,7 @@ describe('ConfigManager', () => {
 				const configManager = ConfigManager.getInstance(
 					config as unknown as Config
 				);
-				configManager.destory();
+				configManager.destroy();
 			} catch (error) {
 				errorOccurred = true;
 			}
