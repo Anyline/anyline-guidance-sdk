@@ -9,6 +9,8 @@ import ImageManager from '../../src/modules/ImageManager';
 import VideoStreamScreen from '../../src/screens/videoStream';
 import HostManager from '../../src/modules/HostManager';
 import OnboardingScreen from '../../src/screens/onboardingInstructions';
+import ConfigManager from '../../src/modules/ConfigManager';
+import LocalStorageManager from '../../src/modules/LocalStorageManager';
 
 describe('closeSDK', () => {
 	it('removes host from DOM', async () => {
@@ -27,8 +29,10 @@ describe('closeSDK', () => {
 		const router = Router.getInstance();
 		const streamManager = StreamManager.getInstance();
 		const videoManager = VideoManager.getInstance();
+		const configManager = ConfigManager.getInstance();
 		const fileInputManager = FileInputManager.getInstance();
 		const imageManager = ImageManager.getInstance();
+		const localStorageManager = LocalStorageManager.getInstance();
 		const videoStreamScreenManager = VideoStreamScreen.getInstance();
 		const onboardingScreenManager = OnboardingScreen.getInstance();
 		const hostManager = HostManager.getInstance();
@@ -48,6 +52,11 @@ describe('closeSDK', () => {
 			.mockImplementation(() => {});
 		void expect(videoManagerSpy).not.toHaveBeenCalled();
 
+		const configManagerSpy = jest
+			.spyOn(configManager, 'destroy')
+			.mockImplementation(() => {});
+		void expect(configManagerSpy).not.toHaveBeenCalled();
+
 		const fileInputManagerSpy = jest
 			.spyOn(fileInputManager, 'destroy')
 			.mockImplementation(() => {});
@@ -57,6 +66,11 @@ describe('closeSDK', () => {
 			.spyOn(imageManager, 'destroy')
 			.mockImplementation(() => {});
 		void expect(imageManagerSpy).not.toHaveBeenCalled();
+
+		const localStorageManagerSpy = jest
+			.spyOn(localStorageManager, 'destroy')
+			.mockImplementation(() => {});
+		void expect(localStorageManagerSpy).not.toHaveBeenCalled();
 
 		const videoStreamScreenManagerSpy = jest
 			.spyOn(videoStreamScreenManager, 'destroy')
@@ -78,8 +92,10 @@ describe('closeSDK', () => {
 		void expect(routerSpy).toHaveBeenCalledTimes(1);
 		void expect(streamManagerSpy).toHaveBeenCalledTimes(1);
 		void expect(videoManagerSpy).toHaveBeenCalledTimes(1);
+		void expect(configManagerSpy).toHaveBeenCalledTimes(1);
 		void expect(fileInputManagerSpy).toHaveBeenCalledTimes(1);
 		void expect(imageManagerSpy).toHaveBeenCalledTimes(1);
+		void expect(localStorageManagerSpy).toHaveBeenCalledTimes(1);
 		void expect(videoStreamScreenManagerSpy).toHaveBeenCalledTimes(1);
 		void expect(onboardingScreenManagerSpy).toHaveBeenCalledTimes(1);
 		void expect(hostManagerSpy).toHaveBeenCalledTimes(1);
