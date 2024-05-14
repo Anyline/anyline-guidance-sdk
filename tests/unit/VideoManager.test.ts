@@ -14,7 +14,7 @@ describe('VideoManager', () => {
 		void expect(videoElement).toBeInstanceOf(HTMLVideoElement);
 	});
 
-	it('should destory the video and clear the instance', () => {
+	it('should destroy the video and clear the instance', () => {
 		const videoManager = VideoManager.getInstance();
 		void expect(VideoManager.getInstance()).toBe(videoManager);
 		videoManager.destroy();
