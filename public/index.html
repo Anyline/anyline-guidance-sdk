@@ -10,7 +10,7 @@
 			body {
 				font-family: Arial, Helvetica, sans-serif;
 			}
-			.start-sdk-btn {
+			.button {
 				min-width: 100px;
 				height: 54px;
 			}
@@ -41,9 +41,16 @@
 						errorElement.innerText = err;
 					}
 				};
+
 				document
 					.getElementById('start-sdk-btn')
-					.addEventListener('click', () => startSdk('default'));
+					.addEventListener('click', () =>
+						startSdk({
+							onboardingInstructions: {
+								timesShown: 3,
+							},
+						})
+					);
 
 				document
 					.getElementById('download-button')
@@ -56,11 +63,21 @@
 							link.click();
 						}
 					});
+
+				document
+					.getElementById('reset-times-shown')
+					.addEventListener('click', () => {
+						localStorage.clear();
+						alert('Reset timesShown back to 3');
+					});
 			});
 		</script>
 	</head>
 	<body>
-		<button id="start-sdk-btn" class="start-sdk-btn">Start SDK</button>
+		<button id="start-sdk-btn" class="button">Start SDK</button>
+		<button id="reset-times-shown" class="button">
+			Reset timesShown to 3
+		</button>
 		<br /><br />
 		<img
 			id="new-image"
@@ -70,9 +87,7 @@
 		/><br />
 		<div id="image-specs"></div>
 		<br />
-		<button id="download-button" class="start-sdk-btn">
-			Download Image
-		</button>
+		<button id="download-button" class="button">Download Image</button>
 		<br />
 		<div id="error"></div>
 	</body>
