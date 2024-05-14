@@ -8,6 +8,7 @@ describe('LocalStorageManager', () => {
 	});
 
 	afterEach(() => {
+		localStorageManager.destroy();
 		localStorage.clear();
 	});
 
