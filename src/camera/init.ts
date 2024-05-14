@@ -1,10 +1,10 @@
 import createModal from '../components/modal';
 import { getImageSpecification } from './getImageSpecification';
 import injectCSS from '../lib/injectCSS';
-import Router from '../modules/Router';
 import ImageManager from '../modules/ImageManager';
-import OnboardingScreen from '../screens/onboardingInstructions';
 import HostManager from '../modules/HostManager';
+import initRouter from '../lib/initRouter';
+import { type Config } from '../modules/ConfigManager';
 
 export interface ImageMetadata {
 	width: number;
@@ -17,7 +17,7 @@ export interface SDKReturnType {
 	metadata: ImageMetadata;
 }
 
-async function init(): Promise<SDKReturnType> {
+async function init(config?: Config): Promise<SDKReturnType> {
 	if (
 		navigator.mediaDevices === null ||
 		navigator.mediaDevices === undefined
@@ -36,13 +36,7 @@ async function init(): Promise<SDKReturnType> {
 
 	const modal = createModal(shadowRoot);
 
-	const router = Router.getInstance();
-	router.init(modal);
-
-	const onboardingScreenManager = OnboardingScreen.getInstance();
-	const onboardingScreen = onboardingScreenManager.getElement();
-
-	router.push(onboardingScreen);
+	initRouter(modal, config);
 
 	const imageManager = ImageManager.getInstance();
 	const blob = await imageManager.getImageBlob();
