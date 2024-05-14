@@ -31,4 +31,8 @@ export default class LocalStorageManager {
 		}
 		return null;
 	}
+
+	public destroy(): void {
+		LocalStorageManager.instance = null;
+	}
 }
