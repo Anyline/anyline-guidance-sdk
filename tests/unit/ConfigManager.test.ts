@@ -17,6 +17,7 @@ describe('ConfigManager', () => {
 			{ something: 'else' },
 			{ onboardingInstructions: 'not an object' },
 			{ onboardingInstructions: { timesShown: 'not a number' } },
+			{ onboardingInstructions: { timesShown: -3 } },
 			{},
 			'test',
 		];
