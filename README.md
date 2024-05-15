@@ -50,6 +50,27 @@ metadata: {
 }
 ```
 
+### SDK Config
+
+By default, we show onboarding instructions screen everytime the SDK opens, this informs users how to capture a better tire image. You can configure this setting to limit the number of times this onboarding instructions screen is shown.
+
+To achieve this, call sdk `init` method like so:
+
+```js
+const { blob } = init({
+  onboardingInstructions: {
+    timesShown: 3
+  }
+})
+```
+where `3` is the number of times you'd want to show the onboarding instructions screen everytime a user opens the SDK. When they open the SDK for the 4th time, they will not see the onboarding instructions screen and will be taken directly to the video stream screen.
+
+This feature comes in handy when we assume that after the user has seen onboarding instruction for a certain number of times, they understand the instructions already and thus do not need to read it again. 
+
+If you do not want to show the instructions at all, you can set `timesShown` to `0`.
+
+Note: This config works by storing a variable in `localStorage`. If you have a functionality within your website/web app that clears the `localStorage`, then this configuration will not be enforced and the onboarding instructions will be shown everytime regardless of what you set `timesShown` to.
+
 ## Developers / Contributors
 
 ### To start
