@@ -1,9 +1,11 @@
 # Changelog
 
-## [1.4.0] - 12-05-2024
+## [1.4.0] - 15-05-2024
 
 -   (feat): add onboarding instructions to describe how to take better tire picture
--   (chore): add routing mechanism
+-   (feat): make sdk configurable for the number of times onboarding instructions are shown
+-   (chore): add routing mechanism to help navigate within sdk screens
+-   (chore): explicitly initiate stream with aspect ratio of 4/3
 -   (fix): stream is zoomed in after user cancels taking picture from native camera
 
 ## [1.3.01] - 02-05-2024
