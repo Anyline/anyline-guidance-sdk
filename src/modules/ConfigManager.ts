@@ -11,21 +11,23 @@ export default class ConfigManager {
 	private constructor(config?: Config) {
 		if (config !== undefined) {
 			// use external library for schema validation if config increases
+			if (typeof config !== 'object')
+				throw new Error('Invalid config format');
 			if (
-				typeof config !== 'object' ||
 				!Object.prototype.hasOwnProperty.call(
 					config,
 					'onboardingInstructions'
-				) ||
-				typeof config.onboardingInstructions !== 'object' ||
-				!Object.prototype.hasOwnProperty.call(
-					config.onboardingInstructions,
-					'timesShown'
-				) ||
-				typeof config.onboardingInstructions.timesShown !== 'number'
-			) {
-				throw new Error('Invalid config format');
-			}
+				)
+			)
+				throw new Error('Config must have onboardingInstructions set');
+			if (typeof config.onboardingInstructions !== 'object')
+				throw new Error('onboardingInstructions must be an object');
+			if (typeof config.onboardingInstructions.timesShown !== 'number')
+				throw new Error('timesShown should be a number');
+			if (config.onboardingInstructions.timesShown < 0)
+				throw new Error(
+					'timesShown should be greater than or equal to 0'
+				);
 			this.config = config;
 		}
 	}
