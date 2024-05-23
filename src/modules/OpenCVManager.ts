@@ -22,9 +22,10 @@ export default class OpenCVManager {
 		const head = document.getElementsByTagName('head')[0];
 		head.appendChild(this.script);
 		this.script.onload = async () => {
-			if (this.opencvLoadedPromiseCallback != null) {
-				await this.opencvLoadedPromiseCallback();
-			}
+			cv.onRuntimeInitialized = async () => {
+				if (this.opencvLoadedPromiseCallback !== null)
+					await this.opencvLoadedPromiseCallback();
+			};
 		};
 	}
 
