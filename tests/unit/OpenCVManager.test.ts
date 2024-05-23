@@ -17,7 +17,7 @@ describe('OpenCVManager', () => {
 	it('loads opencv', async () => {
 		void expect((global as any).cv).toBeUndefined();
 
-		const mockCallback = jest.fn();
+		const mockCallback = jest.fn().mockResolvedValue(undefined);
 		opencvManager.onLoad(mockCallback);
 
 		void expect(mockCallback).not.toHaveBeenCalled();
@@ -27,9 +27,14 @@ describe('OpenCVManager', () => {
 		const scriptElement = document.getElementById(
 			'anyline-guidance-sdk-opencv'
 		) as HTMLScriptElement;
+
 		if (scriptElement?.onload != null) {
-			(global as any).cv = {};
+			(global as any).cv = {
+				onRuntimeInitialized: jest.fn(),
+			};
+
 			scriptElement.onload(new Event('load'));
+			(global as any).cv.onRuntimeInitialized();
 		}
 
 		await waitFor(() => {
