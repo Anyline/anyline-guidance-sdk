@@ -31,5 +31,9 @@ export default class OnboardingScreen extends ComponentManager {
 		onboardingInstructionsInner.appendChild(startCaptureProcessButton);
 
 		onboardingInstructionsWrapper.appendChild(onboardingInstructionsInner);
+
+		this.onUnmount(async () => {
+			this.destroy();
+		});
 	}
 }
