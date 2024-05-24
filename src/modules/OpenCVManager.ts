@@ -5,10 +5,12 @@ export default class OpenCVManager {
 
 	private readonly opencvLoadedPromise: Promise<void>;
 	private opencvLoadedResolve: (() => void) | null = null;
+	private opencvLoadedReject: ((reason?: any) => void) | null = null;
 
 	private constructor() {
-		this.opencvLoadedPromise = new Promise<void>(resolve => {
+		this.opencvLoadedPromise = new Promise<void>((resolve, reject) => {
 			this.opencvLoadedResolve = resolve;
+			this.opencvLoadedReject = reject;
 		});
 	}
 
@@ -36,9 +38,30 @@ export default class OpenCVManager {
 				}
 			};
 		};
+		this.script.onerror = () => {
+			if (this.opencvLoadedReject !== null) {
+				this.opencvLoadedReject(
+					new Error('Failed to load OpenCV script')
+				);
+			}
+		};
 	}
 
-	public onLoad(callback: () => Promise<void>): void {
-		void this.opencvLoadedPromise.then(callback);
+	public onLoad(callback: (error?: Error) => Promise<void>): void {
+		this.opencvLoadedPromise
+			.then(async () => {
+				await callback();
+			})
+			.catch(async error => {
+				await callback(error as Error);
+			});
+	}
+
+	public destroy(): void {
+		if (this.script.parentNode != null) {
+			this.script.parentNode.removeChild(this.script);
+		}
+		OpenCVManager.instance = null;
+		delete (global as any).cv;
 	}
 }
