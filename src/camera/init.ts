@@ -5,6 +5,7 @@ import ImageManager from '../modules/ImageManager';
 import HostManager from '../modules/HostManager';
 import initRouter from '../lib/initRouter';
 import { type Config } from '../modules/ConfigManager';
+import OpenCVManager from '../modules/OpenCVManager';
 
 export interface ImageMetadata {
 	width: number;
@@ -24,6 +25,9 @@ async function init(config?: Config): Promise<SDKReturnType> {
 	) {
 		await Promise.reject(new Error('Unsupported device'));
 	}
+
+	const opencvManager = OpenCVManager.getInstance();
+	opencvManager.loadOpenCV();
 
 	const hostManager = HostManager.getInstance();
 
