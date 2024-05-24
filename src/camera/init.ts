@@ -6,6 +6,7 @@ import HostManager from '../modules/HostManager';
 import initRouter from '../lib/initRouter';
 import { type Config } from '../modules/ConfigManager';
 import OpenCVManager from '../modules/OpenCVManager';
+import DocumentScrollController from '../modules/DocumentScrollController';
 
 export interface ImageMetadata {
 	width: number;
@@ -28,6 +29,9 @@ async function init(config?: Config): Promise<SDKReturnType> {
 
 	const opencvManager = OpenCVManager.getInstance();
 	opencvManager.loadOpenCV();
+
+	const documentScrollController = DocumentScrollController.getInstance();
+	documentScrollController.disableScroll();
 
 	const hostManager = HostManager.getInstance();
 
