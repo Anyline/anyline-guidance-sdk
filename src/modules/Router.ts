@@ -42,6 +42,7 @@ export default class Router {
 
 	public destroy(): void {
 		Router.instance = null;
+		this.mount?.replaceChildren();
 		this.mount = null;
 		this.screens = [];
 	}
