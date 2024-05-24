@@ -11,7 +11,7 @@ export default class ImageManager {
 		return ImageManager.instance;
 	}
 
-	public setImageBlob(file: File): void {
+	public setImageBlob(file: Blob): void {
 		if (ImageManager.blob == null) {
 			ImageManager.blob = file;
 			if (ImageManager.resolveBlobPromise != null) {

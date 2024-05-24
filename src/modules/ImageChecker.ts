@@ -2,7 +2,7 @@ import preProcessImage from '../lib/preProcessImage';
 
 export default class ImageChecker {
 	private static instance: ImageChecker | null = null;
-	private blob: Blob | null = null;
+	public blob: Blob | null = null;
 
 	private constructor() {}
 
@@ -15,6 +15,11 @@ export default class ImageChecker {
 
 	public setImageBlob(blob: Blob): void {
 		this.blob = blob;
+	}
+
+	public getImageBlob(): Blob {
+		if (this.blob === null) throw new Error('No image found');
+		return this.blob;
 	}
 
 	public async isImageQualityGood(): Promise<boolean> {
