@@ -9,8 +9,8 @@ import createSpinner from './spinner';
 import ComponentManager from '../../modules/ComponentManager';
 import { getNonWideAngleCamera } from '../../camera/getNonWideAngleCamera';
 import VideoManager from '../../modules/VideoManager';
-import Router from '../../modules/Router';
 import FileInputManager from '../../modules/FileInputManager';
+import closeSDK from '../../lib/closeSDK';
 
 export default class VideoStreamScreen extends ComponentManager {
 	constructor() {
@@ -63,9 +63,8 @@ export default class VideoStreamScreen extends ComponentManager {
 				container.appendChild(closeElement);
 				container.appendChild(bottomSection);
 			} catch (err) {
-				const router = Router.getInstance();
-				router.pop();
-				alert('Please allow camera permission to proceed');
+				alert('Please allow camera permission and try again');
+				closeSDK();
 			}
 		});
 
