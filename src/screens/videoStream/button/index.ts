@@ -1,8 +1,11 @@
 import VideoStreamScreen from '..';
 import closeSDK from '../../../lib/closeSDK';
 import FileInputManager from '../../../modules/FileInputManager';
+import ImageChecker from '../../../modules/ImageChecker';
 import ImageManager from '../../../modules/ImageManager';
+import OpenCVManager from '../../../modules/OpenCVManager';
 import Router from '../../../modules/Router';
+import PreProcessingScreen from '../../preProcessing';
 import css from './index.module.css';
 
 export default function createButtonElement(): HTMLDivElement {
@@ -16,19 +19,34 @@ export default function createButtonElement(): HTMLDivElement {
 
 	button.innerText = 'Open Camera';
 
-	button.onclick = async event => {
+	button.onclick = async () => {
 		const fileInputManager = FileInputManager.getInstance();
-		const imageManager = ImageManager.getInstance();
 		const fileInput = fileInputManager.getFileInputElement();
 		fileInput.click();
+		const routerManager = Router.getInstance();
+
 		await fileInputManager
 			.onFileSet()
 			.then(file => {
-				imageManager.setImageBlob(file);
-				closeSDK();
+				const opencvManager = OpenCVManager.getInstance();
+				opencvManager.onLoad(async error => {
+					if (error != null) {
+						const imageManager = ImageManager.getInstance();
+						imageManager.setImageBlob(file);
+						closeSDK();
+						return;
+					}
+					const imagechecker = ImageChecker.getInstance();
+					imagechecker.setImageBlob(file);
+
+					const preProcessingScreen =
+						PreProcessingScreen.getInstance().getElement();
+
+					routerManager.pop();
+					routerManager.push(preProcessingScreen);
+				});
 			})
 			.catch(e => {
-				const routerManager = Router.getInstance();
 				routerManager.pop();
 
 				setTimeout(() => {
