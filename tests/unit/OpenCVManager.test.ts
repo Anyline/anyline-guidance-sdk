@@ -10,7 +10,6 @@ describe('OpenCVManager', () => {
 	});
 
 	afterEach(() => {
-		opencvManager.destroy();
 		delete (global as any).cv;
 	});
 
