@@ -10,13 +10,14 @@ describe('OpenCVManager', () => {
 	});
 
 	afterEach(() => {
-		delete (global as any).cv;
+		opencvManager.destroy();
+		jest.clearAllMocks();
 	});
 
-	it('loads opencv', async () => {
+	it('loads opencv successfully', async () => {
 		void expect((global as any).cv).toBeUndefined();
 
-		const mockCallback = jest.fn().mockResolvedValue(undefined);
+		const mockCallback = jest.fn();
 		opencvManager.onLoad(mockCallback);
 
 		void expect(mockCallback).not.toHaveBeenCalled();
@@ -39,6 +40,30 @@ describe('OpenCVManager', () => {
 		await waitFor(() => {
 			void expect(mockCallback).toHaveBeenCalled();
 			void expect((global as any).cv).toBeDefined();
+		});
+	});
+
+	it('handles opencv load error', async () => {
+		void expect((global as any).cv).toBeUndefined();
+
+		const mockCallback = jest.fn();
+		opencvManager.onLoad(mockCallback);
+
+		void expect(mockCallback).not.toHaveBeenCalled();
+
+		opencvManager.loadOpenCV();
+
+		const scriptElement = document.getElementById(
+			'anyline-guidance-sdk-opencv'
+		) as HTMLScriptElement;
+
+		if (scriptElement?.onerror != null) {
+			scriptElement.onerror(new Event('error'));
+		}
+
+		await waitFor(() => {
+			void expect(mockCallback).toHaveBeenCalledWith(expect.any(Error));
+			void expect((global as any).cv).toBeUndefined();
 		});
 	});
 });
