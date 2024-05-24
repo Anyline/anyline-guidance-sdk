@@ -108,8 +108,4 @@
 	.bottomSectionWrapper {
 		grid-area: bottomSectionWrapper;
 	}
-	.image {
-		max-height: unset;
-		max-width: unset;
-	}
 }
