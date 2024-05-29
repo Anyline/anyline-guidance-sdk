@@ -3,7 +3,7 @@ export default {
 	testEnvironment: 'jsdom',
 	transform: {
 		'^.+\\.ts$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.json' }],
-		'^.+\\.(svg|png)$': '<rootDir>/tests/svgTransform.js',
+		'^.+\\.(svg|png|gif)$': '<rootDir>/tests/svgTransform.js',
 	},
 	testMatch: ['<rootDir>/tests/unit/**/*.test.ts'],
 	moduleNameMapper: {

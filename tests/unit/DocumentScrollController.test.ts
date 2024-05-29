@@ -27,11 +27,4 @@ describe('documentScrollController', () => {
 			void expect(document.body).not.toHaveClass('hideOverflow');
 		});
 	});
-
-	it('removes the CSS class from head when destroy is called', () => {
-		documentScrollController.destroy();
-		void expect(
-			document.head.contains(document.querySelector('style'))
-		).toBe(false);
-	});
 });

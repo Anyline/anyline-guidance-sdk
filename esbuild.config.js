@@ -12,6 +12,7 @@ const baseConfig = {
 		'.ts': 'ts',
 		'.svg': 'dataurl',
 		'.png': 'dataurl',
+		'.gif': 'dataurl',
 	},
 	define: { 'process.env.MODE': '"production"' },
 };
