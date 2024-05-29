@@ -1,7 +1,9 @@
 import ComponentManager from '../../modules/ComponentManager';
 import createCloseSDKButton from './closeSDKButton';
 import css from './index.module.css';
-import createInstructionsBody from './instructionsBody';
+import createdemoImage from './instructionsBody/demoInstructionsImage';
+import createHeadline from './instructionsBody/headline';
+import createInstructions from './instructionsBody/instructions';
 import createStartCaptureProcessButton from './startCaptureProcessButton';
 
 export default class OnboardingScreen extends ComponentManager {
@@ -23,11 +25,15 @@ export default class OnboardingScreen extends ComponentManager {
 		);
 
 		const closeSDKButton = createCloseSDKButton();
-		const instructionsBody = createInstructionsBody();
+		const headline = createHeadline();
+		const instructions = createInstructions();
+		const demoImage = createdemoImage();
 		const startCaptureProcessButton = createStartCaptureProcessButton();
 
 		onboardingInstructionsInner.appendChild(closeSDKButton);
-		onboardingInstructionsInner.appendChild(instructionsBody);
+		onboardingInstructionsInner.appendChild(headline);
+		onboardingInstructionsInner.appendChild(instructions);
+		onboardingInstructionsInner.appendChild(demoImage);
 		onboardingInstructionsInner.appendChild(startCaptureProcessButton);
 
 		onboardingInstructionsWrapper.appendChild(onboardingInstructionsInner);

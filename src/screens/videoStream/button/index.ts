@@ -7,6 +7,7 @@ import OpenCVManager from '../../../modules/OpenCVManager';
 import Router from '../../../modules/Router';
 import PreProcessingScreen from '../../preProcessing';
 import css from './index.module.css';
+import rightArrow from './assets/rightArrow.svg';
 
 export default function createButtonElement(): HTMLDivElement {
 	const buttonWrapper = document.createElement('div');
@@ -17,7 +18,18 @@ export default function createButtonElement(): HTMLDivElement {
 	button.id = 'captureButton';
 	button.setAttribute('data-test-id', 'captureButton');
 
-	button.innerText = 'Open Camera';
+	const buttonText = document.createElement('div');
+	buttonText.innerText = 'Continue';
+
+	const buttonArrowImageWrapper = document.createElement('div');
+	buttonArrowImageWrapper.className = css.buttonArrowImageWrapper;
+	const buttonArrowImage = document.createElement('img');
+	buttonArrowImage.className = css.buttonArrowImage;
+	buttonArrowImage.src = rightArrow;
+	buttonArrowImageWrapper.appendChild(buttonArrowImage);
+
+	button.appendChild(buttonText);
+	button.appendChild(buttonArrowImageWrapper);
 
 	button.onclick = async () => {
 		const fileInputManager = FileInputManager.getInstance();

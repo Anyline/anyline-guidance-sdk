@@ -23,8 +23,9 @@
 
 /* Custom for close sdk button on onboarding instructions screen */
 .buttonPosition {
-	position: relative;
+	position: fixed;
 	height: 45px;
+	top: 0;
 	right: 0;
 	left: unset;
 	justify-content: flex-end;

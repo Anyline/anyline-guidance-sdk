@@ -21,6 +21,20 @@
 	z-index: 1;
 	font-weight: 700;
 	font-size: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+.buttonArrowImageWrapper {
+	position: absolute;
+	top: 0;
+	right: 24px;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 @media (orientation: landscape) {
