@@ -1,5 +1,5 @@
 import css from './index.module.css';
-import url from './assets/demoImage.png';
+import url from './assets/demoImage.gif';
 
 export default function createdemoImage(): HTMLDivElement {
 	const demoImageWrapper = document.createElement('div');
