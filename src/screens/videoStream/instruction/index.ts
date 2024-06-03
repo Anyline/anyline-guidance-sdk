@@ -1,21 +1,16 @@
 import css from './index.module.css';
+import createInstructionsList from '../../../components/instructionsList';
 
 export default function createInstructionElement(): HTMLDivElement {
-	const instructionWrapper = document.createElement('div');
-	instructionWrapper.className = css.instructionWrapper;
+	const wrapper = document.createElement('div');
+	wrapper.className = css.wrapper;
 
-	const instruction = document.createElement('div');
-	instruction.className = css.instruction;
+	const instruction =
+		createInstructionsList(`<li><b>Align</b> the tire within the <b>overlay</b></li>
+  <li>Hold <b>steady</b></li>
+  <li><b>Open the camera</b> for capture</li>`);
 
-	instruction.innerHTML = `
-    <div class=${css.instructionsList}>
-      <div>1 - <b>Align</b> the tire within the <b>overlay</b></div>
-      <div>2 - Hold <b>steady</b></div>
-      <div>3 - <b>Open the camera</b> for capture</div>
-    </div>
-  `;
+	wrapper.appendChild(instruction);
 
-	instructionWrapper.appendChild(instruction);
-
-	return instructionWrapper;
+	return wrapper;
 }

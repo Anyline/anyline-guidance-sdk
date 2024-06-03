@@ -1,0 +1,24 @@
+.list {
+	-webkit-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	word-spacing: 0.3px;
+	letter-spacing: 0.3px;
+	display: table;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.list > li {
+	margin-bottom: 8px;
+}
+
+.list > li:last-child {
+	margin-bottom: 0;
+}
+
+@media (orientation: landscape) {
+	.wrapper {
+		display: none;
+	}
+}

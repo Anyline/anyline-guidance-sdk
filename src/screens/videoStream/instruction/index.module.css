@@ -1,28 +1,14 @@
-.instructionWrapper {
-	z-index: 1;
-	padding: 0 16px;
-	box-sizing: border-box;
-	-webkit-text-size-adjust: 100%;
-	-moz-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
-}
-.instruction {
+.wrapper {
 	position: fixed;
 	bottom: 80px;
 	z-index: 1;
 	color: white;
-}
-.instructionsList {
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-}
-.instructionsList > div {
-	padding-bottom: 8px;
+	width: 100%;
+	margin-bottom: 16px;
 }
 
 @media (orientation: landscape) {
-	.instructionWrapper {
+	.wrapper {
 		display: none;
 	}
 }
