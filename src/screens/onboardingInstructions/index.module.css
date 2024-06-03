@@ -5,13 +5,13 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	color: white;
 }
 
 .onboardingInstructionsInner {
 	position: relative;
 	width: 100%;
 	height: 100%;
-	background-color: white;
 	overflow: hidden;
 	display: grid;
 	grid-template-rows: auto auto 1fr auto;
