@@ -3,7 +3,7 @@
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-	padding: 24px 0;
+	height: 75px;
 }
 
 .headlineWrapper > span {
@@ -12,23 +12,7 @@
 }
 
 .instructionsWrapper {
-	padding: 16px;
-	padding-top: 0;
-	box-sizing: border-box;
-}
-
-.instructionsWrapper > div > p {
-	-webkit-text-size-adjust: 100%;
-	-moz-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
-	word-spacing: 0.3px;
-	letter-spacing: 0.3px;
-	margin: 0;
-	margin-bottom: 8px;
-}
-
-.instructionsWrapper > div > p:last-child {
-	margin-bottom: 0;
+	margin-bottom: 16px;
 }
 
 .demoImageWrapper {

@@ -15,11 +15,12 @@
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	min-width: 200px;
+	min-width: 270px;
 }
 
 @media (orientation: landscape) {
 	.button {
 		max-width: 200px;
+		min-width: 200px;
 	}
 }
