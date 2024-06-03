@@ -7,6 +7,7 @@ export default function createdemoImage(): HTMLDivElement {
 
 	const demoImage = new Image();
 	demoImage.src = url;
+	demoImage.style.borderRadius = '16px';
 
 	demoImageWrapper.appendChild(demoImage);
 
