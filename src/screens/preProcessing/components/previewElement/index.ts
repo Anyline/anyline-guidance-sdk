@@ -24,7 +24,7 @@ export default function createPreviewElement(blob: Blob): HTMLDivElement {
 	const description = document.createElement('p');
 	description.className = css.description;
 	description.innerText =
-		"We couldn't detect the object. The image seems too blurry. Please snap a clearer photo for better recognition";
+		"We couldn't detect the object. The image seems too blurry. Please snap a clearer photo for better recognition.";
 	descriptionWrapper.appendChild(description);
 
 	// image preview
