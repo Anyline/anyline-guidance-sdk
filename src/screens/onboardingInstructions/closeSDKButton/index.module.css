@@ -12,41 +12,9 @@
 	align-items: center;
 	vertical-align: middle;
 	padding: 0;
+	padding-left: 16px;
 	box-sizing: border-box;
 	z-index: 2;
 	color: #707070;
 	font-size: 16px;
-}
-.buttonInner {
-	padding-left: 16px;
-}
-
-/* Custom for close sdk button on onboarding instructions screen */
-.buttonPosition {
-	position: fixed;
-	height: 45px;
-	top: 0;
-	right: 0;
-	left: unset;
-	justify-content: flex-end;
-	font-size: 24px;
-	margin-left: auto;
-}
-.buttonInnerPosition {
-	padding-left: unset;
-	padding-right: 16px;
-	color: #bbb;
-}
-
-@media (orientation: landscape) {
-	.buttonPosition {
-		height: 75px;
-		position: absolute;
-		right: unset;
-		justify-content: unset;
-	}
-	.buttonInnerPosition {
-		padding-left: 16px;
-		padding-right: unset;
-	}
 }
