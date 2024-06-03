@@ -1,15 +1,13 @@
+import createPrimaryActionButton from '../../../components/primaryActionButton';
 import Router from '../../../modules/Router';
 import VideoStreamScreen from '../../videoStream';
-import css from '../../videoStream/button/index.module.css';
-import customCSS from './index.module.css';
+import css from './index.module.css';
 
 export default function createStartCaptureProcessButton(): HTMLDivElement {
 	const buttonWrapper = document.createElement('div');
-	buttonWrapper.className = customCSS.buttonWrapper;
-	const button = document.createElement('button');
-	button.className = `${css.button} ${customCSS.button}`;
+	buttonWrapper.className = css.buttonWrapper;
+	const button = createPrimaryActionButton();
 	button.innerText = 'Start capture process';
-	button.type = 'button';
 
 	button.onclick = async () => {
 		const router = Router.getInstance();

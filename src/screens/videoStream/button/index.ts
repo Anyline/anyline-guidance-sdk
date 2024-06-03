@@ -8,13 +8,13 @@ import Router from '../../../modules/Router';
 import PreProcessingScreen from '../../preProcessing';
 import css from './index.module.css';
 import rightArrow from './assets/rightArrow.svg';
+import createPrimaryActionButton from '../../../components/primaryActionButton';
 
 export default function createButtonElement(): HTMLDivElement {
 	const buttonWrapper = document.createElement('div');
 	buttonWrapper.className = css.buttonWrapper;
 
-	const button = document.createElement('button');
-	button.className = css.button;
+	const button = createPrimaryActionButton();
 	button.id = 'captureButton';
 	button.setAttribute('data-test-id', 'captureButton');
 

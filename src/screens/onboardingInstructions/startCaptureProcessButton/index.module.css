@@ -2,11 +2,6 @@
 	padding: 16px;
 	margin: 0 auto;
 }
-.button {
-	width: auto;
-	padding: 0 16px;
-	max-width: unset;
-}
 
 @media (orientation: landscape) {
 	.buttonWrapper {
