@@ -19,6 +19,8 @@ export default class VideoStreamScreen extends ComponentManager {
 
 		container.className = css.container;
 
+		container.setAttribute('data-testid', 'screens-videoStream-container');
+
 		// initially show loader
 		const spinner = createSpinner();
 		container.appendChild(spinner);
@@ -32,6 +34,11 @@ export default class VideoStreamScreen extends ComponentManager {
 				const videoElement = videoManager.getVideoElement();
 				videoElement.srcObject = stream;
 
+				videoElement.setAttribute(
+					'data-testid',
+					'screens-videoElement'
+				);
+
 				// create tire overlay
 				const overlayElement = createOverlayElement();
 
@@ -43,6 +50,11 @@ export default class VideoStreamScreen extends ComponentManager {
 
 				// create capture button
 				const captureButton = createButtonElement();
+
+				captureButton.setAttribute(
+					'data-testid',
+					'screens-captureButton'
+				);
 
 				// create bottom section
 				const bottomSection = createBottomSection(

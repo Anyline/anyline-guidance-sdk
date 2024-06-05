@@ -9,6 +9,11 @@ export default function createStartCaptureProcessButton(): HTMLDivElement {
 	const button = createPrimaryActionButton();
 	button.innerText = 'Start capture process';
 
+	button.setAttribute(
+		'data-testid',
+		'screens-onboardingInstructions-start-capture-process'
+	);
+
 	button.onclick = async () => {
 		const router = Router.getInstance();
 		const videoStreamScreenManager = VideoStreamScreen.getInstance();
