@@ -22,8 +22,10 @@ esbuild
 	.build({
 		...baseConfig,
 		plugins: [injectCSSPlugin('../dist/esm/')],
-		outfile: 'dist/esm/index.js',
+		outdir: 'dist/esm/',
 		format: 'esm',
+		splitting: true,
+		chunkNames: 'chunks/[name]-[hash]',
 	})
 	.catch(() => process.exit(1));
 
