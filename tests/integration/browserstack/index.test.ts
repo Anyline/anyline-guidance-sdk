@@ -2,7 +2,6 @@ import { expect } from 'expect-webdriverio';
 import { browser, $ } from '@wdio/globals';
 
 async function visitDemo(): Promise<void> {
-	// await browser.url('https://cloud-api-user-guidance-app.vercel.app/');
 	await browser.url('http://localhost:8000');
 }
 
@@ -20,6 +19,7 @@ async function acceptCameraPermission(): Promise<void> {
 	}
 	if (browser.isIOS) {
 		const capabilities = browser.capabilities;
+		// @ts-expect-error: browserName exists in wdio config
 		const { browserName } = capabilities;
 		if (browserName === '') {
 			// hack for chromium on ios, browsername is empty for chromium on ios
@@ -34,46 +34,28 @@ async function acceptCameraPermission(): Promise<void> {
 	await browser.switchContext(contexts[1] as string);
 }
 
-describe('guidance sdk', () => {
-	it('should open modal with video element and capture button', async () => {
+describe('goes to video stream screen after clicking Start capture process button from onboarding screen', () => {
+	it('should open modal with onboarding instructions', async () => {
 		await visitDemo();
 		await startSDK();
-		await acceptCameraPermission();
 
-		const videoElement = await $('*[data-test-id="videoElement"]');
-		const captureButton = await $('*[data-test-id="captureButton"]');
-		await expect(videoElement).toBeDisplayed();
-		await expect(captureButton).toBeDisplayed();
-	});
-
-	it.skip('should receive image blob after capture button is clicked', async () => {
-		await visitDemo();
-
-		const demoImage = await $('#new-image');
-
-		const demoImageSrcBefore = await demoImage.getAttribute('src');
-
-		await expect(demoImageSrcBefore).toBeFalsy();
-
-		await startSDK();
-		await acceptCameraPermission();
-
-		const captureButton = await $('*[data-test-id="captureButton"]');
-		await captureButton.click();
-
-		await browser.waitUntil(
-			async () => {
-				const src = await demoImage.getAttribute('src');
-				return src && src.length > 0;
-			},
-			{
-				timeout: 5000,
-				timeoutMsg: 'Image src was not set within the expected time',
-			}
+		const startCaptureProcessButton = await $(
+			'*[data-testid="screens-onboardingInstructions-start-capture-process"]'
 		);
 
-		const demoImageSrcAfter = await demoImage.getAttribute('src');
+		await startCaptureProcessButton.click();
 
-		await expect(demoImageSrcAfter).toBeTruthy();
+		const videoStreamWrapper = await $(
+			'*[data-testid="screens-videoStream-container"]'
+		);
+
+		await expect(videoStreamWrapper).toBeDisplayed();
+
+		await acceptCameraPermission();
+
+		const videoElement = await $('*[data-testid="screens-videoElement"]');
+		const captureButton = await $('*[data-testid="screens-captureButton"]');
+		await expect(videoElement).toBeDisplayed();
+		await expect(captureButton).toBeDisplayed();
 	});
 });
