@@ -72,7 +72,9 @@
 		"typescript-eslint": "^7.5.0",
 		"wdio-wait-for": "^3.0.11"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"joi": "^17.13.1"
+	},
 	"resolutions": {
 		"@typescript-eslint/parser": "6.21.0",
 		"@typescript-eslint/eslint-plugin": "6.21.0"
