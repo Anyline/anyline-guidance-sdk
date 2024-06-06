@@ -27,7 +27,7 @@ export interface SDKReturnType {
 	metadata: ImageMetadata;
 }
 
-async function init(config?: Config): Promise<SDKReturnType> {
+async function init(config: Config): Promise<SDKReturnType> {
 	if (
 		navigator.mediaDevices === null ||
 		navigator.mediaDevices === undefined
