@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.5.0] - 05-06-2024
+
+-   (feat): pre-process image for quality check using opencv before resolving `init` promise
+-   (feat): add gif in onboarding instructions screen which shows how to use the sdk
+-   (chore): onboarding instructions screen is now full screen
+-   (chore): split code to reduce sdk size for esm environments
+-   (chore): update tire overlay image
+-   (chore): update back icon image
+
 ## [1.4.0] - 15-05-2024
 
 -   (feat): add onboarding instructions to describe how to take better tire picture
