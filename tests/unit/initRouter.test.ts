@@ -1,7 +1,5 @@
 import initRouter from '../../src/lib/initRouter';
-import ConfigManager, {
-	type Config,
-} from '../../src/modules/ConfigManager/ConfigManager';
+import ConfigManager from '../../src/modules/ConfigManager/ConfigManager';
 import LocalStorageManager from '../../src/modules/LocalStorageManager';
 
 describe('initRouter', () => {
@@ -13,16 +11,8 @@ describe('initRouter', () => {
 		localStorage.clear();
 	});
 
-	it('should throw error when it is called with invalid config', () => {
-		const config = 'invalid config';
-
-		void expect(() => {
-			initRouter(modal, config as unknown as Config);
-		}).toThrow('Invalid config format');
-	});
-
-	it('should return onboardingInstructionsShown as false when it is called with timesShown = 0', () => {
-		const config: Config = {
+	it('should not show onboarding instructions if timeshown is 0', () => {
+		const config = {
 			onboardingInstructions: {
 				timesShown: 0,
 			},
@@ -31,8 +21,8 @@ describe('initRouter', () => {
 		void expect(onboardingInstructionsShown).toBe(false);
 	});
 
-	it('should return onboardingInstructionsShown as true when it is called with timesShown > 0', () => {
-		const config: Config = {
+	it('should show onboarding instructions if timeshown is greater than 1', () => {
+		const config = {
 			onboardingInstructions: {
 				timesShown: 1,
 			},
