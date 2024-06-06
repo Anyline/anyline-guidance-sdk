@@ -4,7 +4,7 @@ import { waitFor } from '@testing-library/dom';
 import Router from '../../src/modules/Router';
 import ImageManager from '../../src/modules/ImageManager';
 import HostManager from '../../src/modules/HostManager';
-import ConfigManager from '../../src/modules/ConfigManager';
+import ConfigManager from '../../src/modules/ConfigManager/ConfigManager';
 import LocalStorageManager from '../../src/modules/LocalStorageManager';
 import DocumentScrollController from '../../src/modules/DocumentScrollController';
 

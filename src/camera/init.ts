@@ -4,7 +4,7 @@ import injectCSS from '../lib/injectCSS';
 import ImageManager from '../modules/ImageManager';
 import HostManager from '../modules/HostManager';
 import initRouter from '../lib/initRouter';
-import { type Config } from '../modules/ConfigManager';
+import { type Config } from '../modules/ConfigManager/ConfigManager';
 import OpenCVManager from '../modules/OpenCVManager';
 import DocumentScrollController from '../modules/DocumentScrollController';
 
