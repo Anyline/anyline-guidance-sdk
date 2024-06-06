@@ -9,7 +9,7 @@ import closeSDK from './closeSDK';
 
 export default function initRouter(
 	modal: HTMLDivElement,
-	config?: Config
+	config: Config
 ): { onboardingInstructionsShown: boolean } {
 	// mount modal
 	const router = Router.getInstance();
@@ -18,18 +18,20 @@ export default function initRouter(
 	let configManager: ConfigManager;
 
 	try {
-		configManager = ConfigManager.getInstance(config);
+		configManager = ConfigManager.getInstance();
+		configManager.setConfig(config);
 	} catch (err) {
 		closeSDK();
 		throw err;
 	}
 
-	const timesShown =
-		configManager.getConfig()?.onboardingInstructions?.timesShown;
+	const _config = configManager.getConfig();
 
-	let shouldShowOnboarding: boolean;
+	const timesShown = _config?.onboardingInstructions?.timesShown ?? null;
 
-	if (timesShown != null) {
+	let shouldShowOnboarding = true;
+
+	if (timesShown !== null) {
 		const localStorageManager = LocalStorageManager.getInstance();
 
 		localStorageManager.setTimesOnboardingInstructionsShown(timesShown);
