@@ -1,4 +1,6 @@
-import ConfigManager, { type Config } from '../modules/ConfigManager';
+import ConfigManager, {
+	type Config,
+} from '../modules/ConfigManager/ConfigManager';
 import LocalStorageManager from '../modules/LocalStorageManager';
 import Router from '../modules/Router';
 import OnboardingScreen from '../screens/onboardingInstructions';

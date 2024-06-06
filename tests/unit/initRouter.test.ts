@@ -1,5 +1,7 @@
 import initRouter from '../../src/lib/initRouter';
-import ConfigManager, { type Config } from '../../src/modules/ConfigManager';
+import ConfigManager, {
+	type Config,
+} from '../../src/modules/ConfigManager/ConfigManager';
 import LocalStorageManager from '../../src/modules/LocalStorageManager';
 
 describe('initRouter', () => {

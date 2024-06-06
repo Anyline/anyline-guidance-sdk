@@ -1,4 +1,4 @@
-import ConfigManager from '../modules/ConfigManager';
+import ConfigManager from '../modules/ConfigManager/ConfigManager';
 import DocumentScrollController from '../modules/DocumentScrollController';
 import HostManager from '../modules/HostManager';
 import ImageChecker from '../modules/ImageChecker';

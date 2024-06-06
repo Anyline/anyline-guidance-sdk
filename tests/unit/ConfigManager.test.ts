@@ -1,4 +1,6 @@
-import ConfigManager, { type Config } from '../../src/modules/ConfigManager';
+import ConfigManager, {
+	type Config,
+} from '../../src/modules/ConfigManager/ConfigManager';
 
 describe('ConfigManager', () => {
 	it('can be initiated with config and without config', () => {
