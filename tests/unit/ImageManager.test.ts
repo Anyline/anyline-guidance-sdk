@@ -11,18 +11,14 @@ describe('ImageManager', () => {
 		const imageManager = ImageManager.getInstance();
 		let blob;
 
-		const promise = imageManager.getImageBlob().then(res => {
-			blob = res;
-		});
-
 		void expect(blob).toBeUndefined();
 
 		const file = new File([''], 'filename');
 		imageManager.setImageBlob(file);
 
-		await promise;
-
-		void expect(blob).toBe(file);
+		imageManager.onBlobSet((blob: Blob) => {
+			void expect(blob).toBe(file);
+		});
 
 		imageManager.destroy();
 	});
