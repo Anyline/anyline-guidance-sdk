@@ -24,29 +24,30 @@
 					const errorElement = document.getElementById('error');
 					errorElement.innerText = '';
 					try {
-						const {
-							blob,
-							metadata: { width, height, fileSize },
-						} = await Anyline.default(config);
-						blobUrl = URL.createObjectURL(blob);
-						const imgElement = document.getElementById('new-image');
+						Anyline.default(config, {
+							onComplete: ({ blob }) => {
+								blobUrl = URL.createObjectURL(blob);
+								const imgElement =
+									document.getElementById('new-image');
 
-						imgElement.src = blobUrl;
-
-						const specsElement =
-							document.getElementById('image-specs');
-						specsElement.innerText = `Image specs: ${width}px X ${height}px, ${fileSize}kb`;
+								imgElement.src = blobUrl;
+							},
+						});
 					} catch (err) {
 						console.log('Error', err);
 						errorElement.innerText = err;
 					}
 				};
 
+				const config = {
+					onboardingInstructions: {
+						timesShown: 3,
+					},
+				};
+
 				document
 					.getElementById('start-sdk-btn')
-					.addEventListener('click', () =>
-						startSdk({ onboardingInstructions: { timesShown: 3 } })
-					);
+					.addEventListener('click', () => startSdk(config, 'asd'));
 
 				document
 					.getElementById('download-button')
@@ -81,7 +82,6 @@
 			width="100%"
 			style="max-width: 500px"
 		/><br />
-		<div id="image-specs"></div>
 		<br />
 		<button id="download-button" class="button">Download Image</button>
 		<br />
