@@ -1,5 +1,4 @@
 import createModal from '../components/modal';
-import { getImageSpecification } from './getImageSpecification';
 import injectCSS from '../lib/injectCSS';
 import ImageManager from '../modules/ImageManager';
 import HostManager from '../modules/HostManager';
@@ -16,23 +15,23 @@ void import(
 	console.log('Error loading demo gif');
 });
 
-export interface ImageMetadata {
-	width: number;
-	height: number;
-	fileSize: number;
-}
-
 export interface SDKReturnType {
 	blob: Blob;
-	metadata: ImageMetadata;
 }
 
-async function init(config: Config): Promise<SDKReturnType> {
+function init(
+	config: Config,
+	{
+		onComplete,
+	}: {
+		onComplete: (response: SDKReturnType) => void;
+	}
+): void {
 	if (
 		navigator.mediaDevices === null ||
 		navigator.mediaDevices === undefined
 	) {
-		await Promise.reject(new Error('Unsupported device'));
+		throw new Error('Unsupported device');
 	}
 
 	const opencvManager = OpenCVManager.getInstance();
@@ -53,10 +52,9 @@ async function init(config: Config): Promise<SDKReturnType> {
 	initRouter(modal, config);
 
 	const imageManager = ImageManager.getInstance();
-	const blob = await imageManager.getImageBlob();
-	const metadata = await getImageSpecification(blob);
-
-	return { blob, metadata };
+	imageManager.onBlobSet((blob: Blob) => {
+		onComplete({ blob });
+	});
 }
 
 export default init;
