@@ -7,18 +7,24 @@ describe('ImageManager', () => {
 		void expect(instance1).toBe(instance2);
 	});
 
-	it('should not resolve getImageBlob until setImageBlob is called', async () => {
+	it('should call until onBlobSet when setImageBlob is called', async () => {
 		const imageManager = ImageManager.getInstance();
 		let blob;
 
 		void expect(blob).toBeUndefined();
 
+		const onBlobSet = jest.fn();
+
 		const file = new File([''], 'filename');
 		imageManager.setImageBlob(file);
 
 		imageManager.onBlobSet((blob: Blob) => {
+			onBlobSet();
+			void expect(onBlobSet).toHaveBeenCalled();
 			void expect(blob).toBe(file);
 		});
+
+		void expect(onBlobSet).not.toHaveBeenCalled();
 
 		imageManager.destroy();
 	});
