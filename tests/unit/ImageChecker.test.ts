@@ -71,6 +71,22 @@ describe('ImageChecker', () => {
 		}
 	});
 
+	it('calls onBlobSet when image is set', async () => {
+		const checker = ImageChecker.getInstance();
+
+		const file = new File([''], 'filename');
+		checker.setImageBlob(file);
+
+		const onBlobSet = jest.fn();
+
+		checker.onBlobSet(async blob => {
+			onBlobSet();
+			void expect(onBlobSet).toHaveBeenCalled();
+		});
+
+		void expect(onBlobSet).not.toHaveBeenCalled();
+	});
+
 	it('throws an error if no image is provided', async () => {
 		const checker = ImageChecker.getInstance();
 		await expect(checker.isImageQualityGood()).rejects.toThrow(
