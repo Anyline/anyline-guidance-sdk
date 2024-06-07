@@ -4,16 +4,16 @@ const CONTRAST_THRESHOLD = 30;
 const CANNY_LOWER_THRESHOLD = 50;
 const CANNY_UPPER_THRESHOLD = 300;
 
-const undefinedMetrics = {
-	isBlurDetected: undefined,
-	isEdgeDetected: undefined,
-	isContrastLow: undefined,
+const defaultMetrics = {
+	isBlurDetected: false,
+	isEdgeDetected: true,
+	isContrastLow: false,
 };
 
 export default async function preProcessImage(blob: Blob): Promise<{
-	isBlurDetected?: boolean;
-	isEdgeDetected?: boolean;
-	isContrastLow?: boolean;
+	isBlurDetected: boolean;
+	isEdgeDetected: boolean;
+	isContrastLow: boolean;
 }> {
 	return await new Promise((resolve, reject) => {
 		const img = new Image();
@@ -26,7 +26,7 @@ export default async function preProcessImage(blob: Blob): Promise<{
 				const canvas = document.createElement('canvas');
 				const ctx = canvas.getContext('2d');
 				if (ctx == null) {
-					resolve(undefinedMetrics);
+					resolve(defaultMetrics);
 					return;
 				}
 				const fixedWidth = 800;
@@ -50,9 +50,9 @@ export default async function preProcessImage(blob: Blob): Promise<{
 					}
 				}
 
-				let isBlurDetected;
-				let isEdgeDetected;
-				let isContrastLow;
+				let { isBlurDetected, isEdgeDetected, isContrastLow } =
+					defaultMetrics;
+
 				if (cv !== undefined) {
 					const src = cv.matFromImageData(imgData);
 					const dst = new cv.Mat();
