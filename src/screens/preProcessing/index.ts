@@ -1,7 +1,6 @@
 import ComponentManager from '../../modules/ComponentManager';
 import ImageChecker from '../../modules/ImageChecker';
 import ImageManager from '../../modules/ImageManager';
-import OpenCVManager from '../../modules/OpenCVManager';
 import loadingPreProcessingChecksElement from './components/loadingPreProcessingChecksElement';
 import createPreviewElement from './components/previewElement';
 import css from './index.module.css';
@@ -19,27 +18,23 @@ export default class PreProcessingScreen extends ComponentManager {
 		wrapper.appendChild(preProcessingChecksElement);
 
 		this.onMount(async () => {
-			const opencvManager = OpenCVManager.getInstance();
-			opencvManager.onLoad(async error => {
-				if (error != null) return;
-				const imageChecker = ImageChecker.getInstance();
+			const imageChecker = ImageChecker.getInstance();
 
-				imageChecker.onBlobSet(async blob => {
-					const isImageQualityGood =
-						await imageChecker.isImageQualityGood();
+			imageChecker.onBlobSet(async blob => {
+				const isImageQualityGood =
+					await imageChecker.isImageQualityGood();
 
-					if (isImageQualityGood) {
-						const imageManager = ImageManager.getInstance();
-						imageManager.setImageBlob(blob);
-						return;
-					}
+				if (isImageQualityGood) {
+					const imageManager = ImageManager.getInstance();
+					imageManager.setImageBlob(blob);
+					return;
+				}
 
-					// image quality is not good
-					// show the image wih ability to i) Take a new picture, ii) Proceed with this image
-					wrapper.removeChild(preProcessingChecksElement);
-					const previewElement = createPreviewElement(blob);
-					wrapper.appendChild(previewElement);
-				});
+				// image quality is not good
+				// show the image wih ability to i) Take a new picture, ii) Proceed with this image
+				wrapper.removeChild(preProcessingChecksElement);
+				const previewElement = createPreviewElement(blob);
+				wrapper.appendChild(previewElement);
 			});
 		});
 
