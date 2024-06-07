@@ -1,8 +1,7 @@
 export default class ImageManager {
 	private static instance: ImageManager | null = null;
-	private static blob: Blob | null = null;
-	private static blobPromise: Promise<Blob> | null = null;
-	private static resolveBlobPromise: ((blob: Blob) => void) | null = null;
+	private blob: Blob | null = null;
+	private blobSetCallback: ((blob: Blob) => void) | null = null;
 
 	public static getInstance(): ImageManager {
 		if (ImageManager.instance === null) {
@@ -12,31 +11,21 @@ export default class ImageManager {
 	}
 
 	public setImageBlob(file: Blob): void {
-		if (ImageManager.blob == null) {
-			ImageManager.blob = file;
-			if (ImageManager.resolveBlobPromise != null) {
-				ImageManager.resolveBlobPromise(ImageManager.blob);
-				ImageManager.blobPromise = null;
-				ImageManager.resolveBlobPromise = null;
+		if (this.blob == null) {
+			this.blob = file;
+			if (this.blobSetCallback != null) {
+				this.blobSetCallback(this.blob);
 			}
 		}
 	}
 
-	public async getImageBlob(): Promise<Blob> {
-		if (ImageManager.blob != null) {
-			return await Promise.resolve(ImageManager.blob);
-		} else if (ImageManager.blobPromise == null) {
-			ImageManager.blobPromise = new Promise<Blob>(resolve => {
-				ImageManager.resolveBlobPromise = resolve;
-			});
-		}
-		return await ImageManager.blobPromise;
+	public onBlobSet(callback: (blob: Blob) => void): void {
+		this.blobSetCallback = callback;
 	}
 
 	public destroy(): void {
 		ImageManager.instance = null;
-		ImageManager.blob = null;
-		ImageManager.blobPromise = null;
-		ImageManager.resolveBlobPromise = null;
+		this.blob = null;
+		this.blobSetCallback = null;
 	}
 }
