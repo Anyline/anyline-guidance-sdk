@@ -1,4 +1,3 @@
-import closeSDK from '../../lib/closeSDK';
 import ComponentManager from '../../modules/ComponentManager';
 import ImageChecker from '../../modules/ImageChecker';
 import ImageManager from '../../modules/ImageManager';
@@ -32,7 +31,6 @@ export default class PreProcessingScreen extends ComponentManager {
 					if (isImageQualityGood) {
 						const imageManager = ImageManager.getInstance();
 						imageManager.setImageBlob(blob);
-						closeSDK();
 						return;
 					}
 
