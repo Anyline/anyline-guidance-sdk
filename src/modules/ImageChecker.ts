@@ -27,11 +27,7 @@ export default class ImageChecker {
 		try {
 			const { isBlurDetected, isContrastLow, isEdgeDetected } =
 				await preProcessImage(this.blob);
-			return (
-				!(isBlurDetected ?? false) &&
-				(isEdgeDetected ?? false) &&
-				!(isContrastLow ?? false)
-			);
+			return !isBlurDetected && isEdgeDetected && !isContrastLow;
 		} catch (err) {
 			return true;
 		}
