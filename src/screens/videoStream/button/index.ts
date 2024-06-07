@@ -1,5 +1,4 @@
 import VideoStreamScreen from '..';
-import closeSDK from '../../../lib/closeSDK';
 import FileInputManager from '../../../modules/FileInputManager';
 import ImageChecker from '../../../modules/ImageChecker';
 import ImageManager from '../../../modules/ImageManager';
@@ -45,7 +44,6 @@ export default function createButtonElement(): HTMLDivElement {
 					if (error != null) {
 						const imageManager = ImageManager.getInstance();
 						imageManager.setImageBlob(file);
-						closeSDK();
 						return;
 					}
 					const imagechecker = ImageChecker.getInstance();

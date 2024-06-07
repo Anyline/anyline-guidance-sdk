@@ -1,4 +1,3 @@
-import closeSDK from '../../../../lib/closeSDK';
 import ImageChecker from '../../../../modules/ImageChecker';
 import ImageManager from '../../../../modules/ImageManager';
 import Router from '../../../../modules/Router';
@@ -58,7 +57,6 @@ export default function createPreviewElement(blob: Blob): HTMLDivElement {
 	secondaryButton.onclick = () => {
 		const imageManager = ImageManager.getInstance();
 		imageManager.setImageBlob(blob);
-		closeSDK();
 	};
 	bottomSectionWrapper.appendChild(primaryButton);
 	bottomSectionWrapper.appendChild(secondaryButton);

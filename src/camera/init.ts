@@ -6,6 +6,7 @@ import initRouter from '../lib/initRouter';
 import { type Config } from '../modules/ConfigManager/ConfigManager';
 import OpenCVManager from '../modules/OpenCVManager';
 import DocumentScrollController from '../modules/DocumentScrollController';
+import closeSDK from '../lib/closeSDK';
 
 // load demoInstructionsImage chunk before it is requested
 // to ensure lower loading time for the gif when sdk is initialised
@@ -54,6 +55,7 @@ function init(
 	const imageManager = ImageManager.getInstance();
 	imageManager.onBlobSet((blob: Blob) => {
 		onComplete({ blob });
+		closeSDK();
 	});
 }
 
