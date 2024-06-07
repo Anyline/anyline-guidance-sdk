@@ -24,23 +24,24 @@ export default class PreProcessingScreen extends ComponentManager {
 			opencvManager.onLoad(async error => {
 				if (error != null) return;
 				const imageChecker = ImageChecker.getInstance();
-				const isImageQualityGood =
-					await imageChecker.isImageQualityGood();
 
-				const blob = imageChecker.getImageBlob();
+				imageChecker.onBlobSet(async blob => {
+					const isImageQualityGood =
+						await imageChecker.isImageQualityGood();
 
-				if (isImageQualityGood) {
-					const imageManager = ImageManager.getInstance();
-					imageManager.setImageBlob(blob);
-					closeSDK();
-					return;
-				}
+					if (isImageQualityGood) {
+						const imageManager = ImageManager.getInstance();
+						imageManager.setImageBlob(blob);
+						closeSDK();
+						return;
+					}
 
-				// image quality is not good
-				// show the image wih ability to i) Take a new picture, ii) Proceed with this image
-				wrapper.removeChild(preProcessingChecksElement);
-				const previewElement = createPreviewElement(blob);
-				wrapper.appendChild(previewElement);
+					// image quality is not good
+					// show the image wih ability to i) Take a new picture, ii) Proceed with this image
+					wrapper.removeChild(preProcessingChecksElement);
+					const previewElement = createPreviewElement(blob);
+					wrapper.appendChild(previewElement);
+				});
 			});
 		});
 
