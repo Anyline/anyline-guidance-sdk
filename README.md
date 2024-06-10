@@ -2,74 +2,109 @@
 
 Anyline guidance sdk to retrieve high resolution image from a video stream with tire overlay that helps to point accurately to the tire.
 
+See [Migrating from v1 to v2](#migrating-from-v1-to-v2)
+
 ## Installation
 
 ```shell
 npm install @anyline/anyline-guidance-sdk
 ```
 
-The next step varies based on which environment you are working on.
-
-### ESM
+### SDK Config and Callbacks
 
 ```js
 import init from '@anyline/anyline-guidance-sdk';
+// ...
+// call init when you want to start the sdk
+init(config, callbacks);
 ```
 
-Call the `init()` (refer [Code Example](#code-example)) function whenever you'd want the sdk to start.
+#### 1. `config` (**required**)
 
-### Direction script tag inclusions
-
-Refer [index.html](./public/index.html) for demo implementation.
+The `config` value is used to apply developer specific settings to the SDK.
+Currently, `config` can be used to control the number of times onboarding instructions are shown.
+For example:
 
 ```js
-<script src="anyline-guidance-sdk.js"></script>
+const config = { 
+  onboardingInstructions: { 
+    timesShown: 3, 
+  },
+};
 ```
 
-You can get `anyline-guidance-sdk.js` files in the following ways:
+In this example, onboarding instructions will be shown for a total of 3 times, after which the onboarding instructions will be skipped and sdk will start directly at the Video Stream screen.
 
-By [installing the package](https://github.com/Anyline/anyline-guidance-sdk) and copying `index.js` from `dist/iife/` folder into your project.
+> **_NOTE:_** `timesShown` is stored in the localStorage. Clearing the localStorage will reset the setting.
 
-(OR)
-
-You can also build the sdk by yourself and copy `index.js` from `dist/iife` folder (refer [To Build](#to-build) section).
-
-[//]: # "Call `Anyline.default()` function from within your code whenever you'd want the sdk to start."
-
-### Code Example
+If you wish to show the onboarding instructions everytime the sdk is initialised, set `config` like so
 
 ```js
-const { blob, metadata } = await init();
-// blob represents the image captured by SDK in Blob format
-blob: Blob
-// other metadata related to image viz. width, height and fileSize
-metadata: {
-  width: number,
-  height: number,
-  fileSize: number,
-}
+const config = {};
 ```
 
-### SDK Config
+#### 2. `callbacks` (**required**)
 
-By default, we show onboarding instructions screen everytime the SDK opens, this informs users how to capture a better tire image. You can configure this setting to limit the number of times this onboarding instructions screen is shown.
+The `callbacks` object consists of two functions: `onComplete` and `onPreProcessingChecksFailed`
 
-To achieve this, call sdk `init` method like so:
+-   `onComplete` (**required**) is called once the SDK has finished processing the image.
+-   `onPreProcessingChecksFailed` (**optional**) is called when the image captured by an end-user has failed to pass image quality checks. The user has the option to either proceed with the image or take a new picture.
+    Example:
 
 ```js
-const { blob } = init({
+const callbacks = { 
+  onComplete: ({ blob }) => {
+    // final returned image
+  }, 
+  onPreProcessingChecksFailed: ({ blob, message }) => {
+    // intermediate image
+  },
+};
+```
+
+---
+
+### Migrating from v1 to v2
+
+#### Key changes
+1. Initialisation
+  - v1: `init` called with a single `config` object and returned a promise
+  - v2: `init` called with two arguments: `config` and `callbacks` and no longer returns a promise (use `callbacks` to retrieve blob).
+2. Config
+  - v1: can be empty
+  - v2: for empty config use `{}`
+3. Callbacks (v2 only)
+  - `onComplete` **required**
+  - `onPreProcessingChecksFailed` **optional**
+
+#### Example
+v1:
+```ts
+const { blob } = await init({
   onboardingInstructions: {
     timesShown: 3
   }
 })
 ```
-where `3` is the number of times you'd want to show the onboarding instructions screen everytime a user opens the SDK. When they open the SDK for the 4th time, they will not see the onboarding instructions screen and will be taken directly to the video stream screen.
 
-This feature comes in handy when we assume that after the user has seen onboarding instruction for a certain number of times, they understand the instructions already and thus do not need to read it again. 
+v2:
+```ts
+const config = {
+  onboardingInstructions: {
+    timesShown: 3
+  }
+};
+const callbacks = {
+  onComplete: ({ blob }) => {
+    // ...
+  }
+}
+init(config, callbacks)
+```
 
-If you do not want to show the instructions at all, you can set `timesShown` to `0`.
+See [SDK Config and Callbacks](#sdk-config-and-callbacks) for detailed implementation about `config` and `callbacks`.
 
-Note: This config works by storing a variable in `localStorage`. If you have a functionality within your website/web app that clears the `localStorage`, then this configuration will not be enforced and the onboarding instructions will be shown everytime regardless of what you set `timesShown` to.
+---
 
 ## Developers / Contributors
 

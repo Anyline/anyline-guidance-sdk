@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.0] - 10-06-2024
+
+-   (feat): `init` is now initialised with config and callbacks to retrieve image blob
+-   (feat): add `onComplete` and `onPreProcessingChecksFailed` callbacks
+-   (refactor): `init` no longer returns a promise
+-   (refactor): sdk no longer returns image `metadata`
+
 ## [1.5.1] - 11-06-2024
 
 -   (chore): load demo gif asynchronously before init is called
