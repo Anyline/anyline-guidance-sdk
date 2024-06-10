@@ -1,3 +1,5 @@
+import closeSDK from '../../lib/closeSDK';
+import CallbackHandler from '../../modules/CallbackHandler';
 import ComponentManager from '../../modules/ComponentManager';
 import ImageChecker from '../../modules/ImageChecker';
 import ImageManager from '../../modules/ImageManager';
@@ -27,7 +29,20 @@ export default class PreProcessingScreen extends ComponentManager {
 				if (isImageQualityGood) {
 					const imageManager = ImageManager.getInstance();
 					imageManager.setImageBlob(blob);
+					const callbackHandler = CallbackHandler.getInstance();
+					callbackHandler.callOnComplete({ blob });
+					closeSDK();
 					return;
+				}
+
+				try {
+					const callbackHandler = CallbackHandler.getInstance();
+					callbackHandler.callOnPreProcessingChecksFailed({
+						blob,
+						message: 'Poor image quality detected.',
+					});
+				} catch (err) {
+					//
 				}
 
 				// image quality is not good

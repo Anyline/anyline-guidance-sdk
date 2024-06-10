@@ -1,12 +1,11 @@
 import createModal from '../components/modal';
 import injectCSS from '../lib/injectCSS';
-import ImageManager from '../modules/ImageManager';
 import HostManager from '../modules/HostManager';
 import initRouter from '../lib/initRouter';
 import { type Config } from '../modules/ConfigManager/ConfigManager';
 import OpenCVManager from '../modules/OpenCVManager';
 import DocumentScrollController from '../modules/DocumentScrollController';
-import closeSDK from '../lib/closeSDK';
+import CallbackHandler from '../modules/CallbackHandler';
 
 // load demoInstructionsImage chunk before it is requested
 // to ensure lower loading time for the gif when sdk is initialised
@@ -16,23 +15,41 @@ void import(
 	console.log('Error loading demo gif');
 });
 
-export interface SDKReturnType {
+export interface OnComplete {
 	blob: Blob;
 }
 
-function init(
-	config: Config,
-	{
-		onComplete,
-	}: {
-		onComplete: (response: SDKReturnType) => void;
-	}
-): void {
+export interface OnPreProcessingChecksFailed {
+	blob: Blob;
+	message: string;
+}
+
+export interface Callbacks {
+	onComplete: (response: OnComplete) => void;
+	onPreProcessingChecksFailed?: (
+		response: OnPreProcessingChecksFailed
+	) => void;
+}
+
+function init(config: Config, callbacks: Callbacks): void {
 	if (
 		navigator.mediaDevices === null ||
 		navigator.mediaDevices === undefined
 	) {
 		throw new Error('Unsupported device');
+	}
+
+	const callbackHandler = CallbackHandler.getInstance();
+	// register callbacks
+	const { onComplete, onPreProcessingChecksFailed } = callbacks;
+	callbackHandler.setOnComplete(onComplete);
+	if (
+		onPreProcessingChecksFailed != null &&
+		onPreProcessingChecksFailed !== undefined
+	) {
+		callbackHandler.setOnPreProcessingChecksFailedCallback(
+			onPreProcessingChecksFailed
+		);
 	}
 
 	const opencvManager = OpenCVManager.getInstance();
@@ -51,12 +68,6 @@ function init(
 	const modal = createModal(shadowRoot);
 
 	initRouter(modal, config);
-
-	const imageManager = ImageManager.getInstance();
-	imageManager.onBlobSet((blob: Blob) => {
-		onComplete({ blob });
-		closeSDK();
-	});
 }
 
 export default init;
