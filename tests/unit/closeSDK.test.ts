@@ -7,6 +7,7 @@ import HostManager from '../../src/modules/HostManager';
 import ConfigManager from '../../src/modules/ConfigManager/ConfigManager';
 import LocalStorageManager from '../../src/modules/LocalStorageManager';
 import DocumentScrollController from '../../src/modules/DocumentScrollController';
+import CallbackHandler from '../../src/modules/CallbackHandler';
 
 describe('closeSDK', () => {
 	it('removes host from DOM', async () => {
@@ -24,6 +25,7 @@ describe('closeSDK', () => {
 	it('remove all running instances of the SDK', () => {
 		const router = Router.getInstance();
 		const configManager = ConfigManager.getInstance();
+		const callbackHandler = CallbackHandler.getInstance();
 		const documentScrollController = DocumentScrollController.getInstance();
 		const imageManager = ImageManager.getInstance();
 		const localStorageManager = LocalStorageManager.getInstance();
@@ -38,6 +40,11 @@ describe('closeSDK', () => {
 			.spyOn(configManager, 'destroy')
 			.mockImplementation(() => {});
 		void expect(configManagerSpy).not.toHaveBeenCalled();
+
+		const callbackHandlerSpy = jest
+			.spyOn(callbackHandler, 'destroy')
+			.mockImplementation(() => {});
+		void expect(callbackHandlerSpy).not.toHaveBeenCalled();
 
 		const documentScrollControllerEnableScrollSpy = jest
 			.spyOn(documentScrollController, 'enableScroll')
@@ -70,6 +77,7 @@ describe('closeSDK', () => {
 
 		void expect(routerSpy).toHaveBeenCalledTimes(1);
 		void expect(configManagerSpy).toHaveBeenCalledTimes(1);
+		void expect(callbackHandlerSpy).toHaveBeenCalledTimes(1);
 		void expect(
 			documentScrollControllerEnableScrollSpy
 		).toHaveBeenCalledTimes(1);
