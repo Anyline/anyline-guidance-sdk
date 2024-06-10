@@ -1,4 +1,3 @@
-import ImageChecker from '../../../../modules/ImageChecker';
 import ImageManager from '../../../../modules/ImageManager';
 import Router from '../../../../modules/Router';
 import VideoStreamScreen from '../../../videoStream';
@@ -44,8 +43,6 @@ export default function createPreviewElement(blob: Blob): HTMLDivElement {
 	primaryButton.className = css.primaryButton;
 	primaryButton.innerText = 'Take a new picture';
 	primaryButton.onclick = () => {
-		const imageChecker = ImageChecker.getInstance();
-		imageChecker.destroy();
 		const videoStreamScreen = VideoStreamScreen.getInstance().getElement();
 		const routerManager = Router.getInstance();
 		routerManager.pop();
