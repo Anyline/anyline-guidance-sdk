@@ -1,3 +1,4 @@
+import CallbackHandler from '../modules/CallbackHandler';
 import ConfigManager from '../modules/ConfigManager/ConfigManager';
 import DocumentScrollController from '../modules/DocumentScrollController';
 import HostManager from '../modules/HostManager';
@@ -7,6 +8,7 @@ import LocalStorageManager from '../modules/LocalStorageManager';
 import Router from '../modules/Router';
 
 export default function closeSDK(): void {
+	const callbackHandler = CallbackHandler.getInstance();
 	const configManager = ConfigManager.getInstance();
 	const documentScrollController = DocumentScrollController.getInstance();
 	const hostManager = HostManager.getInstance();
@@ -15,6 +17,7 @@ export default function closeSDK(): void {
 	const localStorageManager = LocalStorageManager.getInstance();
 	const routerManager = Router.getInstance();
 
+	callbackHandler.destroy();
 	configManager.destroy();
 	documentScrollController.enableScroll();
 	documentScrollController.destroy();

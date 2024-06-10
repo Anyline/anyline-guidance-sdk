@@ -8,6 +8,8 @@ import PreProcessingScreen from '../../preProcessing';
 import css from './index.module.css';
 import rightArrow from './assets/rightArrow.svg';
 import createPrimaryActionButton from '../../../components/primaryActionButton';
+import CallbackHandler from '../../../modules/CallbackHandler';
+import closeSDK from '../../../lib/closeSDK';
 
 export default function createButtonElement(): HTMLDivElement {
 	const buttonWrapper = document.createElement('div');
@@ -44,6 +46,9 @@ export default function createButtonElement(): HTMLDivElement {
 					if (error != null) {
 						const imageManager = ImageManager.getInstance();
 						imageManager.setImageBlob(file);
+						const callbackHandler = CallbackHandler.getInstance();
+						callbackHandler.callOnComplete({ blob: file });
+						closeSDK();
 						return;
 					}
 					const imagechecker = ImageChecker.getInstance();

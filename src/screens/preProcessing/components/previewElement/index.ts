@@ -1,3 +1,5 @@
+import closeSDK from '../../../../lib/closeSDK';
+import CallbackHandler from '../../../../modules/CallbackHandler';
 import ImageManager from '../../../../modules/ImageManager';
 import Router from '../../../../modules/Router';
 import VideoStreamScreen from '../../../videoStream';
@@ -54,6 +56,9 @@ export default function createPreviewElement(blob: Blob): HTMLDivElement {
 	secondaryButton.onclick = () => {
 		const imageManager = ImageManager.getInstance();
 		imageManager.setImageBlob(blob);
+		const callbackHandler = CallbackHandler.getInstance();
+		callbackHandler.callOnComplete({ blob });
+		closeSDK();
 	};
 	bottomSectionWrapper.appendChild(primaryButton);
 	bottomSectionWrapper.appendChild(secondaryButton);
