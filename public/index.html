@@ -14,6 +14,11 @@
 				min-width: 100px;
 				height: 54px;
 			}
+			#poor-quality-image-wrapper > img {
+				margin-bottom: 12px;
+				width: 100%;
+				max-width: 500px;
+			}
 		</style>
 		<!-- Anyline Guidance SDK js -->
 		<script src="./build/index.js"></script>
@@ -31,6 +36,21 @@
 									document.getElementById('new-image');
 
 								imgElement.src = blobUrl;
+							},
+							onPreProcessingChecksFailed: ({
+								blob,
+								message,
+							}) => {
+								// console.log('Poor quality image', blob);
+								// console.log('Message', message);
+								const poorQualityImageWrapper =
+									document.getElementById(
+										'poor-quality-image-wrapper'
+									);
+								blobUrl = URL.createObjectURL(blob);
+								const imgElement = new Image();
+								imgElement.src = blobUrl;
+								poorQualityImageWrapper.appendChild(imgElement);
 							},
 						});
 					} catch (err) {
@@ -75,15 +95,21 @@
 		<button id="reset-times-shown" class="button">
 			Reset timesShown to 3
 		</button>
-		<br /><br />
+		<br />
+		<hr />
+		Default image section <br />
 		<img
 			id="new-image"
-			alt="Demo"
+			alt=""
 			width="100%"
 			style="max-width: 500px"
 		/><br />
 		<br />
 		<button id="download-button" class="button">Download Image</button>
+		<br />
+		<hr />
+		Poor quality image(s) section <br />
+		<div id="poor-quality-image-wrapper"></div>
 		<br />
 		<div id="error"></div>
 	</body>
