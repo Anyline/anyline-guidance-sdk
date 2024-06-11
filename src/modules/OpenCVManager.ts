@@ -22,10 +22,7 @@ export default class OpenCVManager {
 	}
 
 	public loadOpenCV(): void {
-		if (
-			Boolean((window as any).cv?.getBuildInformation()) &&
-			this.opencvLoadedResolve !== null
-		) {
+		if (Boolean((window as any)?.cv) && this.opencvLoadedResolve !== null) {
 			this.opencvLoadedResolve();
 			return;
 		}
