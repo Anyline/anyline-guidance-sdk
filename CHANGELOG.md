@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.5.1] - 11-06-2024
+
+-   (chore): load demo gif asynchronously before init is called
+-   (chore): reduce demo gif size
+-   (fix): race condition when environment loads its own opencv
+
 ## [1.5.0] - 05-06-2024
 
 -   (feat): pre-process image for quality check using opencv before resolving `init` promise
