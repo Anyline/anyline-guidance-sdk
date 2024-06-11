@@ -8,6 +8,14 @@ import { type Config } from '../modules/ConfigManager';
 import OpenCVManager from '../modules/OpenCVManager';
 import DocumentScrollController from '../modules/DocumentScrollController';
 
+// load demoInstructionsImage chunk before it is requested
+// to ensure lower loading time for the gif when sdk is initialised
+void import(
+	'../screens/onboardingInstructions/instructionsBody/demoInstructionsImage'
+).catch(() => {
+	console.log('Error loading demo gif');
+});
+
 export interface ImageMetadata {
 	width: number;
 	height: number;
