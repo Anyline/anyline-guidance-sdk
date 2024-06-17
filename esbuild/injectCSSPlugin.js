@@ -50,7 +50,7 @@ export const injectCSSPlugin = baseDir => {
 						return;
 					}
 					const regex =
-						/(\w+)\.id="anyline-guidance-sdk-style",\1\.textContent=""/;
+						/([$\w]+)\.id="anyline-guidance-sdk-style",\1\.textContent=""/;
 					const replacement = `$1.id="anyline-guidance-sdk-style",$1.textContent=\`${allCSS}\``;
 					const updatedData = data.replace(regex, replacement);
 					fs.writeFile(filePath, updatedData, 'utf8', err => {
