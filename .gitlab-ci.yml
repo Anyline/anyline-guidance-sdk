@@ -1,0 +1,21 @@
+# "Do not create two separate pipelines on commits pushed when branch has open merge request (mr pipeline)":
+# Only an MR pipeline is created if there's a merge request linked to the branch on a push to it, otherwise, only a
+# branch pipeline is created on a push (but never both kinds of pipelines at the same push)
+# Ref: https://docs.gitlab.com/ee/ci/yaml/workflow.html#switch-between-branch-pipelines-and-merge-request-pipelines
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS && $CI_PIPELINE_SOURCE == "push"
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: always
+    - if: $CI_PIPELINE_SOURCE == "web"
+      when: always
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+    - if: $CI_COMMIT_BRANCH
+      when: always
+
+include:
+  - template: Code-Quality.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
