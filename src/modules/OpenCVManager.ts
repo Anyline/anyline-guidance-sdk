@@ -6,6 +6,7 @@ export default class OpenCVManager {
 	private readonly opencvLoadedPromise: Promise<void>;
 	private opencvLoadedResolve: (() => void) | null = null;
 	private opencvLoadedReject: ((reason?: any) => void) | null = null;
+	public isOpenCVLoaded: boolean = false;
 
 	private constructor() {
 		this.opencvLoadedPromise = new Promise<void>((resolve, reject) => {
@@ -24,6 +25,7 @@ export default class OpenCVManager {
 	public loadOpenCV(): void {
 		if (Boolean((window as any)?.cv) && this.opencvLoadedResolve !== null) {
 			this.opencvLoadedResolve();
+			this.isOpenCVLoaded = true;
 			return;
 		}
 
@@ -40,6 +42,7 @@ export default class OpenCVManager {
 			cv.onRuntimeInitialized = () => {
 				if (this.opencvLoadedResolve !== null) {
 					this.opencvLoadedResolve();
+					this.isOpenCVLoaded = true;
 				}
 			};
 		};
@@ -53,6 +56,11 @@ export default class OpenCVManager {
 	}
 
 	public onLoad(callback: (error?: Error) => Promise<void>): void {
+		if (!this.isOpenCVLoaded) {
+			void callback(new Error('OpenCV is not fully loaded yet'));
+			return;
+		}
+
 		this.opencvLoadedPromise
 			.then(async () => {
 				await callback();
@@ -68,5 +76,6 @@ export default class OpenCVManager {
 		}
 		OpenCVManager.instance = null;
 		delete (global as any).cv;
+		this.isOpenCVLoaded = false;
 	}
 }
