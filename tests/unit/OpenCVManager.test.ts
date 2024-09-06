@@ -17,6 +17,7 @@ describe('OpenCVManager', () => {
 	it('loads opencv successfully', async () => {
 		void expect((global as any).cv).toBeUndefined();
 
+		opencvManager.isOpenCVLoaded = true;
 		const mockCallback = jest.fn();
 		opencvManager.onLoad(mockCallback);
 
@@ -46,6 +47,7 @@ describe('OpenCVManager', () => {
 	it('handles opencv load error', async () => {
 		void expect((global as any).cv).toBeUndefined();
 
+		opencvManager.isOpenCVLoaded = true;
 		const mockCallback = jest.fn();
 		opencvManager.onLoad(mockCallback);
 
@@ -64,6 +66,16 @@ describe('OpenCVManager', () => {
 		await waitFor(() => {
 			void expect(mockCallback).toHaveBeenCalledWith(expect.any(Error));
 			void expect((global as any).cv).toBeUndefined();
+		});
+	});
+
+	it('throws error when opencv has not finished loading', async () => {
+		opencvManager.isOpenCVLoaded = false;
+		const mockCallback = jest.fn().mockResolvedValue(undefined);
+		opencvManager.onLoad(mockCallback);
+
+		await waitFor(() => {
+			void expect(mockCallback).toHaveBeenCalledWith(expect.any(Error));
 		});
 	});
 });
