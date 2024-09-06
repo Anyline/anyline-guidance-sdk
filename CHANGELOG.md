@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.0.1] - 06-09-2024
+
+-   (fix): skip pre-processing step if opencv did not load
+
 ## [2.0.0] - 10-06-2024
 
 -   (feat): `init` is now initialised with config and callbacks to retrieve image blob
