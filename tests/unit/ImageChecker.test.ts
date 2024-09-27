@@ -21,7 +21,6 @@ describe('ImageChecker', () => {
 				mockReturnValue: {
 					isBlurDetected: false,
 					isContrastLow: false,
-					isEdgeDetected: true,
 				},
 				expected: true,
 			},
@@ -29,7 +28,6 @@ describe('ImageChecker', () => {
 				mockReturnValue: {
 					isBlurDetected: true,
 					isContrastLow: true,
-					isEdgeDetected: false,
 				},
 				expected: false,
 			},
@@ -37,7 +35,6 @@ describe('ImageChecker', () => {
 				mockReturnValue: {
 					isBlurDetected: true,
 					isContrastLow: false,
-					isEdgeDetected: false,
 				},
 				expected: false,
 			},
@@ -45,7 +42,6 @@ describe('ImageChecker', () => {
 				mockReturnValue: {
 					isBlurDetected: false,
 					isContrastLow: true,
-					isEdgeDetected: false,
 				},
 				expected: false,
 			},
@@ -53,7 +49,6 @@ describe('ImageChecker', () => {
 				mockReturnValue: {
 					isBlurDetected: false,
 					isContrastLow: true,
-					isEdgeDetected: true,
 				},
 				expected: false,
 			},
