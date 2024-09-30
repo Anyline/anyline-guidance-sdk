@@ -1,15 +1,11 @@
 import VideoStreamScreen from '..';
 import FileInputManager from '../../../modules/FileInputManager';
 import ImageChecker from '../../../modules/ImageChecker';
-import ImageManager from '../../../modules/ImageManager';
-import OpenCVManager from '../../../modules/OpenCVManager';
 import Router from '../../../modules/Router';
 import PreProcessingScreen from '../../preProcessing';
 import css from './index.module.css';
 import rightArrow from './assets/rightArrow.svg';
 import createPrimaryActionButton from '../../../components/primaryActionButton';
-import CallbackHandler from '../../../modules/CallbackHandler';
-import closeSDK from '../../../lib/closeSDK';
 
 export default function createButtonElement(): HTMLDivElement {
 	const buttonWrapper = document.createElement('div');
@@ -41,25 +37,14 @@ export default function createButtonElement(): HTMLDivElement {
 		await fileInputManager
 			.onFileSet()
 			.then(file => {
-				const opencvManager = OpenCVManager.getInstance();
-				opencvManager.onLoad(async error => {
-					if (error != null) {
-						const imageManager = ImageManager.getInstance();
-						imageManager.setImageBlob(file);
-						const callbackHandler = CallbackHandler.getInstance();
-						callbackHandler.callOnComplete({ blob: file });
-						closeSDK();
-						return;
-					}
-					const imagechecker = ImageChecker.getInstance();
-					imagechecker.setImageBlob(file);
+				const imagechecker = ImageChecker.getInstance();
+				imagechecker.setImageBlob(file);
 
-					const preProcessingScreen =
-						PreProcessingScreen.getInstance().getElement();
+				const preProcessingScreen =
+					PreProcessingScreen.getInstance().getElement();
 
-					routerManager.pop();
-					routerManager.push(preProcessingScreen);
-				});
+				routerManager.pop();
+				routerManager.push(preProcessingScreen);
 			})
 			.catch(e => {
 				routerManager.pop();

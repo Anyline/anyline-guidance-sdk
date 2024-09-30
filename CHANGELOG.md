@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.1.0] - 26-09-2024
+
+-   (feat): remove opencv and replace it with pure javascript functions to improve loading performance
+
 ## [2.0.1] - 06-09-2024
 
 -   (fix): skip pre-processing step if opencv did not load

@@ -37,9 +37,10 @@ export default class ImageChecker {
 	public async isImageQualityGood(): Promise<boolean> {
 		if (this.blob === null) throw new Error('No image to process');
 		try {
-			const { isBlurDetected, isContrastLow, isEdgeDetected } =
-				await preProcessImage(this.blob);
-			return !isBlurDetected && isEdgeDetected && !isContrastLow;
+			const { isBlurDetected, isContrastLow } = await preProcessImage(
+				this.blob
+			);
+			return !(isBlurDetected || isContrastLow);
 		} catch (err) {
 			return true;
 		}
