@@ -3,7 +3,6 @@ import injectCSS from '../lib/injectCSS';
 import HostManager from '../modules/HostManager';
 import initRouter from '../lib/initRouter';
 import { type Config } from '../modules/ConfigManager/ConfigManager';
-import OpenCVManager from '../modules/OpenCVManager';
 import DocumentScrollController from '../modules/DocumentScrollController';
 import CallbackHandler from '../modules/CallbackHandler';
 
@@ -51,10 +50,7 @@ function init(config: Config, callbacks: Callbacks): void {
 			onPreProcessingChecksFailed
 		);
 	}
-
-	const opencvManager = OpenCVManager.getInstance();
-	opencvManager.loadOpenCV();
-
+	
 	const documentScrollController = DocumentScrollController.getInstance();
 	documentScrollController.disableScroll();
 
