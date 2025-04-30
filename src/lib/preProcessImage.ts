@@ -214,8 +214,7 @@ const filters: ImageFilter = {
 						sh - 1,
 						Math.max(0, sy + cy - halfSide)
 					);
-					const scx = sx;
-					const srcOff = (scy * sw + scx) * 4;
+          const srcOff = (scy * sw + sx) * 4;
 					const wt = weightsVector[cy];
 					r += src[srcOff] * wt;
 					g += src[srcOff + 1] * wt;
@@ -421,9 +420,7 @@ export default async function preProcessImage(blob: Blob): Promise<{
 }> {
 	return await new Promise((resolve, reject) => {
 		const img = new Image();
-		let blobUrl = '';
-		blobUrl = URL.createObjectURL(blob);
-		img.src = blobUrl;
+    img.src = URL.createObjectURL(blob);
 
 		img.onload = function () {
 			try {
@@ -450,12 +447,12 @@ export default async function preProcessImage(blob: Blob): Promise<{
 
 				resolve({ isBlurDetected, isContrastLow });
 			} catch (error) {
-				reject(error);
+				reject(new Error(JSON.stringify(error)));
 			}
 		};
 
 		img.onerror = function (error) {
-			reject(error);
+			reject(new Error(JSON.stringify(error)));
 		};
 	});
 }

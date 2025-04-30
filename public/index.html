@@ -41,8 +41,6 @@
 								blob,
 								message,
 							}) => {
-								// console.log('Poor quality image', blob);
-								// console.log('Message', message);
 								const poorQualityImageWrapper =
 									document.getElementById(
 										'poor-quality-image-wrapper'
@@ -67,7 +65,7 @@
 
 				document
 					.getElementById('start-sdk-btn')
-					.addEventListener('click', () => startSdk(config, 'asd'));
+					.addEventListener('click', () => startSdk(config));
 
 				document
 					.getElementById('download-button')
